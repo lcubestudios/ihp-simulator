@@ -1,0 +1,40 @@
+
+@import "./_variables";
+@import "./globals";
+@import "./theme";
+
+* {
+	letter-spacing: 0px !important;
+	line-height: 1.25;
+}
+
+.container { padding: 10px !important; max-width: initial !important; }
+
+/*
+	* MOBILE LAYOUT
+*/
+.mobile-container { 
+	grid-template-rows: auto 1fr auto; 
+}
+
+/*
+	* DESKTOP LAYOUT
+*/
+.desktop-container { 
+	grid-template-rows: auto 1fr; 
+	.page-content { 
+		grid-template-columns: $sidebar-width 1fr;
+		@media (min-width: 1280px) {
+			grid-template-columns: $sidebar-width-lg 1fr;
+		}
+	}
+	.page-body { grid-template-rows: auto 1fr; }
+}
+
+.notes {
+	padding: 10px;
+	margin-bottom: 20px;
+	background-color: $primary-light;
+}
+
+.notes > :last-child { margin-bottom: 0 !important; }

@@ -1,1 +1,1 @@
-# ihp-simulator
+# IHP Simulator

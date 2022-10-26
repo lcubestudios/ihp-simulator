@@ -4,7 +4,7 @@ pipeline{
     environment {
         //Mandatory
         REPO_NAME = 'ihp-simulator'
-        PACKAGE_MANAGER = 'npm' // npm
+        PACKAGE_MANAGER = 'npm install' // npm
         BUILD_COMMAND = 'npm run build'  // npm run build
 
 				// ENV Variables

@@ -1,24 +1,242 @@
 <template>
-  <div class="tabs-menu">
+  <div class="tabs-menu d-flex flex-column h-100">
     <ul class="menu cf">
-      <li
-        v-for="(tab_menu, i) in tab_menu"
-        :key="i"
-        :class="{ 
-					active: i === activeIndex 
+			<li
+				:class="{
+					'active': currView === 'profile'
 				}"
-        @click="class_active(i, tab_menu.content)"
-      >
-        <a class="top-10" v-text="tab_menu.text"></a>
-      </li>
+				@click="toggleView('profile')"
+			>
+				<a class="top-10" v-text="'Profile'"></a>
+			</li>
+			<li
+				:class="{
+					'active': currView === 'history'
+				}"
+				@click="toggleView('history')"
+			>
+				<a class="top-10" v-text="'History'"></a>
+			</li>
+			<li
+				:class="{
+					'active': currView === 'physical'
+				}"
+				@click="toggleView('physical')"
+			>
+				<a class="top-10" v-text="'Physical'"></a>
+			</li>
+			<li
+				:class="{
+					'active': currView === 'vitals'
+				}"
+				@click="toggleView('vitals')"
+			>
+				<a class="top-10" v-text="'Vitals'"></a>
+			</li>
+			<li
+				:class="{
+					'active': currView === 'tests'
+				}"
+				@click="toggleView('tests')"
+			>
+				<a class="top-10" v-text="'Tests'"></a>
+			</li>
+			<li
+				:class="{
+					'active': currView === 'findings'
+				}"
+				@click="toggleView('findings')"
+			>
+				<a class="top-10" v-text="'Findings'"></a>
+			</li>
     </ul>
-    <div class="content-box pa-5">
-      <div class="scroll-box" :class="{'active-box':slideDown}">
-        <div class="tab-content">
-          <p>{{ textData }}</p>
-        </div>
-      </div>
-      <!--/scroll-box-->
+    <div class="content-box flex-grow-1 d-flex flex-column h-100">
+			<section class="patient-video position-relative w-100">
+				<div class="gray2-bg">
+					<div class="video h-100">
+						<img src="/images/avatar-placeholder.png" />
+					</div>
+					<v-btn 
+						class="position-absolute bottom-0 left-0 ma-2.5"
+						icon
+					>
+						<v-icon
+							size="32"
+							color="#4e9d2d"
+							@click="lightBox(labs.result.image_url)"
+						>mdi-play-circle-outline</v-icon>
+					</v-btn>
+				</div>
+			</section>
+			<section class="flex-grow-1 position-relative">
+				<div class="position-absolute top-2.5 left-2.5 bottom-2.5 right-2.5 overflow-y-auto">
+					<div 
+						v-show="currView === 'profile'"
+						class="patient-profile"
+					>
+						<v-container>
+							<v-row 
+								class="mb-4"
+								v-for="(info, info_ndx) in profile"
+								:key="info_ndx"
+								no-gutters
+							>
+								<v-col cols="6">
+									<h6 class="primary-color fw-bold">{{ info.label }}</h6>
+								</v-col>
+								<v-col cols="6">
+									{{ info.value }}
+								</v-col>
+							</v-row>
+						</v-container>
+					</div>
+					<div 
+						v-show="currView === 'history'"
+						class="medical-history"
+					>
+						<v-container>
+							<v-row 
+								v-if="history.description"
+								class="mb-4"
+								no-gutters
+							>
+								{{ history.description }}
+							</v-row>
+							<v-row 
+								class="mb-4"
+								no-gutters
+							>
+								<v-expansion-panels class="rounded-0" accordion>
+									<v-expansion-panel
+										v-for="(hist, hist_ndx) in history.data"
+										:key="hist_ndx"
+									>
+										<v-expansion-panel-header class="px-0">
+											<p class="ma-0 font-16">{{ hist.label }}</p>
+										</v-expansion-panel-header>
+										<v-expansion-panel-content class="font-12">
+											<template v-if="typeof hist.value === 'object'">
+												<v-container>
+													<v-row 
+														class="mb-4"
+														v-for="(hist_arr, hist_arr_ndx) in hist.value"
+														:key="hist_arr_ndx"
+														no-gutters
+													>
+														<v-col cols="5">
+															<h6 class="primary-color font-12 fw-bold">{{ hist_arr.label }}</h6>
+														</v-col>
+														<v-col cols="7">
+															<div v-html="hist_arr.value"></div>
+														</v-col>
+													</v-row>
+												</v-container>
+
+											</template>
+											<template v-else-if="typeof hist.value === 'string'">
+												<p class="ma-0">{{ hist.value }}</p>
+											</template>
+										</v-expansion-panel-content>
+									</v-expansion-panel>
+								</v-expansion-panels>
+							</v-row>
+						</v-container>
+					</div>
+					<div 
+						v-show="currView === 'physical'"
+						class="physical-exams"
+					>
+						<v-container>
+							<v-row 
+								v-if="physical.description"
+								class="mb-4"
+								no-gutters
+							>
+								{{ physical.description }}
+							</v-row>
+							<v-row 
+								class="mb-4"
+								no-gutters
+							>
+								<v-expansion-panels class="rounded-0" accordion>
+									<v-expansion-panel
+										v-for="(phys, phys_ndx) in physical.data"
+										:key="phys_ndx"
+									>
+										<v-expansion-panel-header class="px-0 py-2.5">
+											<p class="ma-0 font-16">{{ phys.label }}</p>
+										</v-expansion-panel-header>
+										<v-expansion-panel-content class="font-12">
+											<template v-if="typeof phys.value === 'Array'">
+												<v-container>
+													<v-row 
+														class="mb-4"
+														v-for="(phys_arr, phys_arr_ndx) in phys.value"
+														:key="phys_arr_ndx"
+														no-gutters
+													>
+														<v-col cols="5">
+															<h6 class="primary-color fw-bold">{{ phys_arr.label }}</h6>
+														</v-col>
+														<v-col cols="7">
+															<div v-html="phys_arr.value"></div>
+														</v-col>
+													</v-row>
+												</v-container>
+
+											</template>
+											<template v-else-if="typeof phys.value === 'string'">
+												<p class="ma-0">{{ phys.value }}</p>
+											</template>
+										</v-expansion-panel-content>
+									</v-expansion-panel>
+								</v-expansion-panels>
+							</v-row>
+						</v-container>
+					</div>
+					<div 
+						v-show="currView === 'vitals'"
+						class="vitals-sign"
+					>
+						<v-container>
+							<v-row 
+								class="mb-4"
+								v-for="(vital, vital_ndx) in vitals"
+								:key="vital_ndx"
+								no-gutters
+							>
+								<v-col cols="6">
+									<h6 class="primary-color fw-bold">{{ vital.label }}</h6>
+								</v-col>
+								<v-col cols="6">
+									<p v-if="vital.value">{{ vital.value }}</p>
+									<p 
+										v-for="(other, vital_other_ndx) in vital.other"
+										:key="vital_other_ndx"
+									><strong>{{ other.label }}</strong>: {{ other.value }}</p>
+								</v-col>
+							</v-row>
+						</v-container>
+					</div>
+					<div 
+						v-show="currView === 'findings'"
+						class="key-findings"
+					>
+						<v-container>
+							<v-row  no-gutters>
+								<ul class="custom-list">
+									<li
+										v-for="(finding, finding_ndx) in findings"
+										:key="finding_ndx"
+									>
+										<p v-if="finding">{{ finding }}</p>
+									</li>
+								</ul>
+							</v-row>
+						</v-container>
+					</div>
+				</div>
+			</section>
     </div>
   </div>
   <!--/tabs-menu-->
@@ -27,36 +245,43 @@
 <script>
 export default {
   name: "PatientInformation",
-  props:['slideDown'],
-  data() {
-    return {
-      tab_menu: [
-        {
-          text: "Profile",
-          content: "Patient Profile",
-        },
-        {
-          text: "History",
-          content: "Medical History",
-        },
-        {
-          text: "Physical",
-          content: "Physical Exams",
-        },
-        {
-          text: "Findings",
-          content: "Key Findings",
-        },
-      ],
-      activeIndex: 0,
-      textData: "Patient Profile",
-    };
-  },
+	props: {
+		defaultView: {
+			type: String,
+			default: 'findings'
+		}
+	},
+	data() {
+		return {
+			currView: this.defaultView
+		}
+	},
+	computed: {
+		info() {
+			return this.$store.getters?.caseData?.patient_information
+		},
+		vitals() {
+			return this?.info?.vitals
+		},
+		profile() {
+			return this?.info?.profile
+		},
+		history() {
+			return this?.info?.medical_history
+		},
+		physical() {
+			return this?.info?.physical_exams
+		},
+		findings() {
+			return this?.info?.key_findings
+		}
+	},
+	mounted() {
+	},
   methods: {
-    class_active(id, val) {
-      this.activeIndex = id;
-      this.textData = val;
-    },
+		toggleView(id) {
+			this.currView = id
+		},
   },
 };
 </script>
@@ -66,6 +291,19 @@ export default {
 .v-list-item--active {
   border-left: 3px solid #4e9d2d;
 }
+
+.patient-video {
+	max-height: 400px;
+	.video {
+		display: flex;
+		justify-content: center;
+	}
+}
+
+.vital-sign-header {
+	border-bottom: 1px solid #d4e4cd !important;
+}
+
 .tabs-menu {
   background-color: #fff;
   overflow: hidden;
@@ -138,6 +376,7 @@ export default {
 .active {
   background-color: #4e9d2d !important;
   color: #ffffff !important;
+	font-weight: bold !important;
 }
 .active-text {
   color: #ffffff !important;
@@ -151,14 +390,7 @@ li.active a {
   min-height: 1000px;
 }
 .scroll-box {
-  max-height: 505px;
   overflow: auto;
-  // @media (min-width: 500px) {
-  //   max-height: 390px;
-  // }
-  // @media (max-width: 500px) {
-  //   max-height: 520px;
-  // }
 }
 .scroll-box::-webkit-scrollbar {
   width: 4px;

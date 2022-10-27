@@ -74,11 +74,11 @@
 							<v-btn 
 								class="position-absolute bottom-0 right-0"
 								icon
+								@click="showLightBox(labs.result.image_url)"
 							>
 								<v-icon
 									size="32"
 									color="#4e9d2d"
-									@click="lightBox(labs.result.image_url)"
 								>mdi-magnify-plus-outline</v-icon>
 							</v-btn>
 						</div>
@@ -210,8 +210,8 @@ export default {
 			this.$store.dispatch('setChoiceLabsRead', this.order)
 			this.isLabsRead = true
 		},
-		lightBox(url) {
-			console.log(url)
+		showLightBox(image_url) {
+			this.$store.dispatch('showLightBox', { image_url })
 		}
 	}
 }

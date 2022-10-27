@@ -1,6 +1,13 @@
 /* Position */
+.top-0 { top: 0 !important; }
 .right-0 { right: 0 !important; }
+.bottom-0 { bottom: 0 !important; }
 .left-0 { left: 0 !important; }
+
+.top-2\.5 { top: 10px !important; }
+.right-2\.5 { right: 10px !important; }
+.bottom-2\.5 { bottom: 10px !important; }
+.left-2\.5 { left: 10px !important; }
 
 /* Colors */
 .body-bg-color { background-color: $gray6; }
@@ -13,6 +20,12 @@
 
 .primary-lighter-bg { background-color: $primary-lighter; }
 .primary-lighter-color { color: $primary-lighter; }
+
+.secondary-bg { background-color: $secondary; }
+.secondary-color { color: $secondary; }
+
+.secondary-light-bg { background-color: $secondary-light; }
+.secondary-light-color { color: $secondary-light; }
 
 .blue-bg { background-color: $secondary; }
 .blue-color { color: $secondary; }
@@ -62,6 +75,7 @@
 /* Sizing */
 /* width */
 .w-1px { width: 1px; }
+.w-1\/2 { width: 50%; }
 .max-w-100 { max-width: 100% !important; }
 /* height */
 .max-h-100 { max-height: 100% !important; }
@@ -111,3 +125,30 @@
 .v-dialog--fullscreen > .v-card { padding: 10px !important; }
 .v-input__slot { margin-bottom: 0 !important; }
 .black-label label { color: $black; }
+
+/* Lists */
+ul.custom-list {
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
+	gap: 10px;
+  list-style: none;
+}
+
+ul.custom-list > li {
+	display: flex;
+	flex-flow: row nowrap;
+	gap: 5px;
+}
+
+ul.custom-list > li p { margin-bottom: 0 !important; }
+
+ul.custom-list >li::before {
+  content: "\2022";
+  color: $primary;
+  font-weight: bold;
+	display: inline-block;
+	top: 0;
+  width: 1em;
+  margin-left: -1em;
+}

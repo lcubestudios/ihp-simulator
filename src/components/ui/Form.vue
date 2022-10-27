@@ -26,12 +26,27 @@
 								class="ma-0 pa-0 black-label" 
 								:name="name + '_' + choice_ndx"
 								:label="choice.choice_text" 
+								:value="choice.choice_value"
 								:true-value="choice.choice_value"
 								:ripple="false"
 								color="#4e9d2d"
 							></v-radio>
 						</div>
 					</v-radio-group>
+					<!-- <v-radio-group>
+						<div class="d-flex flex-column gap-3">
+							<v-radio 
+								v-for="(choice, choice_ndx) in choices" 
+								:key="choice_ndx"
+								class="ma-0 pa-0 black-label" 
+								:name="name + '_' + choice_ndx"
+								:label="choice.choice_text" 
+								:true-value="choice.choice_value"
+								:ripple="false"
+								color="#4e9d2d"
+							></v-radio>
+						</div>
+					</v-radio-group> -->
 				</template>
 			</div>
 		</div>

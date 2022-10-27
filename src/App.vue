@@ -44,54 +44,6 @@
 							<PageProgress />
 						</div>
 					</v-row>
-					<v-dialog
-						v-model="isNavMenuVisible"
-						fullscreen
-						hide-overlay
-						transition="dialog-top-transition"
-					>
-						<v-card class="h-100 gray6-bg text-right">
-							<div class="h-100 primary-light-bg">
-								<header>
-									<v-btn 
-										class="primary-color ma-2"
-										icon 
-										dark 
-										@click="hideNavMenu"
-									>
-										<div><v-icon>mdi-close</v-icon></div>
-									</v-btn>
-								</header>
-								<section class="d-flex flex-column gap-4 mt-4">
-									<div>
-										<v-btn class="text-dark font-18" text>
-											Table Of Contents
-										</v-btn>
-									</div>
-									<div>
-										<v-btn class="text-dark font-18" text>
-											Patient Information
-										</v-btn>
-									</div>
-									<div>
-										<v-btn class="text-dark font-18" text>
-											CME Information
-										</v-btn>
-									</div>
-									<div>
-										<v-btn class="text-dark font-18" text>
-											Referrences
-										</v-btn>
-									</div>
-									<div>
-										<v-btn class="text-dark font-18" text>
-											Claim Credit
-										</v-btn>
-									</div>
-								</section>
-							</div>
-						</v-card>
-					</v-dialog>
 				</template>
 				<template v-else>
 					<v-row class="page-content d-grid gap-2.5" no-gutters>
@@ -114,6 +66,17 @@
 				</template>
 			</v-container>
     </v-main>
+		<v-dialog
+			v-model="isLightBoxVisible"
+			fullscreen
+			hide-overlay
+			transition="dialog-top-transition"
+		>
+			<v-card class="h-100 gray6-bg text-right rounded-0">
+				<PageLightBox />
+			</v-card>
+		</v-dialog>
+		<PageNavMenu />
   </v-app>
 </template>
 
@@ -123,6 +86,8 @@ import PageFunderLine from '@/components/page/FunderLine'
 import PageSidebar from '@/components/page/Sidebar'
 import PageProgress from '@/components/page/Progress'
 import PageClipboard from '@/components/page/Clipboard'
+import PageNavMenu from '@/components/page/NavMenu.vue'
+import PageLightBox from '@/components/page/LightBox.vue'
 
 export default {
   name: "App",
@@ -132,6 +97,8 @@ export default {
 		PageSidebar,
 		PageProgress,
 		PageClipboard,
+		PageNavMenu,
+    PageLightBox,
   },
 	data() {
 		return {
@@ -146,9 +113,6 @@ export default {
 	computed: {
     appMode() {
 			return this.$store.getters.appMode
-		},
-		isNavMenuVisible() {
-			return this.$store.getters.isNavMenuVisible
 		},
 		isContinueEnabled() {
 			return this.$store.getters.isContinueEnabled
@@ -171,6 +135,9 @@ export default {
 		currView() {
 			return this.$store.getters?.currView
 		},
+		isLightBoxVisible() {
+			return this.$store.getters?.isLightBoxVisible
+		},
 	},
 	methods: {
 		setAppMode() {
@@ -182,9 +149,6 @@ export default {
 				this.$store.dispatch('setAppMode', 'mobile')
 				this.$store.dispatch('setSidebarView', 0)
 			}
-		},
-		hideNavMenu() {
-			this.$store.dispatch('hideNavMenu')
 		},
 		stageClick() {
 			const stageWrap = this.$el.querySelector('.stages')

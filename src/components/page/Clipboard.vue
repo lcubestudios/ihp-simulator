@@ -1,7 +1,7 @@
 <template>
 	<div class="clipboard position-absolute top-0 w-100"> 
 		<v-card class="clipboard-content">
-			<div>
+			<div class="h-100">
 				<PatientInformation />
 			</div>
 		</v-card>
@@ -65,6 +65,14 @@ export default {
 		PatientInformation
 	},
 	computed: {
+		animationTimeline() {
+			return this.gsap.timeline({
+				defaults: { 
+					duration: 0.2,
+					ease: 'none',
+				}
+			})
+		},
 		isActive() {
 			return this.$store.getters.isClipboardVisible
 		},
@@ -74,11 +82,15 @@ export default {
 				: "View Patient Information";
 		},
 		img() {
-			return 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHByb2ZpbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=400&h=400&q=60'
+			return '/images/avatar-icon.png'
 		}
 	},
 	mounted() {
 		this.setClipboard();
+		setTimeout(() => {
+			if (this.isActive) this.showClipboard()
+			else this.hideClipboard()
+		}, 100)
 		window.addEventListener("resize", this.setClipboard);
 	},
 	methods: {
@@ -99,45 +111,44 @@ export default {
 				maxHeight: 0
 			});
 		},
-		toggleClipboard() {
+		showClipboard(){
 			const wrap = this.$el.closest("[class*=\"-container\"]");
 			const body = wrap.querySelector(".page-body")
 			const footer = wrap.querySelector(".page-footer");
 			const content = this.$el.querySelector(".clipboard-content");
 
-			const timeline = this.gsap.timeline({
-				defaults: { 
-					duration: 0.2,
-					ease: 'none',
-				}
-			})
+			this.animationTimeline
+				.to(content, {
+					height: body.offsetHeight,
+					maxHeight: body.offsetHeight,
+					onStart: () => {
+						this.$store.dispatch('showClipboard')
+					}
+				})
+				.to(footer, {
+					opacity: 0
+				}, '<')
+		},
+		hideClipboard(){
+			const wrap = this.$el.closest("[class*=\"-container\"]");
+			const footer = wrap.querySelector(".page-footer");
+			const content = this.$el.querySelector(".clipboard-content");
 
-			if (!this.isActive) {
-				timeline
-					.to(content, {
-						height: body.offsetHeight,
-						maxHeight: body.offsetHeight,
-						onStart: () => {
-							this.$store.dispatch('showClipboard')
-						}
-					})
-					.to(footer, {
-						opacity: 0
-					}, '<')
-			}
-			else {
-				timeline
-					.to(content, {
-						height: 0,
-						maxHeight: 0,
-						onStart: () => {
-							this.$store.dispatch('hideClipboard')
-						}
-					})
-					.to(footer, {
-						opacity: 1
-					}, '<')
-			}
+			this.animationTimeline
+				.to(content, {
+					height: 0,
+					maxHeight: 0,
+					onStart: () => {
+						this.$store.dispatch('hideClipboard')
+					}
+				})
+				.to(footer, {
+					opacity: 1
+				}, '<')
+		},
+		toggleClipboard() {
+			if (!this.isActive) this.showClipboard()
+			else this.hideClipboard()
 		}
 	},
 }

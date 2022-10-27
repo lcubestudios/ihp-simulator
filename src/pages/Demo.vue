@@ -63,6 +63,21 @@
 								</div>
 							</div>
 						</template>
+						<template v-if="stage.type === 'info'">
+							<div class="group">
+								<div
+									class="view"
+									data-view-type="info"
+								>
+									<div>
+										<section>
+											<!-- <div>Test</div> -->
+											<div v-html="stage.content"></div>
+										</section>
+									</div>
+								</div>
+							</div>
+						</template>
 					</div>
 				</div>                             
 			</section>
@@ -133,7 +148,9 @@ export default {
 			}
 		}
 
-		this.resizeResults()
+		setTimeout(() => {
+			this.resizeResults()
+		}, 100)
 		window.addEventListener('resize', this.resizeResults)
 	},
 	destroyed() {

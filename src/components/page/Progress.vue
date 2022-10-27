@@ -51,6 +51,7 @@ export default {
 		opacity: 1;
   }
 
-	.active { pointer-events: none; }
+	pointer-events: none;
+	// .active { pointer-events: none; }
 }
 </style>

@@ -6,6 +6,12 @@
 /* Override */
 .v-application,
 .v-application--wrap { min-height: 100% !important; }
+.v-expansion-panel-content__wrap { padding: 0 10px 20px !important; }
+.v-expansion-panels.v-expansion-panels--accordion { 
+	border-top: thin solid !important;
+	border-bottom: thin solid !important;
+	border-color: rgba(0,0,0,.12) !important; 
+}
 
 /* Custom */
 * {

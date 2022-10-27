@@ -2,7 +2,7 @@
 	<div class="result position-relative">
 		<header class="mb-4 d-flex flex-row gap-2 align-items-end">
 			<h4 class="font-18 fw-bold ma-0">Results</h4>
-			<p v-if="hasLabs" class="ma-0 font-12">(view all labs to continue)</p>
+			<p v-if="hasLabs" class="ma-0 font-12">(view all <v-icon size="20" color="#222121">mdi-clipboard-text</v-icon> to continue)</p>
 		</header>
 		<section>
 			<div
@@ -56,13 +56,12 @@ export default {
 			default: () => {}
 		},
 	},
-	methods: {
+	computed: {
 		hasLabs() {
-			return this.question.choices.filter((choice) => !!choice.choice_labs).length > 0
+			return this.choices.filter((choice) => !!choice.choice_labs).length > 0
 		}
 	},
 	mounted() {
-		// console.log(this.data)
 	}
 };
 </script>

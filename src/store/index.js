@@ -17,7 +17,11 @@ const state = () => {
 		isContinueEnabled: true,
 		continueButtonText: 'Continue',
 		caseData: test,
-		stages: {}
+		stages: {},
+		isLightBoxVisible: false,
+		lightBoxImage: null,
+		isReferencesVisible: false,
+		isCmeInfoVisible: false,
 	}
 }
 
@@ -70,6 +74,12 @@ const mutations = {
 				.findIndex((choice) => choice.choice_order == val)
 			]
 			.choice_is_labs_read = true
+	},
+	setLightBoxVisible(state, val) {
+		state.isLightBoxVisible = val
+	},
+	setLightBoxImage(state, val) {
+		state.lightBoxImage = val
 	}
 }
 
@@ -80,11 +90,42 @@ const actions = {
 	setCaseData({ commit }, val) {
 		commit('setCaseData', val)
 	},
-	setStages({ state, commit, dispatch }) {
-		const data = state.caseData.stages
+	setStages({ state, commit }) {
+		const data = [
+			...state.caseData.stages,
+			{
+				name: "Follow Up",
+				type: "info",
+				content: state.caseData.follow_up
+			},
+			{
+				name: "Conclusions",
+				type: "info",
+				content: state.caseData.conclusions
+			}
+		]
+
+		console.log(state.caseData)
+
+		const views = []
+		data
+			.map((stage, stage_ndx) => {
+				if (stage.type === 'question') {
+					stage.questions
+						.map((_, q_ndx) => {
+							views.push(stage_ndx + '.' + q_ndx + '.0')
+							views.push(stage_ndx + '.' + q_ndx + '.1')
+						})
+				}
+				else if (stage.type === 'info') {
+					views.push(stage_ndx + '.0')
+				}
+			})
+
+		const key = state.currStage + '.' + state.currGroup + (data[state.currStage].type === 'question' ? '.0' : '')
 
 		commit('setStages', data)
-		dispatch('setCurrGroup', data)
+		commit('setCurrView', views.findIndex((view) => view === key))
 	},
 	setAppMode({ commit }, val) {
 		commit('setAppMode', val)
@@ -113,23 +154,29 @@ const actions = {
 	setCurrStage({ commit }, val) {
 		commit('setCurrStage', val)
 	},
-	setCurrView({ dispatch, commit }, val) {
+	setCurrView({ state, commit }, val) {
 		commit('setCurrView', val)
-		dispatch('setCurrGroup')
-	},
-	setCurrGroup({ state, commit }) {
+
 		const groupKeys = []
 		
 		state.stages
 			.forEach((stage) => {
-				stage.questions
-					.forEach((_, ndx) => {
-						groupKeys.push(ndx)
-						if (stage.type === 'question') groupKeys.push(ndx)
-					})
+				if (stage.type === 'question') {
+					stage.questions
+						.forEach((_, ndx) => {
+							groupKeys.push(ndx)
+							groupKeys.push(ndx)
+						})
+				}
+				else if (stage.type === 'info') {
+					groupKeys.push(0)
+				}
 			})
 		
 		commit('setCurrGroup', groupKeys[state.currView])
+	},
+	setCurrGroup({ commit } ,val) {
+		commit('setCurrGroup', val)
 	},
 	enableContinueButton({ commit }) {
 		commit('setContinueEnabled', true)
@@ -138,14 +185,16 @@ const actions = {
 		commit('setContinueEnabled', false)
 	},
 	setContinueButtonText({ state, commit }, type) {
-		const totalGroup = state.stages[state.currStage]?.questions.length
+		const totalGroup = state.stages[state.currStage].type === 'question'
+			? state.stages[state.currStage]?.questions.length
+			: 1
 		const val = type === 'question'
 				?'Submit ' + state.stages[state.currStage].name + (
 					totalGroup > 1 && state.currGroup < totalGroup
 					? ' Part ' + (state.currGroup + 1)
 					: ''
 				)
-			: type === 'feedback'
+			: type === 'feedback' || type === 'info'
 			? 'Continue to ' + (
 					totalGroup > 1 && state.currGroup + 1 < totalGroup
 					? state.stages[state.currStage].name + ' Part ' + (state.currGroup + 2)
@@ -179,16 +228,20 @@ const actions = {
 			.choices
 			.filter((choice) => !!choice.choice_labs && !choice.choice_is_labs_read)
 			.length > 0
-
-			console.log(state.stages[state.currStage]
-				.questions[state.currGroup]
-				.choices
-				.filter((choice) => !!choice.choice_labs && !choice.choice_is_labs_read))
 		
 			if (hasUnreadLabs) dispatch('disableContinueButton')
 			else dispatch('enableContinueButton')
-
-			console.log(state.isContinueEnabled)
+	},
+	showLightBox({ commit }, { image_url }) {
+		commit('setLightBoxVisible', true)
+		commit('setLightBoxImage', image_url)
+	},
+	hideLightBox({ commit }) {
+		commit('setLightBoxVisible', false)
+		commit('setLightBoxImage', null)
+	},
+	setLightBoxImage({ commit }, val) {
+		commit('setLightBoxImage', val)
 	}
 }
 
@@ -225,6 +278,12 @@ const getters = {
 	},
 	continueButtonText(state) {
 		return state.continueButtonText
+	},
+	isLightBoxVisible(state) {
+		return state.isLightBoxVisible
+	},
+	lightBoxImage(state) {
+		return state.lightBoxImage
 	}
 }
 

@@ -217,6 +217,7 @@ const actions = {
 			})
 		
 		commit('setAnswers', output)
+		console.log(state.stages[state.currStage])
 	},
 	setChoiceLabsRead({ dispatch, commit }, id) {
 		commit('setChoiceLabsRead', id)

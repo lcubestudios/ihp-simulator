@@ -207,6 +207,7 @@ const actions = {
 		commit('setContinueButtonText', val)
 	},
 	submitQuestion({ state, commit }, payload) {
+		console.log(payload)
 		const output = []
 		Object.keys(payload)
 			.map((item) => {

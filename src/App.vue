@@ -169,21 +169,15 @@ export default {
 			}
 		},
 		serializeForm(form) {
-			const data = new FormData(form)
-			const output = []
+			const obj = {};
+			const fields = form.querySelectorAll('input');
 
-			for (let [key, value] of data) {
-				if (output[key] !== undefined) {
-					if (!Array.isArray(output[key])) {
-						output[key] = [output[key]]
-					}
-					output[key].push(value)
-				} else {
-					output[key] = value
-				}
-			}
+			fields
+				.forEach((el) => {
+					if (el.checked || el.getAttribute('aria-checked') === 'true') obj[el.getAttribute('name')] = el.value.trim();
+				})
 
-			return output
+			return obj;
 		},
 		nextStage() {
 			const stageWrap = this.$el.querySelector('.stages')

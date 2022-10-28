@@ -52,9 +52,13 @@
     </ul>
     <div class="content-box flex-grow-1 d-flex flex-column h-100">
 			<section class="patient-video position-relative w-100">
-				<div class="gray2-bg">
+				<div class="gray2-bg h-100">
 					<div class="video h-100">
-						<img src="/images/avatar-placeholder.png" />
+						<video id="patientVideo" class="max-h-100" playsinline>
+							<source 
+								:src="video_url"
+							/>
+						</video>
 					</div>
 					<v-btn 
 						class="position-absolute bottom-0 left-0 ma-2.5"
@@ -63,8 +67,8 @@
 						<v-icon
 							size="32"
 							color="#4e9d2d"
-							@click="lightBox(labs.result.image_url)"
-						>mdi-play-circle-outline</v-icon>
+							@click="toggleVideo()"
+						>{{ isVideoPlaying ? 'mdi-pause-circle-outline' : 'mdi-play-circle-outline' }}</v-icon>
 					</v-btn>
 				</div>
 			</section>
@@ -253,12 +257,16 @@ export default {
 	},
 	data() {
 		return {
-			currView: this.defaultView
+			currView: this.defaultView,
+			isVideoPlaying: false
 		}
 	},
 	computed: {
 		info() {
 			return this.$store.getters?.caseData?.patient_information
+		},
+		video_url() {
+			return this?.info?.video_url
 		},
 		vitals() {
 			return this?.info?.vitals
@@ -282,6 +290,14 @@ export default {
 		toggleView(id) {
 			this.currView = id
 		},
+		toggleVideo() {
+			const video = this.$el.querySelector('#patientVideo')
+
+			if (this.isVideoPlaying) video.pause()
+			else video.play()
+
+			this.isVideoPlaying = !this.isVideoPlaying
+		}
   },
 };
 </script>
@@ -293,10 +309,14 @@ export default {
 }
 
 .patient-video {
-	max-height: 400px;
+	height: 240px;
 	.video {
 		display: flex;
 		justify-content: center;
+		> * {
+			height: 100%;
+			max-height: 100%;
+		}
 	}
 }
 

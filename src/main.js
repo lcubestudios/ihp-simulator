@@ -24,7 +24,9 @@ import 'vuetify/dist/vuetify.min.css'
 
 // Mixins
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import ScrollTrigger from "gsap/ScrollTrigger"
+import VueVideoPlayer from 'vue-video-player'
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,6 +37,7 @@ Vue
 	.use(VueAxios, axios)
 	.use(BootstrapVue)
 	.use(BootstrapVueIcons)
+	.use(VueVideoPlayer)
 	.mixin({
 		created: function () {
 			this.gsap = gsap;

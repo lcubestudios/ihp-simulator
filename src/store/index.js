@@ -207,8 +207,8 @@ const actions = {
 		commit('setContinueButtonText', val)
 	},
 	submitQuestion({ state, commit }, payload) {
-		console.log(payload)
 		const output = []
+
 		Object.keys(payload)
 			.map((item) => {
 				const id = item.split('_')[2]
@@ -218,7 +218,6 @@ const actions = {
 			})
 		
 		commit('setAnswers', output)
-		console.log(state.stages[state.currStage])
 	},
 	setChoiceLabsRead({ dispatch, commit }, id) {
 		commit('setChoiceLabsRead', id)

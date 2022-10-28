@@ -54,7 +54,12 @@
 			<section class="patient-video position-relative w-100">
 				<div class="gray2-bg h-100">
 					<div class="video h-100">
-						<video id="patientVideo" class="max-h-100" playsinline>
+						<video 
+							id="patientVideo" 
+							class="max-h-100" 
+							poster="/images/avatar-placeholder.png"
+							playsinline
+						>
 							<source 
 								:src="video_url"
 							/>

@@ -8,6 +8,7 @@ Vue.use(Vuex)
 
 const state = () => {
 	return {
+		isLoading: false,
 		isPatientIntroComplete: false,
 		isGuruIntroComplete: false,
 		appMode: 'desktop',
@@ -34,6 +35,9 @@ const state = () => {
 }
 
 const mutations = {
+	setIsLoading(state, val) {
+		state.isLoading = val
+	},
 	setAppMode(state, val) {
 		state.appMode = val
 	},
@@ -132,6 +136,15 @@ const mutations = {
 const actions = {
 	submitAnalytics() {
 		console.log('analytics')
+	},
+	setIsLoading({ commit }, val) {
+		commit('setIsLoading', val)
+	},
+	isLoading({ dispatch }) {
+		dispatch('setIsLoading', true)
+	},
+	isLoaded({ dispatch }) {
+		dispatch('setIsLoading', false)
 	},
 	setAppMode({ commit }, val) {
 		commit('setAppMode', val)
@@ -333,7 +346,7 @@ const actions = {
 		// Get Reference Data
 		refData = await dispatch('getRefData')
 		// IF no ref data -> Throw error
-		if(!refData) throw 'data not found'
+		if (!refData) throw 'data not found'
 		// Store ref data
 		await dispatch('setRefData', refData)
 		// check token
@@ -372,6 +385,9 @@ const actions = {
 				// dispatch('setCurrStage', progress.stages.filter((stage)))
 			}
 			console.log(progress)
+			// setTimeout(() => {
+			// 	dispatch('isLoaded')
+			// }, 1000)
 		}
 		else {
 			await dispatch('setUserToken', null)
@@ -609,6 +625,9 @@ const actions = {
 }
 
 const getters = {
+	isLoading(state) {
+		return state.isLoading
+	},
 	appMode(state) {
 		return state.appMode
 	},

@@ -3,7 +3,6 @@
 		<v-card class="clipboard-content pointer-events-initial">
 			<div class="h-100">
 				<PatientInformation 
-					:default-view="!isPatientIntroComplete ? 'profile' : null"
 					:auto-play="true"
 				/>
 			</div>
@@ -122,12 +121,8 @@ export default {
 		}
 	},
 	mounted() {
-		this.setClipboard();
-		setTimeout(() => {
-			if (this.isActive || !this.isPatientIntroComplete) this.$store.dispatch('showClipboard')
-			else this.$store.dispatch('hideClipboard')
-		}, 100)
-		window.addEventListener("resize", this.setClipboard);
+		this.setClipboard()
+		window.addEventListener("resize", () => this.setClipboard);
 	},
 	methods: {
 		setClipboard() {
@@ -142,10 +137,17 @@ export default {
 				paddingTop: handle.offsetHeight
 			});
 
-			this.gsap.set(content, {
-				height: 0,
-				maxHeight: 0
-			});
+			if (this.isActive || !this.isPatientIntroComplete) {
+				this.$store.dispatch('showClipboard')
+				if (this.isActive) this.showClipboard()
+			}
+			else {
+				this.$store.dispatch('hideClipboard')
+				this.gsap.set(content, {
+					height: 0,
+					maxHeight: 0
+				});
+			}
 		},
 		showClipboard(){
 			const wrap = this.$el.closest("[class*=\"-container\"]");

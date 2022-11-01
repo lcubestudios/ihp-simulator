@@ -14,33 +14,39 @@
 			>
 				<template v-if="isAuth">
 					<v-row class="page-header" no-gutters>
-						<v-card class="pa-0 overflow-hidden rounded-lg">
+						<v-card class="pa-0 overflow-hidden rounded-lg gray1-bg">
 							<PageHeader />
 							<PageFunderLine 
-								v-if="appMode === 'mobile'" 
+								v-if="appMode === 'mobile' && !isLoading"
 							/>
 						</v-card>
 					</v-row>
 					<template v-if="appMode === 'mobile'">
 						<v-row class="page-body" no-gutters>
 							<v-card class="px-0 position-relative overflow-visible rounded-lg font-16">
-								<PageClipboard />
-								<PageGuruIntro 
-									v-if="!isGuruIntroComplete" 
-									:class="{
-										'opacity-0': !isPatientIntroComplete
-									}"
-								/>
-								<router-view
-									:class="{
-										'opacity-0': !isPatientIntroComplete || !isGuruIntroComplete
-									}"
-								></router-view>
-								<CmeInfo />
-								<ReferenceData />
+								<template v-if="isLoading">
+									<PageLoader />
+								</template>
+								<template v-else>
+									<PageClipboard />
+									<PageGuruIntro 
+										v-if="!isGuruIntroComplete" 
+										:class="{
+											'opacity-0': !isPatientIntroComplete
+										}"
+									/>
+									<router-view
+										:class="{
+											'opacity-0': !isPatientIntroComplete || !isGuruIntroComplete
+										}"
+									></router-view>
+									<CmeInfo />
+									<ReferenceData />
+								</template>
 							</v-card>
 						</v-row>
 						<v-row 
+							v-if="!isLoading"
 							class="page-footer"
 							:class="{
 								'opacity-0': !(!isClipboardVisible || !isPatientIntroComplete)
@@ -115,6 +121,7 @@
 </template>
 
 <script>
+import PageLoader from '@/components/page/Loader'
 import PageAuth from '@/components/page/Auth'
 import PageHeader from '@/components/page/Header'
 import PageFunderLine from '@/components/page/FunderLine'
@@ -131,6 +138,7 @@ import ReferenceData from '@/components/ReferenceData'
 export default {
   name: "App",
   components: {
+		PageLoader,
 		PageAuth,
 		PageHeader,
 		PageFunderLine,
@@ -159,6 +167,9 @@ export default {
 		window.removeEventListener('resize', this.setAppMode)
 	},
 	computed: {
+		isLoading() {
+			return this.$store.getters.isLoading
+		},
     appMode() {
 			return this.$store.getters?.appMode
 		},

@@ -34,6 +34,7 @@
 				<a class="top-10" v-text="'Vitals'"></a>
 			</li>
 			<li
+				class="d-none"
 				:class="{
 					'active': currView === 'tests'
 				}"
@@ -58,7 +59,10 @@
 							id="patientVideo" 
 							class="max-h-100" 
 							:poster="patient_video_thumbnail"
+							@pause="onVideoPause"
+							@play="onVideoPlay"
 							playsinline
+							muted
 						>
 							<source 
 								:src="patient_video_url"
@@ -66,16 +70,21 @@
 							/>
 						</video>
 					</div>
-					<v-btn 
-						class="position-absolute bottom-0 left-0 ma-2.5"
-						icon
+					<div 
+						class="position-absolute top-0 left-0 w-100 h-100"
+						@click="toggleVideo()"
 					>
-						<v-icon
-							size="32"
-							color="#4e9d2d"
-							@click="toggleVideo()"
-						>{{ isVideoPlaying ? 'mdi-pause-circle-outline' : 'mdi-play-circle-outline' }}</v-icon>
-					</v-btn>
+						<v-btn 
+							class="position-absolute bottom-0 left-0 ma-2.5"
+							icon
+						>
+							<v-icon
+								size="32"
+								color="#4e9d2d"
+								:ripple="false"
+							>{{ isVideoPlaying ? 'mdi-pause-circle-outline' : 'mdi-play-circle-outline' }}</v-icon>
+						</v-btn>
+					</div>
 				</div>
 			</section>
 			<section class="flex-grow-1 position-relative">
@@ -85,6 +94,12 @@
 						class="patient-profile"
 					>
 						<v-container>
+							<v-row 
+								class="mb-4"
+								no-gutters
+							>
+								<p class="pa-0 ma-0">Hi, I'm Pete. I'm 69. I've had COPD for a while, but now I'm feeling worse. I'm always out of breath and I've lost a lot of weight. Please help me!</p>
+							</v-row>
 							<v-row 
 								class="mb-4"
 								v-for="(info, info_ndx) in profile"
@@ -110,7 +125,7 @@
 								class="mb-4"
 								no-gutters
 							>
-								{{ history.description }}
+								<p class="pa-0 ma-0">{{ history.description }}</p>
 							</v-row>
 							<v-row 
 								class="mb-4"
@@ -162,7 +177,7 @@
 								class="mb-4"
 								no-gutters
 							>
-								{{ physical.description }}
+								<p class="pa-0 ma-0">{{ physical.description }}</p>
 							</v-row>
 							<v-row 
 								class="mb-4"
@@ -268,19 +283,25 @@ export default {
 	data() {
 		return {
 			currView: this.defaultView,
-			isVideoPlaying: false
+			isVideoPlaying: false,
+		}
+	},
+	watch: {
+		isClipboardVisible(to) {
+			if (!to) this.setDefaultView()
 		}
 	},
 	computed: {
+		isClipboardVisible() {
+			return this.$store.getters.isClipboardVisible
+		},
 		info() {
 			return this.$store.getters?.refData?.patient_information
 		},
 		patient_video_url() {
-			console.log(this?.info?.patient_video_url)
 			return this?.info?.patient_video_url
 		},
 		patient_video_thumbnail() {
-			console.log(this?.info?.patient_video_thumbnail)
 			return this?.info?.patient_video_thumbnail
 		},
 		vitals() {
@@ -299,7 +320,27 @@ export default {
 			return this?.info?.key_findings
 		}
 	},
+	mounted() {
+		if (!this.$store.getters.isPatientIntroComplete) {
+			setTimeout(() => {
+				this.$el.querySelector('#patientVideo').play()
+			}, 150)
+		}
+			setTimeout(() => {
+				this.setDefaultView()
+			}, 150)
+	},
   methods: {
+		setDefaultView() {
+			if (!this.$store.getters.isPatientIntroComplete)  this.toggleView('profile')
+			else this.toggleView('findings')
+		},
+		onVideoPlay() {
+			this.isVideoPlaying = true
+		},
+		onVideoPause() {
+			this.isVideoPlaying = false
+		},
 		toggleView(id) {
 			this.currView = id
 		},
@@ -308,8 +349,6 @@ export default {
 
 			if (this.isVideoPlaying) video.pause()
 			else video.play()
-
-			this.isVideoPlaying = !this.isVideoPlaying
 		}
   },
 };

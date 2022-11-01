@@ -47,30 +47,6 @@
 										data-view-type="feedback"
 									>
 										<div class="result-content">
-											<section 
-												v-if="!isFeedbackComplete({ stage: stage_ndx, group: question_ndx }) && guruResponseVideo(question)" 
-												class="result-video mb-4 position-relative w-100 gray2-bg overflow-hidden"
-											>
-												<video 
-													:id="`guruResponse_${ stage_ndx }_${ question_ndx }`"
-													class="w-100"
-													:poster="guruResponseThumbnail"
-													playsinline
-													muted
-												>
-													<source :src="guruResponseVideo(question)" type="video/mp4" />
-												</video>
-												<div 
-													class="video-overlay position-absolute top-0 left-0 bottom-0 right-0 d-flex flex-row justify-content-start align-items-end"
-												>
-													<v-btn icon :ripple="false">
-														<v-icon
-															size="32"
-															color="#4e9d2d"
-														>mdi-play-circle-outline</v-icon>
-													</v-btn>
-												</div>
-											</section>
 											<section>
 												<UiResult 
 													:question="question.question"
@@ -117,6 +93,7 @@
 import UiForm from '@/components/ui/Form'
 import UiResult from '@/components/ui/Result'
 import ResultFeedback from '@/components/ResultFeedback'
+// import ResponseVideo from '@/components/ResponseVideo'
 
 export default {
 	name: "DemoPage",
@@ -124,6 +101,7 @@ export default {
     UiForm,
     UiResult,
     ResultFeedback,
+    // ResponseVideo,
 	},
 	data() {
 		return {
@@ -151,9 +129,6 @@ export default {
 		isIndicatorVisible() {
 			return this?.stages[this.currStage]?.type === 'question'
 		},
-		guruResponseThumbnail() {
-			return this.$store.getters?.refData?.guru_intro_video_thumbnail
-		}
 	},
 	watch: {
 		currView() {
@@ -182,16 +157,6 @@ export default {
 				).length > 0
 			
 			return isViewComplete
-		},
-		guruResponseVideo(question) {
-			const correctAnswers = question.answers ? question?.answers.filter((answer) => answer.choice_is_correct)?.length > 0 : null
-			const correctChoices = question.choices ? question?.choices.filter((choice) => choice.choice_is_correct)?.length > 0 : null
-			
-			return correctAnswers && correctChoices 
-				? correctAnswers === correctChoices
-					? question?.correct_video_url.replace(/\{\{CORRECT_VIDEO\}\}/gi, 'global/guru-spot-on.mp4')
-					: question?.incorrect_video_url.replace(/\{\{INCORRECT_VIDEO\}\}/gi, 'global/guru-not-quite.mp4')
-				: null
 		},
 		setView() {
 			const stageWrap = this.$el.querySelector('.stages')

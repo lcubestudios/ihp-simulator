@@ -7,10 +7,20 @@
 				<img class="h-100" src="https://secureapi.atpoc.com/cdn/assets/production/suite-library/ihp-logo.png" />
 			</div>
 			<v-spacer></v-spacer>
-			<div class="d-block d-md-none">
+			<div 
+				class="d-block d-md-none"
+				:class="{
+					'opacity-0': isLoading
+				}"
+			>
 				<v-app-bar-nav-icon @click="showNavMenu"></v-app-bar-nav-icon>
 			</div>
-			<div class="d-none d-md-block">
+			<div 
+				class="d-none d-md-block"
+				:class="{
+					'opacity-0': isLoading
+				}"
+			>
 				<v-btn 
 					class="toggle-sidebar"
 					:class="{
@@ -59,6 +69,9 @@
 export default {
   name: "PageHeader",
 	computed: {
+		isLoading() {
+			return this.$store.getters.isLoading
+		},
 		currSidebarView() {
 			return this.$store.getters.sidebarView
 		}

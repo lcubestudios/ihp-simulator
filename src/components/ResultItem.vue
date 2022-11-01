@@ -142,6 +142,9 @@ export default {
 		}
 	},
 	mounted() {
+		setTimeout(() => {
+			this.isLabsRead = !!this?.data?.choice_is_labs_read
+		}, 100)
 	},
 	methods: {
 		isAnswered(id) {

@@ -1,88 +1,116 @@
 <template>
-	<v-container class="content-container h-100">
-		<v-row class="h-100 position-relative overflow-hidden" no-gutters>
-			<section 
-				class="pa-0 w-100 h-100 d-flex flex-column"
-				:data-curr-stage="currStage"
-				:data-curr-view="currView"
-			>
-				<header class="stage-header primary-color">
-					<h2>{{ stageName }}</h2>
-					<p v-if="isIndicatorVisible">{{ currGroup + 1 }} / {{ totalGroup }}</p>
-				</header>
-				<div class="stages flex-grow-1 position-relative overflow-visible">
-					<div
-						v-for="(stage, stage_ndx) in stages"
-						:key="stage_ndx"
-						class="stage"
-					>
-						<template v-if="stage.type === 'question'">
-							<div 
-								v-for="(question, question_ndx) in stage.questions"
-								:key="question_ndx"
-								class="group"
-							>
-								<div
-									class="view"
-									data-view-type="question"
+	<div class="h-100 d-flex flex-row flex-nowrap">
+		<v-container class="content-container h-100">
+			<v-row class="h-100 position-relative overflow-hidden" no-gutters>
+				<section 
+					class="d-none pa-0 w-100 h-100 d-flex flex-column"
+					:data-curr-stage="currStage"
+					:data-curr-view="currView"
+				>
+					<header class="stage-header primary-color">
+						<h2>{{ stageName }}</h2>
+						<p v-if="isIndicatorVisible">{{ currGroup + 1 }} / {{ totalGroup }}</p>
+					</header>
+					<div class="stages flex-grow-1 position-relative overflow-visible">
+						<div
+							v-for="(stage, stage_ndx) in stages"
+							:key="stage_ndx"
+							class="stage"
+						>
+							<template v-if="stage.type === 'question'">
+								<div 
+									v-for="(question, question_ndx) in stage.questions"
+									:key="question_ndx"
+									class="group"
 								>
-									<div>
-										<section>
-											<UiForm 
-												:data-stage-name="stage.name"
-												:data-question-order="question_ndx"
-												:data="{
-													...question,
-													name: stage.order + '_' + question_ndx,
-												}"
-											/>
-										</section>	
+									<div
+										class="view"
+										data-view-type="question"
+									>
+										<div>
+											<section>
+												<UiForm 
+													:data-stage-name="stage.name"
+													:data-question-order="question_ndx"
+													:data="{
+														...question,
+														name: stage.order + '_' + question_ndx,
+													}"
+													:stage="stage_ndx"
+													:group="question_ndx"
+												/>
+											</section>	
+										</div>
+									</div>
+									<div
+										class="view"
+										data-view-type="feedback"
+									>
+										<div class="result-content">
+											<section 
+												v-if="!isFeedbackComplete({ stage: stage_ndx, group: question_ndx }) && guruResponseVideo(question)" 
+												class="result-video mb-4 position-relative w-100 gray2-bg overflow-hidden"
+											>
+												<video 
+													:id="`guruResponse_${ stage_ndx }_${ question_ndx }`"
+													class="w-100"
+													:poster="guruResponseThumbnail"
+													playsinline
+													muted
+												>
+													<source :src="guruResponseVideo(question)" type="video/mp4" />
+												</video>
+												<div 
+													class="video-overlay position-absolute top-0 left-0 bottom-0 right-0 d-flex flex-row justify-content-start align-items-end"
+												>
+													<v-btn icon :ripple="false">
+														<v-icon
+															size="32"
+															color="#4e9d2d"
+														>mdi-play-circle-outline</v-icon>
+													</v-btn>
+												</div>
+											</section>
+											<section>
+												<UiResult 
+													:question="question.question"
+													:choices="question.choices"
+													:answers="question.answers"
+													:feedback="question.feedback"
+													:notes="question.notes"
+													:test-results="question.test_results"
+												/>
+											</section>	
+										</div>
+										<ResultFeedback
+											v-if="question.feedback" 
+											class="result-feedback"
+											:data="question.feedback" 
+										/>
 									</div>
 								</div>
-								<div
-									class="view"
-									data-view-type="feedback"
-								>
-									<div class="result-content">
-										<section>
-											<UiResult 
-												:question="question.question"
-												:choices="question.choices"
-												:answers="question.answers"
-												:feedback="question.feedback"
-												:notes="question.notes"
-												:test-results="question.test_results"
-											/>
-										</section>	
-									</div>
-									<ResultFeedback
-										v-if="question.feedback" 
-										class="result-feedback"
-										:data="question.feedback" 
-									/>
-								</div>
-							</div>
-						</template>
-						<template v-if="stage.type === 'info'">
-							<div class="group">
-								<div
-									class="view"
-									data-view-type="info"
-								>
-									<div>
-										<section>
-											<!-- <div>Test</div> -->
-											<div v-html="stage.content"></div>
-										</section>
+							</template>
+							<template v-if="stage.type === 'info'">
+								<div class="group">
+									<div
+										class="view"
+										data-view-type="info"
+									>
+										<div>
+											<section>
+												<!-- <div>Test</div> -->
+												<div v-html="stage.content"></div>
+											</section>
+										</div>
 									</div>
 								</div>
-							</div>
-						</template>
-					</div>
-				</div>                             
-			</section>
-		</v-row>
-	</v-container>
+							</template>
+						</div>
+					</div>                             
+				</section>
+			</v-row>
+		</v-container>
+	</div>
 </template>
 
 <script>
@@ -92,10 +120,14 @@ import ResultFeedback from '@/components/ResultFeedback'
 
 export default {
 	name: "DemoPage",
-	components: { 
-		UiForm,
-		UiResult,
-		ResultFeedback
+	components: {
+    UiForm,
+    UiResult,
+    ResultFeedback,
+	},
+	data() {
+		return {
+		}
 	},
 	computed: {
 		stages() {
@@ -118,36 +150,19 @@ export default {
 		},
 		isIndicatorVisible() {
 			return this?.stages[this.currStage]?.type === 'question'
+		},
+		guruResponseThumbnail() {
+			return this.$store.getters?.refData?.guru_intro_video_thumbnail
+		}
+	},
+	watch: {
+		currView() {
+			this.setView()
+			this.$store.dispatch('checkLabs')
 		}
 	},
 	mounted() {
-		const stageWrap = this.$el.querySelector('.stages')
-		const views = Array.from(stageWrap.querySelectorAll('.view'))
-		const isLastView = (this.currView + 1) === views.length
-
-		if (views.length > 0) {
-			// Set Views Position
-			this.$el
-				.querySelectorAll(".view")
-				.forEach((el, ndx) => {
-					this.gsap.set(el, {
-						xPercent: ndx * 100
-					});
-				});
-			// Set Visible View
-			this.gsap.set(stageWrap, {
-				xPercent: this.currView * -100,
-			});
-			// Set Button Text
-			if (isLastView) {
-				this.$store.dispatch('setContinueButtonText', 'end')
-			}
-			else {
-				this.$store.dispatch('setContinueButtonText', views[this.currView].getAttribute('data-view-type'))
-				if (views[this.currView].getAttribute('data-view-type') === 'feedback') this.$store.dispatch('checkLabs') 
-			}
-		}
-
+		this.setView()
 		setTimeout(() => {
 			this.resizeResults()
 		}, 100)
@@ -157,6 +172,56 @@ export default {
 		window.removeEventListener('resize', this.resizeResults)
 	},
 	methods: {
+		isFeedbackComplete({ stage, group }) {
+			const isViewComplete = this.$store.getters?.progress?.stages
+				.filter((item) => 
+					item.stage === stage
+					&& item.group === group
+					&& item.type === 'feedback'
+					&& item.isComplete
+				).length > 0
+			
+			return isViewComplete
+		},
+		guruResponseVideo(question) {
+			const correctAnswers = question.answers ? question?.answers.filter((answer) => answer.choice_is_correct)?.length > 0 : null
+			const correctChoices = question.choices ? question?.choices.filter((choice) => choice.choice_is_correct)?.length > 0 : null
+			
+			return correctAnswers && correctChoices 
+				? correctAnswers === correctChoices
+					? question?.correct_video_url.replace(/\{\{CORRECT_VIDEO\}\}/gi, 'global/guru-spot-on.mp4')
+					: question?.incorrect_video_url.replace(/\{\{INCORRECT_VIDEO\}\}/gi, 'global/guru-not-quite.mp4')
+				: null
+		},
+		setView() {
+			const stageWrap = this.$el.querySelector('.stages')
+			const views = Array.from(stageWrap.querySelectorAll('.view'))
+			const isLastView = (this.currView + 1) === views.length
+
+			if (this.currStage !== -1) {
+				// Set Views Position
+				this.$el
+					.querySelectorAll(".view")
+					.forEach((el, ndx) => {
+						this.gsap.set(el, {
+							xPercent: ndx * 100
+						});
+					});
+				// Set Visible View
+				this.gsap.set(stageWrap, {
+					xPercent: this.currView * -100,
+				});
+				// Set Button Text
+				if (isLastView) {
+					this.$store.dispatch('setContinueButtonText', 'end')
+				}
+				else {
+					const viewType = views[this.currView].getAttribute('data-view-type')
+					this.$store.dispatch('setContinueButtonText', viewType)
+					if (viewType === 'feedback') this.$store.dispatch('checkLabs') 
+				}
+			}
+		},
 		resizeResults() {
 			const results = this.$el.querySelectorAll('.result-content')
 
@@ -235,6 +300,15 @@ export default {
 		ul {
 			margin-bottom: 1rem;
 		}
+	}
+}
+.result-video {
+	height: auto;
+	max-height: 240px;
+	video {
+		height: 100%;
+		max-height: 100%;
+		max-width: 100%;
 	}
 }
 </style>

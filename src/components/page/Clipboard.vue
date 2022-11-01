@@ -1,12 +1,20 @@
 <template>
-	<div class="clipboard position-absolute top-0 w-100"> 
-		<v-card class="clipboard-content">
+	<div class="clipboard position-absolute pointer-events-none top-0 w-100"> 
+		<v-card class="clipboard-content pointer-events-initial">
 			<div class="h-100">
-				<PatientInformation />
+				<PatientInformation 
+					:default-view="!isPatientIntroComplete ? 'profile' : null"
+					:auto-play="true"
+				/>
 			</div>
 		</v-card>
 		<div 
 			class="clipboard-handle"
+			:class="{ 
+				'opacity-0': !isPatientIntroComplete || !isGuruIntroComplete,
+				'pointer-events-none': !isPatientIntroComplete || !isGuruIntroComplete,
+				'pointer-events-initial': isPatientIntroComplete || isGuruIntroComplete,
+			}"
 			@click="toggleClipboard"
 		>
 			<div class="position-relative text-center">
@@ -65,6 +73,12 @@ export default {
 		PatientInformation
 	},
 	computed: {
+		isPatientIntroComplete() {
+			return this.$store.getters.isPatientIntroComplete
+		},
+		isGuruIntroComplete() {
+			return this.$store.getters.isGuruIntroComplete
+		},
 		animationTimeline() {
 			return this.gsap.timeline({
 				defaults: { 
@@ -82,14 +96,36 @@ export default {
 				: "View Patient Information";
 		},
 		img() {
-			return '/images/avatar-icon.png'
+			return this.$store.getters?.refData?.patient_information?.patient_image_url
+		}
+	},
+	watch: {
+		isPatientIntroComplete(to) {
+			if (this.isActive && to) {
+				this.$store.dispatch('hideClipboard')
+				setTimeout(() => {
+					const wrap = this.$el.closest("[class*=\"-container\"]");
+					const body = wrap
+						.querySelector(".page-body")
+						.querySelector(".v-card");
+					const handle = this.$el.querySelector(".clipboard-handle");
+
+					this.gsap.set(body, {
+						paddingTop: handle.offsetHeight
+					});
+				}, 100)
+			}
+		},
+		isActive(to) {
+			if (to) this.showClipboard()
+			else this.hideClipboard()
 		}
 	},
 	mounted() {
 		this.setClipboard();
 		setTimeout(() => {
-			if (this.isActive) this.showClipboard()
-			else this.hideClipboard()
+			if (this.isActive || !this.isPatientIntroComplete) this.$store.dispatch('showClipboard')
+			else this.$store.dispatch('hideClipboard')
 		}, 100)
 		window.addEventListener("resize", this.setClipboard);
 	},
@@ -114,41 +150,26 @@ export default {
 		showClipboard(){
 			const wrap = this.$el.closest("[class*=\"-container\"]");
 			const body = wrap.querySelector(".page-body")
-			const footer = wrap.querySelector(".page-footer");
 			const content = this.$el.querySelector(".clipboard-content");
 
 			this.animationTimeline
 				.to(content, {
 					height: body.offsetHeight,
-					maxHeight: body.offsetHeight,
-					onStart: () => {
-						this.$store.dispatch('showClipboard')
-					}
+					maxHeight: body.offsetHeight
 				})
-				.to(footer, {
-					opacity: 0
-				}, '<')
 		},
 		hideClipboard(){
-			const wrap = this.$el.closest("[class*=\"-container\"]");
-			const footer = wrap.querySelector(".page-footer");
 			const content = this.$el.querySelector(".clipboard-content");
 
 			this.animationTimeline
 				.to(content, {
 					height: 0,
-					maxHeight: 0,
-					onStart: () => {
-						this.$store.dispatch('hideClipboard')
-					}
+					maxHeight: 0
 				})
-				.to(footer, {
-					opacity: 1
-				}, '<')
 		},
 		toggleClipboard() {
-			if (!this.isActive) this.showClipboard()
-			else this.hideClipboard()
+			if (!this.isActive) this.$store.dispatch('showClipboard')
+			else this.$store.dispatch('hideClipboard')
 		}
 	},
 }

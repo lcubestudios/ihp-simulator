@@ -17,8 +17,21 @@
 				sm="5"
 				md="3"
 			>
-				<v-btn class="primary-light-bg font-9 text-capitalize fw-bold" text small>Claim Credit</v-btn>
-				<v-btn class="primary-light-bg font-9 text-capitalize fw-bold" text small>CME Info</v-btn>
+				<v-btn
+					class="primary-light-bg font-9 text-capitalize fw-bold"
+					text
+					small
+				>
+					Claim Credit
+				</v-btn>
+				<v-btn
+					class="primary-light-bg font-9 text-capitalize fw-bold"
+					text
+					small
+					@click="showCmeInfo"
+				>
+					CME Info
+			</v-btn>
 			</v-col>
 		</v-row>
 	</div>
@@ -26,6 +39,11 @@
 
 <script>
 export default {
-	name: 'PageFunderLine'
+	name: 'PageFunderLine',
+	methods: {
+		showCmeInfo() {
+			this.$store.dispatch('showCmeInfo')
+		}
+	}
 }
 </script>

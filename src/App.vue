@@ -2,96 +2,136 @@
   <v-app>
     <v-main class="body-bg-color">
 			<v-container
-				class="h-100 d-grid gap-2.5 lighten-5"
+				class="h-100"
 				:class="{
-					'mobile-container': appMode === 'mobile',
-					'desktop-container': appMode === 'desktop'
+					'mobile-container': isAuth && appMode === 'mobile',
+					'desktop-container': isAuth && appMode === 'desktop',
+					'd-grid': isAuth,
+					'gap-2.5': isAuth,
+					'lighten-5': isAuth,
 				}" 
 				fluid
 			>
-				<v-row class="page-header" no-gutters>
-					<v-card class="pa-0 overflow-hidden rounded-lg">
-						<PageHeader />
-						<PageFunderLine 
-							v-if="appMode === 'mobile'" 
-						/>
-					</v-card>
-				</v-row>
-				<template v-if="appMode === 'mobile'">
-					<v-row class="page-body" no-gutters>
-						<v-card class="px-0 position-relative overflow-visible rounded-lg font-16">
-							<PageClipboard />
-							<router-view></router-view>
+				<template v-if="isAuth">
+					<v-row class="page-header" no-gutters>
+						<v-card class="pa-0 overflow-hidden rounded-lg">
+							<PageHeader />
+							<PageFunderLine 
+								v-if="appMode === 'mobile'" 
+							/>
 						</v-card>
 					</v-row>
-					<v-row class="page-footer" no-gutters>
-						<div class="d-flex flex-column gap-2.5 pa-0">
-							<v-btn
-								v-if="isContinueEnabled"
-								class="next-button text-white primary-bg font-18"
-								large
-								block
-								@click="stageClick()"
-							>{{ continueButtonLabel }}</v-btn>
-							<v-btn
-								v-else
-								class="next-button text-white primary-bg font-18"
-								large
-								block
-								disabled
-								@click="stageClick()"
-							>{{ continueButtonLabel }}</v-btn>
-							<PageProgress />
-						</div>
-					</v-row>
+					<template v-if="appMode === 'mobile'">
+						<v-row class="page-body" no-gutters>
+							<v-card class="px-0 position-relative overflow-visible rounded-lg font-16">
+								<PageClipboard />
+								<PageGuruIntro 
+									v-if="!isGuruIntroComplete" 
+									:class="{
+										'opacity-0': !isPatientIntroComplete
+									}"
+								/>
+								<router-view
+									:class="{
+										'opacity-0': !isPatientIntroComplete || !isGuruIntroComplete
+									}"
+								></router-view>
+								<CmeInfo />
+								<ReferenceData />
+							</v-card>
+						</v-row>
+						<v-row 
+							class="page-footer"
+							:class="{
+								'opacity-0': !(!isClipboardVisible || !isPatientIntroComplete)
+							}" 
+							no-gutters
+						>
+							<div 
+								v-if="!isCmeInfoVisible && !isReferenceDataVisible"
+								class="d-flex flex-column gap-2.5 pa-0"
+							>
+								<v-btn
+									v-if="isContinueEnabled"
+									class="next-button text-white primary-bg font-18"
+									large
+									block
+									@click="stageClick()"
+								>{{ continueButtonLabel }}</v-btn>
+								<v-btn
+									v-else
+									class="next-button text-white primary-bg font-18"
+									large
+									block
+									disabled
+									@click="stageClick()"
+								>{{ continueButtonLabel }}</v-btn>
+								<PageProgress v-if="isPatientIntroComplete && isGuruIntroComplete" />
+							</div>
+						</v-row>
+						<PageTOC />
+					</template>
+					<template v-else>
+						<v-row class="page-content d-grid gap-2.5" no-gutters>
+							<v-col>
+								<v-card class="page-sidebar h-100 pa-0 overflow-hidden rounded-lg">
+									<PageSidebar />
+								</v-card>
+							</v-col>
+							<v-col>
+								<v-card class="page-body d-grid h-100 pa-0 overflow-hidden rounded-lg">
+									<v-row no-gutters>
+										<PageFunderLine />
+									</v-row>
+									<v-row class="position-relative font-16" no-gutters>
+										<router-view></router-view>
+									</v-row>
+								</v-card>
+							</v-col>
+						</v-row>
+					</template>
+					<v-dialog
+						v-model="isLightBoxVisible"
+						fullscreen
+						hide-overlay
+						transition="dialog-top-transition"
+					>
+						<v-card class="h-100 gray6-bg text-right rounded-0">
+							<PageLightBox />
+						</v-card>
+					</v-dialog>
+					<PageNavMenu />
 				</template>
 				<template v-else>
-					<v-row class="page-content d-grid gap-2.5" no-gutters>
-						<v-col>
-							<v-card class="page-sidebar h-100 pa-0 overflow-hidden rounded-lg">
-								<PageSidebar />
-							</v-card>
-						</v-col>
-						<v-col>
-							<v-card class="page-body d-grid h-100 pa-0 overflow-hidden rounded-lg">
-								<v-row no-gutters>
-									<PageFunderLine />
-								</v-row>
-								<v-row class="position-relative font-16" no-gutters>
-									<router-view></router-view>
-								</v-row>
-							</v-card>
+					<v-row class="h-100" no-gutters>
+						<v-col class="h-100">
+							<PageAuth />
 						</v-col>
 					</v-row>
 				</template>
 			</v-container>
     </v-main>
-		<v-dialog
-			v-model="isLightBoxVisible"
-			fullscreen
-			hide-overlay
-			transition="dialog-top-transition"
-		>
-			<v-card class="h-100 gray6-bg text-right rounded-0">
-				<PageLightBox />
-			</v-card>
-		</v-dialog>
-		<PageNavMenu />
   </v-app>
 </template>
 
 <script>
+import PageAuth from '@/components/page/Auth'
 import PageHeader from '@/components/page/Header'
 import PageFunderLine from '@/components/page/FunderLine'
 import PageSidebar from '@/components/page/Sidebar'
 import PageProgress from '@/components/page/Progress'
 import PageClipboard from '@/components/page/Clipboard'
-import PageNavMenu from '@/components/page/NavMenu.vue'
-import PageLightBox from '@/components/page/LightBox.vue'
+import PageNavMenu from '@/components/page/NavMenu'
+import PageLightBox from '@/components/page/LightBox'
+import PageGuruIntro from '@/components/page/GuruIntro'
+import PageTOC from '@/components/page/TOC'
+import CmeInfo from '@/components/CmeInfo'
+import ReferenceData from '@/components/ReferenceData'
 
 export default {
   name: "App",
   components: {
+		PageAuth,
 		PageHeader,
 		PageFunderLine,
 		PageSidebar,
@@ -99,6 +139,10 @@ export default {
 		PageClipboard,
 		PageNavMenu,
     PageLightBox,
+    PageGuruIntro,
+    PageTOC,
+    CmeInfo,
+    ReferenceData,
   },
 	data() {
 		return {
@@ -107,18 +151,40 @@ export default {
 	},
 	mounted() {
 		this.setAppMode()
-		this.$store.dispatch('setStages')
+		this.$store.dispatch('setEnvironment')
+		console.log('url stage - ', this.$route.query.stage)
 		window.addEventListener('resize', this.setAppMode)
+	},
+	destroyed() {
+		window.removeEventListener('resize', this.setAppMode)
 	},
 	computed: {
     appMode() {
-			return this.$store.getters.appMode
+			return this.$store.getters?.appMode
+		},
+		isAuth() {
+			return this.$store.getters?.isAuth
+		},
+		isPatientIntroComplete() {
+			return this.$store.getters?.isPatientIntroComplete
+		},
+		isGuruIntroComplete() {
+			return this.$store.getters?.isGuruIntroComplete
+		},
+		isClipboardVisible() {
+			return this.$store.getters?.isClipboardVisible
 		},
 		isContinueEnabled() {
-			return this.$store.getters.isContinueEnabled
+			return this.$store.getters?.isContinueEnabled
+		},
+		isCmeInfoVisible() {
+			return this.$store.getters?.isCmeInfoVisible
+		},
+		isReferenceDataVisible() {
+			return this.$store.getters?.isReferenceDataVisible
 		},
 		continueButtonLabel() {
-			return this.$store.getters.continueButtonText
+			return this.$store.getters?.continueButtonText
 		},
 		stages() {
 			return this.$store.getters?.stages
@@ -144,6 +210,11 @@ export default {
 			if (window.innerWidth > 960) {
 				this.$store.dispatch('setAppMode', 'desktop')
 				this.$store.dispatch('hideNavMenu')
+				if (this.isPatientIntroComplete) this.$store.dispatch('hideClipboard')
+				this.$store.dispatch('hideCmeInfo')
+				this.$store.dispatch('hideReferenceData')
+				this.$store.dispatch('hideTOC')
+				this.$store.dispatch('hideLightBox')
 			}
 			else {
 				this.$store.dispatch('setAppMode', 'mobile')
@@ -155,9 +226,19 @@ export default {
 			const views = Array.from(stageWrap.querySelectorAll('.view'))
 			const currViewIndex = this.currView
 			const currView = views[currViewIndex]
-			const viewType = currView.getAttribute('data-view-type')
+			const viewType = !this.isPatientIntroComplete
+				? 'patient-intro'
+				: !this.isGuruIntroComplete
+				? 'guru-intro'
+				: currView.getAttribute('data-view-type')
 
-			if (viewType === 'question') {
+			if (viewType === 'patient-intro') {
+				this.$store.dispatch('completePatientIntro')
+			}
+			else if (viewType === 'guru-intro') {
+				this.$store.dispatch('completeGuruIntro')
+			}
+			else if (viewType === 'question') {
 				const form = currView.querySelector('form')
 				const payload = this.serializeForm(form)
 
@@ -213,9 +294,12 @@ export default {
 								this.$store.dispatch('setContinueButtonText', 'end')
 							}
 							else {
-								this.$store.dispatch('setContinueButtonText', views[nextViewIndex].getAttribute('data-view-type'))
-								if (views[nextViewIndex].getAttribute('data-view-type') === 'feedback') this.$store.dispatch('checkLabs')
+								const viewType = views[nextViewIndex].getAttribute('data-view-type')
+								this.$store.dispatch('setContinueButtonText', viewType)
+								if (viewType === 'feedback') this.$store.dispatch('checkLabs')
 							}
+
+							this.$store.dispatch('updateProgress')
 						}
 					}, '<')
 			}
@@ -223,3 +307,10 @@ export default {
 	}
 };
 </script>
+
+<style>
+#test {
+	z-index: 999999999;
+}
+
+</style>

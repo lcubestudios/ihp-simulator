@@ -1,13 +1,21 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-import test from '@/data/test.json'
+import axios from 'axios'
+import Cookies from 'js-cookie'
 
 Vue.use(Vuex)
 
 const state = () => {
 	return {
+		isPatientIntroComplete: false,
+		isGuruIntroComplete: false,
 		appMode: 'desktop',
+		isAuth: false,
+		userToken: null,
+		sessionId: null,
+		stages: null,
+		progress: null,
 		sidebarView: 0,
 		isNavMenuVisible: false,
 		isClipboardVisible: false,
@@ -16,24 +24,42 @@ const state = () => {
 		currView: 0,
 		isContinueEnabled: true,
 		continueButtonText: 'Continue',
-		caseData: test,
-		stages: {},
+		refData: null,
 		isLightBoxVisible: false,
 		lightBoxImage: null,
-		isReferencesVisible: false,
 		isCmeInfoVisible: false,
+		isReferenceDataVisible: false,
+		isTOCVisible: false,
 	}
 }
 
 const mutations = {
-	setCaseData(state, val) {
-		state.caseData = val
+	setAppMode(state, val) {
+		state.appMode = val
+	},
+	setPatientIntroComplete(state, val) {
+		state.isPatientIntroComplete = val
+	},
+	setGuruIntroComplete(state, val) {
+		state.isGuruIntroComplete = val
+	},
+	setAuth(state, val) {
+		state.isAuth = val
+	},
+	setUserToken(state, val) {
+		state.userToken = val
+	},
+	setSessionId(state, val) {
+		state.sessionId = val
+	},
+	setRefData(state, val) {
+		state.refData = val
 	},
 	setStages(state, val) {
 		state.stages = val
 	},
-	setAppMode(state, val) {
-		state.appMode = val
+	setProgress(state, val) {
+		state.progress = val
 	},
 	setSidebarView(state, val) {
 		state.sidebarView = val
@@ -75,11 +101,31 @@ const mutations = {
 			]
 			.choice_is_labs_read = true
 	},
+	setLabs(state, { stage, group, choice_order, val }) {
+		state.stages[stage]
+			.questions[group]
+			.choices[
+				state.stages[stage]
+				.questions[group]
+				.choices
+				.findIndex((choice) => choice.choice_order == choice_order)
+			]
+			.choice_is_labs_read = val
+	},
 	setLightBoxVisible(state, val) {
 		state.isLightBoxVisible = val
 	},
 	setLightBoxImage(state, val) {
 		state.lightBoxImage = val
+	},
+	setCmeInfoVisible(state, val) {
+		state.isCmeInfoVisible = val
+	},
+	setReferenceDataVisible(state, val) {
+		state.isReferenceDataVisible = val
+	},
+	setTOCVisible(state, val) {
+		state.isTOCVisible = val
 	}
 }
 
@@ -87,48 +133,249 @@ const actions = {
 	submitAnalytics() {
 		console.log('analytics')
 	},
-	setCaseData({ commit }, val) {
-		commit('setCaseData', val)
-	},
-	setStages({ state, commit }) {
-		const data = [
-			...state.caseData.stages,
-			{
-				name: "Follow Up",
-				type: "info",
-				content: state.caseData.follow_up
-			},
-			{
-				name: "Conclusions",
-				type: "info",
-				content: state.caseData.conclusions
-			}
-		]
-
-		console.log(state.caseData)
-
-		const views = []
-		data
-			.map((stage, stage_ndx) => {
-				if (stage.type === 'question') {
-					stage.questions
-						.map((_, q_ndx) => {
-							views.push(stage_ndx + '.' + q_ndx + '.0')
-							views.push(stage_ndx + '.' + q_ndx + '.1')
-						})
-				}
-				else if (stage.type === 'info') {
-					views.push(stage_ndx + '.0')
-				}
-			})
-
-		const key = state.currStage + '.' + state.currGroup + (data[state.currStage].type === 'question' ? '.0' : '')
-
-		commit('setStages', data)
-		commit('setCurrView', views.findIndex((view) => view === key))
-	},
 	setAppMode({ commit }, val) {
 		commit('setAppMode', val)
+	},
+	setPatientIntroComplete({ commit }, val) {
+		commit('setPatientIntroComplete', val)
+	},
+	completePatientIntro({ dispatch }) {
+		const progress = Object.assign(
+			JSON.parse(Cookies.get('ihp_progress')), 
+			{ isPatientIntroComplete: true }
+		)
+
+		dispatch('setProgress', progress)
+		dispatch('setPatientIntroComplete', true)
+	},
+	resetPatientIntro({ dispatch }) {
+		const progress = Object.assign(
+			JSON.parse(Cookies.get('ihp_progress')), 
+			{ isPatientIntroComplete: false }
+		)
+
+		dispatch('setProgress', progress)
+		dispatch('setPatientIntroComplete', false)
+	},
+	setGuruIntroComplete({ commit }, val) {
+		commit('setGuruIntroComplete', val)
+	},
+	completeGuruIntro({ dispatch }) {
+		const progress = Object.assign(
+			JSON.parse(Cookies.get('ihp_progress')), 
+			{ isGuruIntroComplete: true }
+		)
+
+		dispatch('setGuruIntroComplete', true)
+		dispatch('setCurrStage', 0)
+		dispatch('setCurrView', 0)
+		dispatch('setProgress', progress)
+		dispatch('updateProgress')
+	},
+	resetGuruIntro({ dispatch }) {
+		const progress = Object.assign(
+			JSON.parse(Cookies.get('ihp_progress')), 
+			{ isGuruIntroComplete: false }
+		)
+
+		dispatch('setProgress', progress)
+		dispatch('setGuruIntroComplete', false)
+	},
+	setAuth({ commit }, val) {
+		commit('setAuth', val)
+	},
+	setUserToken({ dispatch, commit }, val) {
+		if (val) {
+			Cookies.set('ihp_user_token', val)
+			dispatch('setAuth', true)
+		}
+		else {
+			Cookies.remove('ihp_user_token')
+			dispatch('setAuth', false)
+		}
+
+		commit('setUserToken', val)
+	},
+	userLogin({ dispatch }, creds) {
+		console.log(creds)
+		dispatch('setUserToken', '1234')
+		dispatch('setEnvironment')
+	},
+	userLogout({ dispatch }) {
+		dispatch('setUserToken', null)
+	},
+	async getRefData({ commit }) {
+		const getCmeInfo = await axios.get('https://cdn.atpoc.com/cdn/ihp/2537.11/2537.11.json').then((res) => { return res.data})
+		const getCaseData = await axios.get('https://cdn.atpoc.com/cdn/ihp/2537.11/case.json').then((res) => { return res.data})
+
+		return await Promise.all([
+				getCmeInfo,
+				getCaseData
+			])
+				.then((res) => {
+					const cmeInfo = res[0]
+					const caseData = res[1]
+
+					const output = {
+						...caseData,
+						cme_information: cmeInfo?.cme
+					}
+
+					console.log(output)
+					commit('setStages', output.stages)
+					return output
+				})
+	},
+	setRefData({ commit }, val) {
+		commit('setRefData', val)
+	},
+	createSessionId({ state }) {
+		const sessionId = Date.now() + '.' + state.userToken
+
+		Cookies.set('ihp_session_id', sessionId)
+		return sessionId
+	},
+	setSessionId({ commit }, val) {
+		commit('setSessionId', val)
+	},
+	createProgress({ state }) {
+		let view = 0
+		const stages = []
+
+		state.stages
+			.map((stage, stage_ndx) => {
+				const { questions, type } = stage
+
+				if (type === 'question') {
+					questions
+						.map((q, q_ndx) => {
+							// Question view
+							stages.push({
+								stage: stage_ndx,
+								group: q_ndx,
+								view,
+								type: 'question',
+								isCompleted: false,
+								answers: [],
+							})
+							view += 1
+							// Feedback view
+							stages.push({
+								stage: stage_ndx,
+								group: q_ndx,
+								view,
+								type: 'feedback',
+								isCompleted: false,
+								labs: []
+							})
+							view += 1
+						})
+				}
+				else if (type === 'info') {
+					// Info View
+					stages.push({
+						stage: stage_ndx,
+						group: 0,
+						view,
+						type: 'info',
+						isCompleted: false,
+					})
+					view += 1
+				}
+			})
+			
+		const progress = {
+			isPatientIntroComplete: state.isPatientIntroComplete,
+			isGuruIntroComplete: state.isGuruIntroComplete,
+			stages
+		}
+
+		return progress
+	},
+	setProgress({ dispatch, commit }, val) {
+		Cookies.set('ihp_progress', JSON.stringify(val))
+		commit('setProgress', val)
+		const progress = val
+
+		// Set Patient Intro
+		dispatch('setPatientIntroComplete', progress.isPatientIntroComplete)
+		// Set Guru Intro
+		dispatch('setGuruIntroComplete', progress.isGuruIntroComplete)
+		// Set Answers
+		dispatch('setAnswers', progress.stages)
+		// Set Labs
+		dispatch('setLabs', progress.stages)
+		// Set button Text
+		if (!progress.isPatientIntroComplete) dispatch('setContinueButtonText', 'patient-intro')
+		else if (progress.isPatientIntroComplete && !progress.isGuruIntroComplete) dispatch('setContinueButtonText', 'guru-intro')
+	},
+	updateProgress({ state, dispatch }) {
+		const progress = JSON.parse(Cookies.get('ihp_progress'))
+		const startIndex = progress.stages
+			.findIndex((stage) => 
+				stage.stage === state.currStage 
+				&& stage.group === state.currGroup
+				&& stage.view === state.currView
+			)
+
+		if (startIndex > 0) {
+			const completeIndex = startIndex - 1
+			progress.stages[completeIndex].isCompleted = true
+			if (progress.stages[completeIndex].type === 'question') {
+				progress.stages[completeIndex].answers = state.stages[state.currStage].questions[state.currGroup].answers
+			}
+		}
+		
+		dispatch('setProgress', progress)
+	},
+	async setEnvironment({ dispatch }) {
+		let userToken, sessionId, refData, progress
+		// Get Reference Data
+		refData = await dispatch('getRefData')
+		// IF no ref data -> Throw error
+		if(!refData) throw 'data not found'
+		// Store ref data
+		await dispatch('setRefData', refData)
+		// check token
+		userToken = Cookies.get('ihp_user_token')
+
+		if (userToken) {
+			await dispatch('setUserToken', userToken)
+			// Check Session Id
+			sessionId = Cookies.get('ihp_session_id')
+			// IF no session id -> create session id
+			if (!sessionId) sessionId = await dispatch('createSessionId')
+			// Store session id
+			await dispatch('setSessionId', sessionId)
+			// Check progress
+			progress = Cookies.get('ihp_progress')
+				? JSON.parse(Cookies.get('ihp_progress'))
+				: null
+			// IF no progress -> create progress
+			if (!progress) progress = await dispatch('createProgress')
+			// Store progress
+			dispatch('setProgress', progress)
+			// Set stage + view
+			if (!progress.isPatientIntroComplete || !progress.isGuruIntroComplete) dispatch('setCurrStage', -1)
+			else {
+				const incomplete = progress.stages.filter((stage) => !stage.isCompleted)
+				const hasIncomplete = incomplete.length > 0
+	
+				if (hasIncomplete) {
+					dispatch('setCurrStage', incomplete[0].stage)
+					dispatch('setCurrView', incomplete[0].view)
+				}
+				else {
+					dispatch('setCurrStage', progress.stages[progress.stages.length - 1].stage)
+					dispatch('setCurrView', progress.stages[progress.stages.length - 1].view)
+				}
+				// dispatch('setCurrStage', progress.stages.filter((stage)))
+			}
+			console.log(progress)
+		}
+		else {
+			await dispatch('setUserToken', null)
+		}
 	},
 	setSidebarView({ commit }, val) {
 		commit('setSidebarView', val)
@@ -136,8 +383,13 @@ const actions = {
 	setNavMenuVisible({ commit }, val) {
 		commit('setNavMenuVisible', val)
 	},
-	showNavMenu({ dispatch }) {
+	showNavMenu({ state, dispatch }) {
 		dispatch('setNavMenuVisible', true)
+		dispatch('hideCmeInfo')
+		dispatch('hideReferenceData')
+		if (state.isPatientIntroComplete) dispatch('hideClipboard')
+		dispatch('hideLightBox')
+		dispatch('hideTOC')
 	},
 	hideNavMenu({ dispatch }) {
 		dispatch('setNavMenuVisible', false)
@@ -147,6 +399,11 @@ const actions = {
 	},
 	showClipboard({ dispatch }) {
 		dispatch('setClipboardVisible', true)
+		dispatch('hideNavMenu')
+		dispatch('hideReferenceData')
+		dispatch('hideCmeInfo')
+		dispatch('hideLightBox')
+		dispatch('hideTOC')
 	},
 	hideClipboard({ dispatch }) {
 		dispatch('setClipboardVisible', false)
@@ -185,11 +442,17 @@ const actions = {
 		commit('setContinueEnabled', false)
 	},
 	setContinueButtonText({ state, commit }, type) {
-		const totalGroup = state.stages[state.currStage].type === 'question'
-			? state.stages[state.currStage]?.questions.length
-			: 1
-		const val = type === 'question'
-				?'Submit ' + state.stages[state.currStage].name + (
+		let totalGroup
+		if (state.currStage !== -1) {
+			totalGroup = state.stages[state.currStage].type === 'question'
+				? state.stages[state.currStage]?.questions.length
+				: 1
+		}
+
+		const val = type === 'guru-intro'
+			? 'Continue to ' + state.stages[0].name
+			: type === 'question'
+				? 'Submit ' + state.stages[state.currStage].name + (
 					totalGroup > 1 && state.currGroup < totalGroup
 					? ' Part ' + (state.currGroup + 1)
 					: ''
@@ -219,23 +482,64 @@ const actions = {
 		
 		commit('setAnswers', output)
 	},
-	setChoiceLabsRead({ dispatch, commit }, id) {
+	setAnswers({ state, commit }, val) {
+		const output = state.stages
+
+		val
+			.map((item) => {
+				if (item.type === 'question') output[item.stage].questions[item.group].answers = item.answers
+			})
+		
+		commit('setStages', output)
+	},
+	setLabs({ commit }, val) {
+		val
+			.map((item) => {
+				if (item.type === 'feedback') {
+					item.labs
+						.map((lab) => {
+							commit('setLabs', {
+								stage: item.stage,
+								group: item.group,
+								choice_order: lab.choice_order,
+								val: lab.choice_is_labs_read
+							})
+						})
+				}
+			})
+	},
+	setChoiceLabsRead({ state, dispatch, commit }, id) {
+		const progress = JSON.parse(Cookies.get('ihp_progress'))
+		
+		progress.stages
+			.filter((stage) => stage.view === state.currView)[0]
+			.labs
+			.push({ choice_order: id, choice_is_labs_read: true})
+
 		commit('setChoiceLabsRead', id)
+		dispatch('setProgress', progress)
 		dispatch('checkLabs')
 	},
 	checkLabs({ state, dispatch }) {
-		const hasUnreadLabs = state.stages[state.currStage]
-			.questions[state.currGroup]
-			.choices
-			.filter((choice) => !!choice.choice_labs && !choice.choice_is_labs_read)
-			.length > 0
+		const hasUnreadLabs = state.progress.stages.filter((stage) => stage.view === state.currView)[0].type === 'feedback'
+			? state.stages[state.currStage]
+					.questions[state.currGroup]
+					.choices
+					.filter((choice) => !!choice.choice_labs && !choice.choice_is_labs_read)
+					.length > 0
+			: null
 		
-			if (hasUnreadLabs) dispatch('disableContinueButton')
-			else dispatch('enableContinueButton')
+		if (hasUnreadLabs) dispatch('disableContinueButton')
+		else dispatch('enableContinueButton')
 	},
-	showLightBox({ commit }, { image_url }) {
+	showLightBox({ state, commit, dispatch }, { image_url }) {
 		commit('setLightBoxVisible', true)
 		commit('setLightBoxImage', image_url)
+		dispatch('hideNavMenu')
+		dispatch('hideReferenceData')
+		dispatch('hideCmeInfo')
+		if (state.isPatientIntroComplete) dispatch('hideClipboard')
+		dispatch('hideTOC')
 	},
 	hideLightBox({ commit }) {
 		commit('setLightBoxVisible', false)
@@ -243,18 +547,91 @@ const actions = {
 	},
 	setLightBoxImage({ commit }, val) {
 		commit('setLightBoxImage', val)
-	}
+	},
+	goToStage({ dispatch }, val) {
+		const progress = JSON.parse(Cookies.get('ihp_progress'))
+
+		const stage = progress.stages.filter((stage) => stage.stage === val)
+		const incomplete = stage.filter((items) => !items.isCompleted)
+		const hasIncomplete = incomplete.length > 0
+
+		if (!hasIncomplete) {
+			dispatch('setCurrStage', stage[stage.length - 1].stage)
+			dispatch('setCurrView', stage[stage.length - 1].view)
+		}
+		else {
+			dispatch('setCurrStage', incomplete[0].stage)
+			dispatch('setCurrView', incomplete[0].view)
+		}
+	},
+	setCmeInfoVisible({ commit }, val) {
+		commit('setCmeInfoVisible', val)
+	},
+	showCmeInfo({ state, dispatch }) {
+		dispatch('setCmeInfoVisible', true)
+		dispatch('hideNavMenu')
+		dispatch('hideReferenceData')
+		if (state.isPatientIntroComplete) dispatch('hideClipboard')
+		dispatch('hideLightBox')
+		dispatch('hideTOC')
+	},
+	hideCmeInfo({ dispatch }) {
+		dispatch('setCmeInfoVisible', false)
+	},
+	setReferenceDataVisible({ commit }, val) {
+		commit('setReferenceDataVisible', val)
+	},
+	showReferenceData({ state, dispatch }) {
+		dispatch('setReferenceDataVisible', true)
+		dispatch('hideNavMenu')
+		dispatch('hideCmeInfo')
+		if (state.isPatientIntroComplete) dispatch('hideClipboard')
+		dispatch('hideLightBox')
+		dispatch('hideTOC')
+	},
+	hideReferenceData({ dispatch }) {
+		dispatch('setReferenceDataVisible', false)
+	},
+	setTOCVisible({ commit }, val) {
+		commit('setTOCVisible', val)
+	},
+	showTOC({ state, dispatch }) {
+		dispatch('setTOCVisible', true)
+		dispatch('hideNavMenu')
+		dispatch('hideCmeInfo')
+		if (state.isPatientIntroComplete) dispatch('hideClipboard')
+		dispatch('hideLightBox')
+		dispatch('hideReferenceData')
+	},
+	hideTOC({ dispatch }) {
+		dispatch('setTOCVisible', false)
+	},
 }
 
 const getters = {
-	caseData(state) {
-		return state.caseData
+	appMode(state) {
+		return state.appMode
+	},
+	isPatientIntroComplete(state) {
+		return state.isPatientIntroComplete
+	},
+	isGuruIntroComplete(state) {
+		return state.isGuruIntroComplete
+	},
+	isAuth(state) {
+		return state.isAuth
+	},
+	sessionId(state) {
+		return state.sessionId
+	},
+	refData(state) {
+		return state.refData
 	},
 	stages(state) {
 		return state.stages
 	},
-	appMode(state) {
-		return state.appMode
+	progress(state) {
+		return state.progress
 	},
 	sidebarView(state) {
 		return state.sidebarView
@@ -285,6 +662,15 @@ const getters = {
 	},
 	lightBoxImage(state) {
 		return state.lightBoxImage
+	},
+	isCmeInfoVisible(state) {
+		return state.isCmeInfoVisible
+	},
+	isReferenceDataVisible(state) {
+		return state.isReferenceDataVisible
+	},
+	isTOCVisible(state) {
+		return state.isTOCVisible
 	}
 }
 

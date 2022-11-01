@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs-menu d-flex flex-column h-100">
+  <div class="tabs-menu d-flex flex-column h-100 w-100">
     <ul class="menu cf">
 			<li
 				:class="{
@@ -57,11 +57,12 @@
 						<video 
 							id="patientVideo" 
 							class="max-h-100" 
-							poster="/images/avatar-placeholder.png"
+							:poster="patient_video_thumbnail"
 							playsinline
 						>
 							<source 
-								:src="video_url"
+								:src="patient_video_url"
+								type="video/mp4"
 							/>
 						</video>
 					</div>
@@ -258,6 +259,10 @@ export default {
 		defaultView: {
 			type: String,
 			default: 'findings'
+		},
+		autoPlay: {
+			type: Boolean,
+			default: false
 		}
 	},
 	data() {
@@ -268,10 +273,15 @@ export default {
 	},
 	computed: {
 		info() {
-			return this.$store.getters?.caseData?.patient_information
+			return this.$store.getters?.refData?.patient_information
 		},
-		video_url() {
-			return this?.info?.video_url
+		patient_video_url() {
+			console.log(this?.info?.patient_video_url)
+			return this?.info?.patient_video_url
+		},
+		patient_video_thumbnail() {
+			console.log(this?.info?.patient_video_thumbnail)
+			return this?.info?.patient_video_thumbnail
 		},
 		vitals() {
 			return this?.info?.vitals
@@ -288,8 +298,6 @@ export default {
 		findings() {
 			return this?.info?.key_findings
 		}
-	},
-	mounted() {
 	},
   methods: {
 		toggleView(id) {
@@ -321,6 +329,7 @@ export default {
 		> * {
 			height: 100%;
 			max-height: 100%;
+			max-width: 100%;
 		}
 	}
 }

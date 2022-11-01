@@ -3,7 +3,9 @@
 		<li
 			v-for="(slide) in total"
 			:key="slide"
+			class="pointer-events-initial"
 			:class="{ active: (slide - 1) == activeIndex }"
+			@click="goToStage(slide - 1)"
 		></li>
 	</ul>
 </template>
@@ -20,6 +22,11 @@ export default {
 			return this.$store.getters.currStage
 		}
 	},
+	methods: {
+		goToStage(ndx) {
+			this.$store.dispatch('goToStage', ndx)
+		}
+	}
 }
 </script>
 

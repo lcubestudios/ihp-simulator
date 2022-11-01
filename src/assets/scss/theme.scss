@@ -78,6 +78,8 @@
 .w-1\/2 { width: 50%; }
 .max-w-100 { max-width: 100% !important; }
 /* height */
+.h-0 { height: 0% !important; }
+.max-h-0 { max-height: 0% !important; }
 .max-h-100 { max-height: 100% !important; }
 
 /* Spacing */
@@ -118,6 +120,7 @@
 
 /* Pointer Events */
 .pointer-events-none { pointer-events: none !important; }
+.pointer-events-initial { pointer-events: initial !important; }
 
 /* v- Classes */
 .v-toolbar__content { padding: 10px !important; }

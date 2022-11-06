@@ -324,11 +324,10 @@ export default {
 		if (!this.$store.getters.isPatientIntroComplete) {
 			setTimeout(() => {
 				this.$el.querySelector('#patientVideo').play()
+				this.$el.querySelector('#patientVideo').muted = false
 			}, 150)
 		}
-			setTimeout(() => {
-				this.setDefaultView()
-			}, 150)
+		this.setDefaultView()
 	},
   methods: {
 		setDefaultView() {

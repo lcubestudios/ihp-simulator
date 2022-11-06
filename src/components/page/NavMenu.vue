@@ -24,7 +24,7 @@
 							class="text-dark font-18" text
 							@click="showTOC"
 						>
-							Table Of Contents
+							Your Progress
 						</v-btn>
 					</div>
 					<div>

@@ -15,6 +15,7 @@
 						<div
 							v-for="(stage, stage_ndx) in stages"
 							:key="stage_ndx"
+							:data-stage="stage_ndx"
 							class="stage"
 						>
 							<template v-if="stage.type === 'question'">
@@ -27,8 +28,8 @@
 										class="view"
 										data-view-type="question"
 									>
-										<div>
-											<section>
+										<div class="d-flex flex-column pr-md-5">
+											<section class="flex-grow-1">
 												<UiForm 
 													:data-stage-name="stage.name"
 													:data-question-order="question_ndx"
@@ -40,14 +41,57 @@
 													:group="question_ndx"
 												/>
 											</section>	
+											<div 
+												v-if="appMode === 'desktop'"
+											>
+												<v-btn
+													v-if="isContinueEnabled"
+													class="next-button text-white primary-bg font-18"
+													large
+													block
+													@click="stageClick()"
+												>{{ continueButtonLabel }}</v-btn>
+												<v-btn
+													v-else
+													class="next-button text-white primary-bg font-18"
+													large
+													block
+													disabled
+													@click="stageClick()"
+												>{{ continueButtonLabel }}</v-btn>
+											</div>
 										</div>
 									</div>
 									<div
 										class="view"
+										:class="{
+											'opacity-0': !progress.stages
+												.filter((stage) => 
+													stage.type === 'question' 
+													&& stage.stage === stage_ndx 
+													&& stage.group === question_ndx
+												)[0]
+												.isCompleted
+										}"
 										data-view-type="feedback"
 									>
 										<div class="result-content">
-											<section>
+											<section 
+												v-if="appMode === 'mobile'
+													&& !progress.stages
+														.filter((stage) => 
+															stage.type === 'feedback' 
+															&& stage.stage === stage_ndx 
+															&& stage.group === question_ndx
+														)[0]
+														.isCompleted"
+											>
+												<ResponseVideo 
+													:stage="stage_ndx"
+													:group="question_ndx"
+												/>
+											</section>
+											<section class="flex-grow-1 overflow-y-auto">
 												<UiResult 
 													:question="question.question"
 													:choices="question.choices"
@@ -72,11 +116,27 @@
 										class="view"
 										data-view-type="info"
 									>
-										<div>
-											<section>
-												<!-- <div>Test</div> -->
+										<div class="d-flex flex-column">
+											<section class="flex-grow-1">
 												<div v-html="stage.content"></div>
 											</section>
+											<div v-if="appMode === 'desktop'">
+												<v-btn
+													v-if="isContinueEnabled"
+													class="next-button text-white primary-bg font-18"
+													large
+													block
+													@click="stageClick()"
+												>{{ continueButtonLabel }}</v-btn>
+												<v-btn
+													v-else
+													class="next-button text-white primary-bg font-18"
+													large
+													block
+													disabled
+													@click="stageClick()"
+												>{{ continueButtonLabel }}</v-btn>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -93,7 +153,7 @@
 import UiForm from '@/components/ui/Form'
 import UiResult from '@/components/ui/Result'
 import ResultFeedback from '@/components/ResultFeedback'
-// import ResponseVideo from '@/components/ResponseVideo'
+import ResponseVideo from '@/components/ResponseVideo'
 
 export default {
 	name: "DemoPage",
@@ -101,13 +161,19 @@ export default {
     UiForm,
     UiResult,
     ResultFeedback,
-    // ResponseVideo,
+    ResponseVideo,
 	},
 	data() {
 		return {
 		}
 	},
 	computed: {
+		appMode() {
+			return this.$store.getters?.appMode
+		},
+		progress() {
+			return this.$store.getters?.progress || []
+		},
 		stages() {
 			return this.$store.getters?.stages || []
 		},
@@ -129,12 +195,24 @@ export default {
 		isIndicatorVisible() {
 			return this?.stages[this.currStage]?.type === 'question'
 		},
+		isContinueEnabled() {
+			return this.$store.getters?.isContinueEnabled
+		},
+		continueButtonLabel() {
+			return this.$store.getters?.continueButtonText
+		},
+		isPatientIntroComplete() {
+			return this.$store.getters?.isPatientIntroComplete
+		},
+		isGuruIntroComplete() {
+			return this.$store.getters?.isGuruIntroComplete
+		}
 	},
 	watch: {
 		currView() {
 			this.setView()
 			this.$store.dispatch('checkLabs')
-		}
+		},
 	},
 	mounted() {
 		this.setView()
@@ -147,6 +225,79 @@ export default {
 		window.removeEventListener('resize', this.resizeResults)
 	},
 	methods: {
+		async stageClick() {
+			let viewType
+			if (this.isPatientIntroComplete && this.isGuruIntroComplete) {
+				const stageWrap = this.$el.querySelector('.stages')
+				const views = Array.from(stageWrap.querySelectorAll('.view'))
+				const currViewIndex = this.currView
+				const currView = views[currViewIndex]
+				viewType = currView.getAttribute('data-view-type')
+
+				if (viewType === 'question') {
+					const form = currView.querySelector('form')
+					const payload = this.serializeForm(form)
+
+					await this.$store.dispatch('submitQuestion', payload)
+					this.nextStage()
+				}
+				else {
+					this.nextStage()
+				}
+			}
+			else {
+				viewType = !this.isPatientIntroComplete
+					? 'patient-intro'
+					: !this.isGuruIntroComplete
+					? 'guru-intro'
+					:  null
+				if (viewType === 'patient-intro') {
+					await this.$store.dispatch('completePatientIntro')
+					this.$el.querySelector('#patientVideo').pause()
+				}
+				else if (viewType === 'guru-intro') {
+					await this.$store.dispatch('completeGuruIntro')
+				}
+			}
+		},
+		nextStage() {
+			const stageWrap = this.$el.querySelector('.stages')
+			const currViewIndex = this.$store.getters.currView
+			const stages = Array.from(stageWrap.querySelectorAll('.stage'))
+			const groups = Array.from(stageWrap.querySelectorAll('.group'))
+			const views = Array.from(stageWrap.querySelectorAll('.view'))
+			const next = views[currViewIndex + 1]
+			const timeline = this.gsap.timeline({
+				defaults: { 
+					duration: 0.3,
+					ease: 'none',
+				}
+			})
+
+			if (next) {
+				const nextViewIndex = currViewIndex + 1
+				const nextGroupIndex = groups.indexOf(views[nextViewIndex].closest('.group'))
+				const nextStageIndex = stages.indexOf(next.closest('.stage'))
+				
+				timeline
+					.to(stageWrap, {
+						xPercent: this.appMode === 'desktop'
+							? nextGroupIndex * -100
+							: nextViewIndex * -100,
+						onComplete: () => {
+							// Update Stage
+							this.$store.dispatch('setCurrStage', nextStageIndex)
+							// Update View
+							this.$store.dispatch('setCurrView', nextViewIndex)
+							// Toggle end of case
+							if ((nextViewIndex + 1) === views.length) this.isEnd = true
+							else this.isEnd = false
+
+							this.$store.dispatch('updateProgress')
+						}
+					}, '<')
+			}
+		},
 		isFeedbackComplete({ stage, group }) {
 			const isViewComplete = this.$store.getters?.progress?.stages
 				.filter((item) => 
@@ -160,32 +311,28 @@ export default {
 		},
 		setView() {
 			const stageWrap = this.$el.querySelector('.stages')
+			const groups = Array.from(stageWrap.querySelectorAll('.group'))
 			const views = Array.from(stageWrap.querySelectorAll('.view'))
-			const isLastView = (this.currView + 1) === views.length
 
-			if (this.currStage !== -1) {
-				// Set Views Position
-				this.$el
-					.querySelectorAll(".view")
-					.forEach((el, ndx) => {
-						this.gsap.set(el, {
-							xPercent: ndx * 100
-						});
+			// Set Views Position
+			this.$el
+				.querySelectorAll(".view")
+				.forEach((el, ndx) => {
+					this.gsap.set(el, {
+						xPercent: this.appMode === 'desktop' && (el.getAttribute('data-view-type') !== 'question' && el.getAttribute('data-view-type') !== 'feedback')
+							? Math.ceil((ndx * 50)/100)*100
+							: ndx * 100
 					});
-				// Set Visible View
-				this.gsap.set(stageWrap, {
-					xPercent: this.currView * -100,
 				});
-				// Set Button Text
-				if (isLastView) {
-					this.$store.dispatch('setContinueButtonText', 'end')
-				}
-				else {
-					const viewType = views[this.currView].getAttribute('data-view-type')
-					this.$store.dispatch('setContinueButtonText', viewType)
-					if (viewType === 'feedback') this.$store.dispatch('checkLabs') 
-				}
-			}
+			// Set Visible View
+			this.gsap.set(stageWrap, {
+				xPercent: this.appMode === 'desktop'
+					? groups.indexOf(views[this.currView].closest('.group')) * -100
+					: this.currView * -100
+			});
+
+			const viewType = views[this.currView].getAttribute('data-view-type')
+			if (viewType === 'feedback') this.$store.dispatch('checkLabs') 
 		},
 		resizeResults() {
 			const results = this.$el.querySelectorAll('.result-content')
@@ -201,7 +348,18 @@ export default {
 							})
 					}
 				})
-		}
+		},
+		serializeForm(form) {
+			const obj = {};
+			const fields = form.querySelectorAll('input');
+
+			fields
+				.forEach((el) => {
+					if (el.checked || el.getAttribute('aria-checked') === 'true') obj[el.getAttribute('name')] = el.value.trim();
+				})
+
+			return obj;
+		},
 	}
 }
 </script>
@@ -234,15 +392,17 @@ export default {
 			height: 100%;
 			background-color: #fff;
 
+			&[data-view-type="question"],
+			&[data-view-type="feedback"] {
+				@media (min-width: 961px) {
+					width: 50%;
+				}
+			}
+
 			> div {
 				display: flex;
 				flex-flow: column nowrap;
 				height: 100%;
-
-				section {
-					flex: 1;
-					overflow-y: auto;
-				}
 			}
 		}
 	}

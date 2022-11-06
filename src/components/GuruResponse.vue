@@ -1,8 +1,9 @@
 <template>
-	<v-card id="guruIntro" class="position-absolute top-0 w-100 h-100 gray8-bg">
+	<v-card id="guruResponse" class="position-absolute top-0 w-100 h-100 gray8-bg">
 		<div class="w-100 h-100 d-flex justify-content-center align-items-center">
 			<video 
-				id="guruIntroVideo" 
+				v-if="videoUrl"
+				id="guruResponseVideo" 
 				@ended="onVideoEnd"
 				@pause="onVideoPause"
 				@play="onVideoPlay"
@@ -10,7 +11,7 @@
 				playsinline
 				muted
 			>
-				<source :src="video" type="video/mp4" />
+				<source :src="videoUrl" type="video/mp4" />
 			</video>
 		</div>
 		<div 
@@ -42,27 +43,33 @@ export default {
 		isGuruIntroComplete() {
 			return this.$store.getters.isGuruIntroComplete
 		},
-		video() {
-			return this.$store.getters?.refData?.guru_intro_video_url
+		videoUrl() {
+			return this.$store.getters?.guruResponseURL
 		},
 		thumbnail() {
 			return this.$store.getters?.refData?.guru_intro_video_thumbnail
+		},
+		progress() {
+			return this.$store.getters?.progress
+		},
+		stage() {
+			return this.$store.getters.currStage
+		},
+		group() {
+			return this.$store.getters.currGroup
+		},
+		view() {
+			return this.$store.getters.currView
 		}
 	},
+	mounted() {
+		setTimeout(() => {
+			console.log(this.progress?.stages
+				.filter((stage) => stage.stage === this.stage && stage.group === this.group)
+			)
+		}, 100)
+	},
 	watch: {
-		isPatientIntroComplete(to) {
-			if (to && !this.$store.getters.isGuruIntroComplete) {
-				setTimeout(() => {
-					this.$el.querySelector('.video-overlay').click()
-					setTimeout(() => {
-						this.$el.querySelector('video').muted = false
-					}, 500)
-				}, 150)
-			}
-		},
-		isGuruIntroComplete(to) {
-			if (to) console.log('hide guru intro')
-		}
 	},
 	methods: {
 		onVideoPlay() {
@@ -72,7 +79,7 @@ export default {
 			this.isVideoPlaying = false
 		},
 		onVideoEnd() {
-			this.$store.dispatch('completeGuruIntro')
+			console.log('hide Video')
 		},
 		toggleVideo() {
 			const video = this.$el.querySelector('#guruIntroVideo')
@@ -85,13 +92,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#guruIntro {
-	z-index: 99;
-}
 
-video {
-	width: 100%;
-	min-width: 100%;
-	max-width: 100%;
-}
 </style>

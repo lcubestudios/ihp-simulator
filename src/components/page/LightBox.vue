@@ -9,7 +9,7 @@
 			<div><v-icon>mdi-close</v-icon></div>
 		</v-btn>
 		<div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
-			<img :src="image" width="100%" />
+			<img :src="image" />
 		</div>
 	</div>
 </template>
@@ -29,3 +29,11 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss" scoped>
+img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+</style>

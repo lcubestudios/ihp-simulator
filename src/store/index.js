@@ -8,12 +8,13 @@ Vue.use(Vuex)
 
 const state = () => {
 	return {
-		isLoading: false,
+		isLoading: true,
 		isPatientIntroComplete: false,
 		isGuruIntroComplete: false,
 		appMode: 'desktop',
 		isAuth: false,
 		userToken: null,
+		userProfile: null,
 		sessionId: null,
 		stages: null,
 		progress: null,
@@ -31,6 +32,7 @@ const state = () => {
 		isCmeInfoVisible: false,
 		isReferenceDataVisible: false,
 		isTOCVisible: false,
+		guruResponseURL: null
 	}
 }
 
@@ -52,6 +54,9 @@ const mutations = {
 	},
 	setUserToken(state, val) {
 		state.userToken = val
+	},
+	setUserProfile(state, val) {
+		state.userProfile = val
 	},
 	setSessionId(state, val) {
 		state.sessionId = val
@@ -130,7 +135,10 @@ const mutations = {
 	},
 	setTOCVisible(state, val) {
 		state.isTOCVisible = val
-	}
+	},
+	setGuruResponseURL(state, val) {
+		state.guruResponseURL = val
+	} 
 }
 
 const actions = {
@@ -179,10 +187,10 @@ const actions = {
 			{ isGuruIntroComplete: true }
 		)
 
-		dispatch('setGuruIntroComplete', true)
 		dispatch('setCurrStage', 0)
 		dispatch('setCurrView', 0)
 		dispatch('setProgress', progress)
+		dispatch('setGuruIntroComplete', true)
 		dispatch('updateProgress')
 	},
 	resetGuruIntro({ dispatch }) {
@@ -197,10 +205,17 @@ const actions = {
 	setAuth({ commit }, val) {
 		commit('setAuth', val)
 	},
-	setUserToken({ dispatch, commit }, val) {
+	setUserProfile({ commit }, val) {
+		commit('setUserProfile', val)
+	},
+	async setUserToken({ dispatch, commit }, val) {
 		if (val) {
-			Cookies.set('ihp_user_token', val)
-			dispatch('setAuth', true)
+			await axios.get(`https://secureapi.atpoc.com/api-suite/8.2/profile?token=${ val }`)
+				.then((res) => {
+					Cookies.set('ihp_user_token', val)
+					dispatch('setUserProfile', res?.data?.personal)
+					dispatch('setAuth', true)
+				})
 		}
 		else {
 			Cookies.remove('ihp_user_token')
@@ -209,10 +224,19 @@ const actions = {
 
 		commit('setUserToken', val)
 	},
-	userLogin({ dispatch }, creds) {
-		console.log(creds)
-		dispatch('setUserToken', '1234')
-		dispatch('setEnvironment')
+	async userLogin({ dispatch }, creds) {
+		dispatch('isLoading')
+		await axios.get(`https://secureapi.atpoc.com/api-suite/8.2/auth/token?email=${ creds.email }&password=${ creds.password }`)
+			.then(async (res) => {
+				if (res.data.error) throw res.data.error
+				if (res.data.token) {
+					await dispatch('setUserToken', res.data.token)
+					await dispatch('setEnvironment')
+				}
+			})
+			.catch((err) => {
+				throw err
+			})
 	},
 	userLogout({ dispatch }) {
 		dispatch('setUserToken', null)
@@ -234,7 +258,6 @@ const actions = {
 						cme_information: cmeInfo?.cme
 					}
 
-					console.log(output)
 					commit('setStages', output.stages)
 					return output
 				})
@@ -305,7 +328,7 @@ const actions = {
 
 		return progress
 	},
-	setProgress({ dispatch, commit }, val) {
+	async setProgress({ dispatch, commit }, val) {
 		Cookies.set('ihp_progress', JSON.stringify(val))
 		commit('setProgress', val)
 		const progress = val
@@ -318,11 +341,8 @@ const actions = {
 		dispatch('setAnswers', progress.stages)
 		// Set Labs
 		dispatch('setLabs', progress.stages)
-		// Set button Text
-		if (!progress.isPatientIntroComplete) dispatch('setContinueButtonText', 'patient-intro')
-		else if (progress.isPatientIntroComplete && !progress.isGuruIntroComplete) dispatch('setContinueButtonText', 'guru-intro')
 	},
-	updateProgress({ state, dispatch }) {
+	async updateProgress({ state, dispatch }) {
 		const progress = JSON.parse(Cookies.get('ihp_progress'))
 		const startIndex = progress.stages
 			.findIndex((stage) => 
@@ -340,6 +360,7 @@ const actions = {
 		}
 		
 		dispatch('setProgress', progress)
+		dispatch('setContinueButtonText')
 	},
 	async setEnvironment({ dispatch }) {
 		let userToken, sessionId, refData, progress
@@ -367,31 +388,29 @@ const actions = {
 			// IF no progress -> create progress
 			if (!progress) progress = await dispatch('createProgress')
 			// Store progress
-			dispatch('setProgress', progress)
+			await dispatch('setProgress', progress)
 			// Set stage + view
-			if (!progress.isPatientIntroComplete || !progress.isGuruIntroComplete) dispatch('setCurrStage', -1)
-			else {
+			if (progress.isPatientIntroComplete && progress.isGuruIntroComplete) {
 				const incomplete = progress.stages.filter((stage) => !stage.isCompleted)
 				const hasIncomplete = incomplete.length > 0
 	
 				if (hasIncomplete) {
-					dispatch('setCurrStage', incomplete[0].stage)
-					dispatch('setCurrView', incomplete[0].view)
+					await dispatch('setCurrStage', incomplete[0].stage)
+					await dispatch('setCurrView', incomplete[0].view)
 				}
 				else {
-					dispatch('setCurrStage', progress.stages[progress.stages.length - 1].stage)
-					dispatch('setCurrView', progress.stages[progress.stages.length - 1].view)
+					await dispatch('setCurrStage', progress.stages[progress.stages.length - 1].stage)
+					await dispatch('setCurrView', progress.stages[progress.stages.length - 1].view)
 				}
-				// dispatch('setCurrStage', progress.stages.filter((stage)))
 			}
-			console.log(progress)
-			// setTimeout(() => {
-			// 	dispatch('isLoaded')
-			// }, 1000)
+			// Set button Text
+			await dispatch('setContinueButtonText')
 		}
 		else {
 			await dispatch('setUserToken', null)
 		}
+
+		dispatch('isLoaded')
 	},
 	setSidebarView({ commit }, val) {
 		commit('setSidebarView', val)
@@ -457,13 +476,21 @@ const actions = {
 	disableContinueButton({ commit }) {
 		commit('setContinueEnabled', false)
 	},
-	setContinueButtonText({ state, commit }, type) {
+	setContinueButtonText({ state, commit }) {
 		let totalGroup
-		if (state.currStage !== -1) {
-			totalGroup = state.stages[state.currStage].type === 'question'
-				? state.stages[state.currStage]?.questions.length
-				: 1
-		}
+		totalGroup = state.stages[state.currStage].type === 'question'
+			? state.stages[state.currStage]?.questions.length
+			: 1
+		const type = !state.isPatientIntroComplete
+			? 'patient-intro'
+			: !state.isGuruIntroComplete
+			? 'guru-intro'
+			: state.progress.stages.findIndex((stage) => stage.view === state.currView) + 1 === state.progress.stages.length
+				? 'end'
+				: state.progress.stages.filter((stage) => stage.view === state.currView)[0].type === 'question'
+					&& state.progress.stages.filter((stage) => stage.view === state.currView)[0].isCompleted
+						? 'feedback'
+						: state.progress.stages.filter((stage) => stage.view === state.currView)[0].type
 
 		const val = type === 'guru-intro'
 			? 'Continue to ' + state.stages[0].name
@@ -480,12 +507,12 @@ const actions = {
 					: state.stages[state.currStage + 1].name
 				)
 			: type === 'end'
-			? 'End of Case'
+			? 'Continue to Post Test'
 			: 'Continue'
 
 		commit('setContinueButtonText', val)
 	},
-	submitQuestion({ state, commit }, payload) {
+	async submitQuestion({ state, commit }, payload) {
 		const output = []
 
 		Object.keys(payload)
@@ -495,8 +522,27 @@ const actions = {
 
 				output.push(question.choices[id])
 			})
-		
-		commit('setAnswers', output)
+
+		const postPayload = {
+			userid: state.userProfile.user_id,
+			token: state.userToken,
+			session_id: state.sessionId,
+			jobnum: state.refData.jobnum,
+			stage_id: state.stages[state.currStage].id,
+			question_id: state.stages[state.currStage].questions[state.currGroup].id,
+			answers: output.map((ans) => {
+				delete ans.choice_labs
+				delete ans.choice_is_labs_read
+				delete ans.choice_feedback
+				return ans
+			})
+		}
+
+		await axios.post('https://secureapi.atpoc.com/api-suite/8.2/answersihp', postPayload)
+			.then(() => {
+				commit('setAnswers', output)
+			})
+			.catch((err) => console.log(err))
 	},
 	setAnswers({ state, commit }, val) {
 		const output = state.stages
@@ -579,6 +625,8 @@ const actions = {
 			dispatch('setCurrStage', incomplete[0].stage)
 			dispatch('setCurrView', incomplete[0].view)
 		}
+
+		dispatch('setContinueButtonText')
 	},
 	setCmeInfoVisible({ commit }, val) {
 		commit('setCmeInfoVisible', val)
@@ -622,6 +670,9 @@ const actions = {
 	hideTOC({ dispatch }) {
 		dispatch('setTOCVisible', false)
 	},
+	setGuruResponseURL({ commit }, val) {
+		commit('setGuruResponseURL', val)
+	} 
 }
 
 const getters = {
@@ -690,6 +741,9 @@ const getters = {
 	},
 	isTOCVisible(state) {
 		return state.isTOCVisible
+	},
+	guruResponseURL(state) {
+		return state.guruResponseURL
 	}
 }
 

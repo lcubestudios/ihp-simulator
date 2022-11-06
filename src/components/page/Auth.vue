@@ -8,6 +8,7 @@
 						label="Email" 
 						solo 
 						required
+						type="email"
 					></v-text-field>
 				</div>
 				<div>
@@ -16,6 +17,7 @@
 						label="Password" 
 						solo 
 						required
+						type="password"
 					></v-text-field>
 				</div>
 				<v-btn 
@@ -36,8 +38,8 @@ export default {
 	name: 'PageAuth',
 	data() {
 		return {
-			email: null,
-			password: null
+			email: 'lukasavb@live.com',
+			password: 'pikAVB93'
 		}
 	},
 	methods: {
@@ -50,3 +52,9 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss" scoped>
+#loginForm {
+	max-width: 400px;
+}
+</style>

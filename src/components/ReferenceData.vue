@@ -1,14 +1,7 @@
 <template>
 	<v-card class="references position-absolute top-0 w-100 white-bg overflow-hidden">
 		<div class="position-absolute top-0 left-0 d-flex flex-column flex-nowrap w-100 h-100 overflow-hidden">
-			<section class="flex-grow-1 position-relative">
-				<div class="position-absolute top-0 left-0 right-0 bottom-0">
-					<div class="w-100 h-100 pa-5 overflow-y-auto">
-						<h2 class="primary-color">References</h2>
-						<div v-if="data" v-html="data"></div>
-					</div>
-				</div>
-			</section>
+			<ReferenceContent />
 			<footer class="d-flex flex-row justify-content-center">
 				<v-btn 
 					class="primary-color ma-2"
@@ -24,8 +17,12 @@
 </template>
 
 <script>
+import ReferenceContent from '@/components/ReferenceContent'
 export default {
 	name: 'ReferenceData',
+	components: {
+		ReferenceContent
+	},
 	computed: {
 		data() {
 			return this.$store.getters?.refData?.references

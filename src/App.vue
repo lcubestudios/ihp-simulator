@@ -1,48 +1,51 @@
 <template>
   <v-app>
-    <v-main class="body-bg-color">
+    <v-main :class="{
+			'body-bg-color': !isLoading,
+			'white-bg': isLoading
+		}">
 			<v-container
 				class="h-100"
 				:class="{
 					'mobile-container': isAuth && appMode === 'mobile',
 					'desktop-container': isAuth && appMode === 'desktop',
-					'd-grid': isAuth,
-					'gap-2.5': isAuth,
-					'lighten-5': isAuth,
+					'd-grid': isAuth && !isLoading,
+					'gap-2.5': isAuth && !isLoading,
+					'lighten-5': isAuth && !isLoading,
 				}" 
 				fluid
 			>
-				<template v-if="isAuth">
+				<template v-if="isLoading">
+					<v-row class="h-100" no-gutters>
+						<v-col class="h-100">
+							<PageLoader />
+						</v-col>
+					</v-row>
+				</template>
+				<template v-else-if="isAuth">
 					<v-row class="page-header" no-gutters>
 						<v-card class="pa-0 overflow-hidden rounded-lg gray1-bg">
 							<PageHeader />
-							<PageFunderLine 
-								v-if="appMode === 'mobile' && !isLoading"
-							/>
+							<PageFunderLine v-if="appMode === 'mobile'"/>
 						</v-card>
 					</v-row>
 					<template v-if="appMode === 'mobile'">
 						<v-row class="page-body" no-gutters>
 							<v-card class="px-0 position-relative overflow-visible rounded-lg font-16">
-								<template v-if="isLoading">
-									<PageLoader />
-								</template>
-								<template v-else>
-									<PageClipboard />
-									<PageGuruIntro 
-										v-if="!isGuruIntroComplete" 
-										:class="{
-											'opacity-0': !isPatientIntroComplete
-										}"
-									/>
-									<router-view
-										:class="{
-											'opacity-0': !isPatientIntroComplete || !isGuruIntroComplete
-										}"
-									></router-view>
-									<CmeInfo />
-									<ReferenceData />
-								</template>
+								<PageClipboard />
+								<PageGuruIntro 
+									v-if="!isGuruIntroComplete" 
+									:class="{
+										'opacity-0': !isPatientIntroComplete
+									}"
+								/>
+								<router-view
+									:class="{
+										'opacity-0': !isPatientIntroComplete || !isGuruIntroComplete
+									}"
+								></router-view>
+								<CmeInfo />
+								<ReferenceData />
 							</v-card>
 						</v-row>
 						<v-row 
@@ -81,7 +84,16 @@
 						<v-row class="page-content d-grid gap-2.5" no-gutters>
 							<v-col>
 								<v-card class="page-sidebar h-100 pa-0 overflow-hidden rounded-lg">
+									<PageGuruIntro 
+										v-if="!isGuruIntroComplete" 
+										:class="{
+											'opacity-0': !isPatientIntroComplete
+										}"
+									/>
 									<PageSidebar />
+									<GuruResponse 
+										v-if="appMode === 'desktop'"
+									/>
 								</v-card>
 							</v-col>
 							<v-col>
@@ -90,7 +102,49 @@
 										<PageFunderLine />
 									</v-row>
 									<v-row class="position-relative font-16" no-gutters>
-										<router-view></router-view>
+										<template v-if="isPatientIntroComplete && isGuruIntroComplete">
+											<router-view></router-view>
+											<CmeInfo />
+										</template>
+										<template v-else>
+											<div class="d-flex justify-content-center align-items-center">
+												<div 
+													v-if="!isCmeInfoVisible && !isReferenceDataVisible"
+													class="d-flex flex-column gap-2.5 pa-0"
+												>
+													<div class="text-center">
+														<p v-if="!isPatientIntroComplete">
+															Review Patient Information in Sidebar
+															<br>
+															Click Button Below to Continue.
+														</p>
+														<p v-if="isPatientIntroComplete && !isGuruIntroComplete">
+															Questions Will Begin Once Video Ends.
+															<br>
+															Click Button Below to Skip and Continue.
+														</p>
+													</div>
+													<div>
+														<v-btn
+															v-if="isContinueEnabled"
+															class="next-button text-white primary-bg font-18"
+															large
+															block
+															@click="stageClick()"
+														>{{ continueButtonLabel }}</v-btn>
+														<v-btn
+															v-else
+															class="next-button text-white primary-bg font-18"
+															large
+															block
+															disabled
+															@click="stageClick()"
+														>{{ continueButtonLabel }}</v-btn>
+													</div>
+													<PageProgress v-if="isPatientIntroComplete && isGuruIntroComplete" />
+												</div>	
+											</div>											
+										</template>
 									</v-row>
 								</v-card>
 							</v-col>
@@ -134,6 +188,7 @@ import PageGuruIntro from '@/components/page/GuruIntro'
 import PageTOC from '@/components/page/TOC'
 import CmeInfo from '@/components/CmeInfo'
 import ReferenceData from '@/components/ReferenceData'
+import GuruResponse from '@/components/GuruResponse'
 
 export default {
   name: "App",
@@ -151,6 +206,7 @@ export default {
     PageTOC,
     CmeInfo,
     ReferenceData,
+    GuruResponse
   },
 	data() {
 		return {
@@ -160,8 +216,9 @@ export default {
 	mounted() {
 		this.setAppMode()
 		this.$store.dispatch('setEnvironment')
-		console.log('url stage - ', this.$route.query.stage)
-		window.addEventListener('resize', this.setAppMode)
+		window.addEventListener('resize', () => {
+			this.setAppMode()
+		})
 	},
 	destroyed() {
 		window.removeEventListener('resize', this.setAppMode)
@@ -216,6 +273,12 @@ export default {
 			return this.$store.getters?.isLightBoxVisible
 		},
 	},
+	watch: {
+		appMode() {
+			this.$store.dispatch('isLoading')
+			this.$store.dispatch('setEnvironment')
+		}
+	},
 	methods: {
 		setAppMode() {
 			if (window.innerWidth > 960) {
@@ -232,32 +295,39 @@ export default {
 				this.$store.dispatch('setSidebarView', 0)
 			}
 		},
-		stageClick() {
-			const stageWrap = this.$el.querySelector('.stages')
-			const views = Array.from(stageWrap.querySelectorAll('.view'))
-			const currViewIndex = this.currView
-			const currView = views[currViewIndex]
-			const viewType = !this.isPatientIntroComplete
-				? 'patient-intro'
-				: !this.isGuruIntroComplete
-				? 'guru-intro'
-				: currView.getAttribute('data-view-type')
+		async stageClick() {
+			let viewType
+			if (this.isPatientIntroComplete && this.isGuruIntroComplete) {
+				const stageWrap = this.$el.querySelector('.stages')
+				const views = Array.from(stageWrap.querySelectorAll('.view'))
+				const currViewIndex = this.currView
+				const currView = views[currViewIndex]
+				viewType = currView.getAttribute('data-view-type')
 
-			if (viewType === 'patient-intro') {
-				this.$store.dispatch('completePatientIntro')
-			}
-			else if (viewType === 'guru-intro') {
-				this.$store.dispatch('completeGuruIntro')
-			}
-			else if (viewType === 'question') {
-				const form = currView.querySelector('form')
-				const payload = this.serializeForm(form)
+				if (viewType === 'question') {
+					const form = currView.querySelector('form')
+					const payload = this.serializeForm(form)
 
-				this.$store.dispatch('submitQuestion', payload)
-				this.nextStage()
+					await this.$store.dispatch('submitQuestion', payload)
+					this.nextStage()
+				}
+				else {
+					this.nextStage()
+				}
 			}
 			else {
-				this.nextStage()
+				viewType = !this.isPatientIntroComplete
+					? 'patient-intro'
+					: !this.isGuruIntroComplete
+					? 'guru-intro'
+					:  null
+				if (viewType === 'patient-intro') {
+					await this.$store.dispatch('completePatientIntro')
+					this.$el.querySelector('#patientVideo').pause()
+				}
+				else if (viewType === 'guru-intro') {
+					await this.$store.dispatch('completeGuruIntro')
+				}
 			}
 		},
 		serializeForm(form) {
@@ -287,7 +357,6 @@ export default {
 			if (next) {
 				const nextViewIndex = currViewIndex + 1
 				const nextStageIndex = stages.indexOf(next.closest('.stage'))
-				const isLastView = (nextViewIndex + 1) === views.length
 				
 				timeline
 					.to(stageWrap, {
@@ -300,15 +369,6 @@ export default {
 							// Toggle end of case
 							if ((nextViewIndex + 1) === views.length) this.isEnd = true
 							else this.isEnd = false
-							// Set Button Text
-							if (isLastView) {
-								this.$store.dispatch('setContinueButtonText', 'end')
-							}
-							else {
-								const viewType = views[nextViewIndex].getAttribute('data-view-type')
-								this.$store.dispatch('setContinueButtonText', viewType)
-								if (viewType === 'feedback') this.$store.dispatch('checkLabs')
-							}
 
 							this.$store.dispatch('updateProgress')
 						}

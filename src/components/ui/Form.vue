@@ -34,7 +34,7 @@
 					</div>
 				</template>
 				<template v-if="type === 'multichoice'">
-					<v-radio-group>
+					<v-radio-group v-model="selectedRadio">
 						<div class="d-flex flex-column gap-3">
 							<template v-if="isCompleted">
 								<v-radio 
@@ -126,6 +126,9 @@ export default {
 						&& stage.type === 'question'
 				)[0]
 				.isCompleted
+		},
+		selectedRadio() {
+			return this.answers[0]?.choice_order || -1
 		}
 	},
 	methods: {

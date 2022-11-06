@@ -9,17 +9,11 @@
 			<v-spacer></v-spacer>
 			<div 
 				class="d-block d-md-none"
-				:class="{
-					'opacity-0': isLoading
-				}"
 			>
 				<v-app-bar-nav-icon @click="showNavMenu"></v-app-bar-nav-icon>
 			</div>
 			<div 
 				class="d-none d-md-block"
-				:class="{
-					'opacity-0': isLoading
-				}"
 			>
 				<v-btn 
 					class="toggle-sidebar"
@@ -45,7 +39,7 @@
 					view-id="1"
 					@click="goToSidebarView(1)"
 				>
-					Table of Contents
+					Your Progress
 				</v-btn>
 				<v-btn 
 					class="toggle-sidebar"
@@ -69,11 +63,16 @@
 export default {
   name: "PageHeader",
 	computed: {
-		isLoading() {
-			return this.$store.getters.isLoading
-		},
 		currSidebarView() {
 			return this.$store.getters.sidebarView
+		},
+		appMode() {
+			return this.$store.getters.appMode
+		}
+	},
+	watch: {
+		appMode() {
+			this.goToSidebarView(0)
 		}
 	},
   methods: {

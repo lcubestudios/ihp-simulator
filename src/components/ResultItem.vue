@@ -2,8 +2,8 @@
 	<div class="result-item d-flex flex-row flex-nowrap gap-2.5">
 		<div>
 			<span class="primary-color font-13 fw-bold">
-				<span v-if="!isAnswered(order) && isCorrect">&ndash;</span>
-				<span v-if="!isAnswered(order) && !isCorrect">&nbsp;&nbsp;</span>
+				<span v-if="!isAnswered(order) && isCorrect">&ndash;&nbsp;&nbsp;</span>
+				<span v-if="!isAnswered(order) && !isCorrect">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				<v-icon
 					v-if="isAnswered(order) && isCorrect"
 					size="13"
@@ -71,16 +71,20 @@
 					<div class="labs" v-if="labs.result">
 						<div class="position-relative mb-4" v-if="labs.result.image_url">
 							<img :src="labs.result.image_url" />
-							<v-btn 
-								class="position-absolute bottom-0 right-0"
-								icon
+							<div 
+								class="position-absolute top-0 left-0 bottom-0 right-0"
 								@click="showLightBox(labs.result.image_url)"
 							>
-								<v-icon
-									size="32"
-									color="#4e9d2d"
-								>mdi-magnify-plus-outline</v-icon>
-							</v-btn>
+								<v-btn 
+									class="position-absolute bottom-0 right-0"
+									icon
+								>
+									<v-icon
+										size="32"
+										color="#4e9d2d"
+									>mdi-magnify-plus-outline</v-icon>
+								</v-btn>
+							</div>
 						</div>
 						<div v-if="labs.result.text" v-html="labs.result.text"></div>
 					</div>

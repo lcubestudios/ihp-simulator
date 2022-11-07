@@ -1,21 +1,28 @@
 <template>
   <v-app>
     <v-main :class="{
-			'body-bg-color': !isLoading,
-			'white-bg': isLoading
+			'body-bg-color': !isLoading && !$route.meta.hideAll,
+			'white-bg': isLoading || $route.meta.hideAll
 		}">
 			<v-container
 				class="h-100"
 				:class="{
 					'mobile-container': isAuth && appMode === 'mobile',
 					'desktop-container': isAuth && appMode === 'desktop',
-					'd-grid': isAuth && !isLoading,
-					'gap-2.5': isAuth && !isLoading,
-					'lighten-5': isAuth && !isLoading,
+					'd-grid': isAuth && !isLoading && !$route.meta.hideAll,
+					'gap-2.5': isAuth && !isLoading && !$route.meta.hideAll,
+					'lighten-5': isAuth && !isLoading && !$route.meta.hideAll,
 				}" 
 				fluid
 			>
-				<template v-if="isLoading">
+				<template v-if="$route.meta.hideAll">
+					<v-row class="h-100" no-gutters>
+						<v-col class="h-100">
+							<router-view></router-view>
+						</v-col>
+					</v-row>
+				</template>
+				<template v-else-if="isLoading">
 					<v-row class="h-100" no-gutters>
 						<v-col class="h-100">
 							<PageLoader />
@@ -33,17 +40,17 @@
 						<v-row class="page-body" no-gutters>
 							<v-card class="px-0 position-relative overflow-visible rounded-lg font-16">
 								<PageClipboard />
+								<router-view
+									:class="{
+										'opacity-0': !isPatientIntroComplete || !isGuruIntroComplete
+									}"
+								></router-view>
 								<PageGuruIntro 
 									v-if="!isGuruIntroComplete" 
 									:class="{
 										'opacity-0': !isPatientIntroComplete
 									}"
 								/>
-								<router-view
-									:class="{
-										'opacity-0': !isPatientIntroComplete || !isGuruIntroComplete
-									}"
-								></router-view>
 								<CmeInfo />
 								<ReferenceData />
 							</v-card>
@@ -60,21 +67,32 @@
 								v-if="!isCmeInfoVisible && !isReferenceDataVisible"
 								class="d-flex flex-column gap-2.5 pa-0"
 							>
-								<v-btn
-									v-if="isContinueEnabled"
-									class="next-button text-white primary-bg font-18"
-									large
-									block
-									@click="stageClick()"
-								>{{ continueButtonLabel }}</v-btn>
-								<v-btn
-									v-else
-									class="next-button text-white primary-bg font-18"
-									large
-									block
-									disabled
-									@click="stageClick()"
-								>{{ continueButtonLabel }}</v-btn>
+								<template v-if="isLastView">
+									<v-btn
+										class="next-button text-white primary-bg font-18"
+										large
+										block
+										:href="posttestURL"
+										target="_blank"
+									>{{ continueButtonLabel }}</v-btn>
+								</template>
+								<template v-else>
+									<v-btn
+										v-if="isContinueEnabled"
+										class="next-button text-white primary-bg font-18"
+										large
+										block
+										@click="stageClick()"
+									>{{ continueButtonLabel }}</v-btn>
+									<v-btn
+										v-else
+										class="next-button text-white primary-bg font-18"
+										large
+										block
+										disabled
+										@click="stageClick()"
+									>{{ continueButtonLabel }}</v-btn>
+								</template>
 								<PageProgress v-if="isPatientIntroComplete && isGuruIntroComplete" />
 							</div>
 						</v-row>
@@ -87,10 +105,17 @@
 									<PageGuruIntro 
 										v-if="!isGuruIntroComplete" 
 										:class="{
+											'above': isPatientIntroComplete && !isGuruIntroComplete,
+											'below': !isPatientIntroComplete,
 											'opacity-0': !isPatientIntroComplete
 										}"
 									/>
-									<PageSidebar />
+									<PageSidebar 
+										:class="{
+											'above': !isPatientIntroComplete,
+											'below': isPatientIntroComplete && !isGuruIntroComplete,
+										}" 
+									/>
 									<GuruResponse 
 										v-if="appMode === 'desktop'"
 									/>
@@ -125,21 +150,32 @@
 														</p>
 													</div>
 													<div>
-														<v-btn
-															v-if="isContinueEnabled"
-															class="next-button text-white primary-bg font-18"
-															large
-															block
-															@click="stageClick()"
-														>{{ continueButtonLabel }}</v-btn>
-														<v-btn
-															v-else
-															class="next-button text-white primary-bg font-18"
-															large
-															block
-															disabled
-															@click="stageClick()"
-														>{{ continueButtonLabel }}</v-btn>
+														<template v-if="isLastView">
+															<v-btn
+																class="next-button text-white primary-bg font-18"
+																large
+																block
+																:href="posttestURL"
+																target="_blank"
+															>{{ continueButtonLabel }}</v-btn>
+														</template>
+														<template v-else>
+															<v-btn
+																v-if="isContinueEnabled"
+																class="next-button text-white primary-bg font-18"
+																large
+																block
+																@click="stageClick()"
+															>{{ continueButtonLabel }}</v-btn>
+															<v-btn
+																v-else
+																class="next-button text-white primary-bg font-18"
+																large
+																block
+																disabled
+																@click="stageClick()"
+															>{{ continueButtonLabel }}</v-btn>
+														</template>
 													</div>
 													<PageProgress v-if="isPatientIntroComplete && isGuruIntroComplete" />
 												</div>	
@@ -215,7 +251,7 @@ export default {
 	},
 	mounted() {
 		this.setAppMode()
-		this.$store.dispatch('setEnvironment')
+		this.$store.dispatch('setEnvironment', this.$route.params.jn)
 		window.addEventListener('resize', () => {
 			this.setAppMode()
 		})
@@ -254,6 +290,9 @@ export default {
 		continueButtonLabel() {
 			return this.$store.getters?.continueButtonText
 		},
+		progress() {
+			return this.$store.getters?.progress
+		},
 		stages() {
 			return this.$store.getters?.stages
 		},
@@ -272,11 +311,23 @@ export default {
 		isLightBoxVisible() {
 			return this.$store.getters?.isLightBoxVisible
 		},
+		isLastView() {
+			return (this.currView + 1) === this.progress.stages.length
+		},
+		posttestURL() {
+			return this.$store.getters?.posttestURL
+		},
+		redirectURL() {
+			return this.$store.getters?.redirectURL
+		}
 	},
 	watch: {
 		appMode() {
 			this.$store.dispatch('isLoading')
 			this.$store.dispatch('setEnvironment')
+		},
+		redirectURL(to) {
+			if (to) this.$router.push(to)
 		}
 	},
 	methods: {
@@ -308,6 +359,7 @@ export default {
 					const form = currView.querySelector('form')
 					const payload = this.serializeForm(form)
 
+					await this.$store.dispatch('isSubmitLoading')
 					await this.$store.dispatch('submitQuestion', payload)
 					this.nextStage()
 				}
@@ -321,9 +373,11 @@ export default {
 					: !this.isGuruIntroComplete
 					? 'guru-intro'
 					:  null
+
 				if (viewType === 'patient-intro') {
 					await this.$store.dispatch('completePatientIntro')
 					this.$el.querySelector('#patientVideo').pause()
+					this.$store.dispatch('setContinueButtonText')
 				}
 				else if (viewType === 'guru-intro') {
 					await this.$store.dispatch('completeGuruIntro')
@@ -380,8 +434,7 @@ export default {
 </script>
 
 <style>
-#test {
-	z-index: 999999999;
-}
-
+#pageSidebar { position: relative; }
+.above { z-index: 9999999; }
+.below { z-index: 99999; }
 </style>

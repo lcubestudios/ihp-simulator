@@ -76,31 +76,47 @@
 										data-view-type="feedback"
 									>
 										<div class="result-content">
-											<section 
-												v-if="appMode === 'mobile'
-													&& !progress.stages
-														.filter((stage) => 
-															stage.type === 'feedback' 
-															&& stage.stage === stage_ndx 
-															&& stage.group === question_ndx
-														)[0]
-														.isCompleted"
+											<template v-if="isSubmitLoading
+													&& stage_ndx === currStage
+													&& question_ndx === currGroup
+													&& progress.stages.filter((stage) => 
+														stage.view === currView
+														&& stage.type === 'feedback'
+														&& !stage.isCompleted
+													).length > 0"
 											>
-												<ResponseVideo 
-													:stage="stage_ndx"
-													:group="question_ndx"
-												/>
-											</section>
-											<section class="flex-grow-1 overflow-y-auto">
-												<UiResult 
-													:question="question.question"
-													:choices="question.choices"
-													:answers="question.answers"
-													:feedback="question.feedback"
-													:notes="question.notes"
-													:test-results="question.test_results"
-												/>
-											</section>	
+												<PageLoader />
+											</template>
+											<template v-else>
+												<section
+													v-if="appMode === 'mobile'
+														&& stage_ndx === currStage
+														&& question_ndx === currGroup
+														&& progress.stages.filter((stage) => 
+															stage.view === currView
+															&& stage.type === 'feedback'
+															&& !stage.isCompleted
+														).length > 0" >
+													<GuruResponse 
+														v-if="appMode === 'mobile'
+															&& progress.stages.filter((stage) => 
+																stage.view === currView
+																&& stage.type === 'feedback'
+																&& !stage.isCompleted
+															).length > 0" 
+													/>
+												</section>
+												<section class="flex-grow-1 overflow-y-auto">
+													<UiResult 
+														:question="question.question"
+														:choices="question.choices"
+														:answers="question.answers"
+														:feedback="question.feedback"
+														:notes="question.notes"
+														:test-results="question.test_results"
+													/>
+												</section>	
+											</template>
 										</div>
 										<ResultFeedback
 											v-if="question.feedback" 
@@ -153,7 +169,8 @@
 import UiForm from '@/components/ui/Form'
 import UiResult from '@/components/ui/Result'
 import ResultFeedback from '@/components/ResultFeedback'
-import ResponseVideo from '@/components/ResponseVideo'
+import GuruResponse from '@/components/GuruResponse'
+import PageLoader from '@/components/page/Loader'
 
 export default {
 	name: "DemoPage",
@@ -161,13 +178,17 @@ export default {
     UiForm,
     UiResult,
     ResultFeedback,
-    ResponseVideo,
+    GuruResponse,
+    PageLoader,
 	},
 	data() {
 		return {
 		}
 	},
 	computed: {
+		isSubmitLoading() {
+			return this.$store.getters?.isSubmitLoading
+		},
 		appMode() {
 			return this.$store.getters?.appMode
 		},
@@ -330,9 +351,6 @@ export default {
 					? groups.indexOf(views[this.currView].closest('.group')) * -100
 					: this.currView * -100
 			});
-
-			const viewType = views[this.currView].getAttribute('data-view-type')
-			if (viewType === 'feedback') this.$store.dispatch('checkLabs') 
 		},
 		resizeResults() {
 			const results = this.$el.querySelectorAll('.result-content')

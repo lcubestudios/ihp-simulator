@@ -9,6 +9,7 @@ Vue.use(Vuex)
 const state = () => {
 	return {
 		isLoading: true,
+		isSubmitLoading: false,
 		isPatientIntroComplete: false,
 		isGuruIntroComplete: false,
 		appMode: 'desktop',
@@ -32,13 +33,24 @@ const state = () => {
 		isCmeInfoVisible: false,
 		isReferenceDataVisible: false,
 		isTOCVisible: false,
-		guruResponseURL: null
+		guruResponseURL: null,
+		posttestURL: null,
+		redirectURL: null
 	}
 }
 
 const mutations = {
+	setPosttestURL(state, val) {
+		state.posttestURL = val
+	},
+	setRedirectURL(state, val) {
+		state.redirectURL = val
+	},
 	setIsLoading(state, val) {
 		state.isLoading = val
+	},
+	setIsSubmitLoading(state, val) {
+		state.isSubmitLoading = val
 	},
 	setAppMode(state, val) {
 		state.appMode = val
@@ -145,6 +157,9 @@ const actions = {
 	submitAnalytics() {
 		console.log('analytics')
 	},
+	setPosttestURL({ commit }, val) {
+		commit('setPosttestURL', val)
+	},
 	setIsLoading({ commit }, val) {
 		commit('setIsLoading', val)
 	},
@@ -153,6 +168,15 @@ const actions = {
 	},
 	isLoaded({ dispatch }) {
 		dispatch('setIsLoading', false)
+	},
+	setIsSubmitLoading({ commit }, val) {
+		commit('setIsSubmitLoading', val)
+	},
+	isSubmitLoading({ dispatch }) {
+		dispatch('setIsSubmitLoading', true)
+	},
+	isSubmitLoaded({ dispatch }) {
+		dispatch('setIsSubmitLoading', false)
 	},
 	setAppMode({ commit }, val) {
 		commit('setAppMode', val)
@@ -241,26 +265,41 @@ const actions = {
 	userLogout({ dispatch }) {
 		dispatch('setUserToken', null)
 	},
-	async getRefData({ commit }) {
-		const getCmeInfo = await axios.get('https://cdn.atpoc.com/cdn/ihp/2537.11/2537.11.json').then((res) => { return res.data})
-		const getCaseData = await axios.get('https://cdn.atpoc.com/cdn/ihp/2537.11/case.json').then((res) => { return res.data})
-
-		return await Promise.all([
-				getCmeInfo,
-				getCaseData
-			])
-				.then((res) => {
-					const cmeInfo = res[0]
-					const caseData = res[1]
-
-					const output = {
-						...caseData,
-						cme_information: cmeInfo?.cme
-					}
-
-					commit('setStages', output.stages)
-					return output
+	async getRefData({ commit }, jobnum) {
+		if (jobnum) {
+			const getCmeInfo = await axios
+				.get(`https://cdn.atpoc.com/cdn/ihp/${ jobnum }/${ jobnum }.json`)
+				.then((res) => { return res.data })
+				.catch(() => {
+					commit('setRedirectURL', `/invalid/${ jobnum }`)
 				})
+			const getCaseData = await axios
+				.get(`https://cdn.atpoc.com/cdn/ihp/${ jobnum }/case.json`)
+				.then((res) => { return res.data })
+				.catch(() => {
+					commit('setRedirectURL', `/invalid/${ jobnum }`)
+				})
+	
+			return await Promise.all([
+					getCmeInfo,
+					getCaseData
+				])
+					.then((res) => {
+						const cmeInfo = res[0]
+						const caseData = res[1]
+	
+						const output = {
+							...caseData,
+							cme_information: cmeInfo?.cme
+						}
+	
+						commit('setStages', output.stages)
+						return output
+					})
+					.catch(() => {
+						commit('setRedirectURL', `/invalid/${ jobnum }`)
+					})
+		}
 	},
 	setRefData({ commit }, val) {
 		commit('setRefData', val)
@@ -362,10 +401,10 @@ const actions = {
 		dispatch('setProgress', progress)
 		dispatch('setContinueButtonText')
 	},
-	async setEnvironment({ dispatch }) {
+	async setEnvironment({ dispatch }, jobnum) {
 		let userToken, sessionId, refData, progress
 		// Get Reference Data
-		refData = await dispatch('getRefData')
+		refData = await dispatch('getRefData', jobnum)
 		// IF no ref data -> Throw error
 		if (!refData) throw 'data not found'
 		// Store ref data
@@ -375,6 +414,8 @@ const actions = {
 
 		if (userToken) {
 			await dispatch('setUserToken', userToken)
+			const posttestURL = `https://secureapi.atpoc.com/beta/poc-test-module/?jn=${ refData?.jobnum }&poc_tkn=${ userToken }`
+			await dispatch('setPosttestURL', posttestURL)
 			// Check Session Id
 			sessionId = Cookies.get('ihp_session_id')
 			// IF no session id -> create session id
@@ -507,12 +548,12 @@ const actions = {
 					: state.stages[state.currStage + 1].name
 				)
 			: type === 'end'
-			? 'Continue to Post Test'
+			? 'Claim Credit'
 			: 'Continue'
 
 		commit('setContinueButtonText', val)
 	},
-	async submitQuestion({ state, commit }, payload) {
+	async submitQuestion({ state, commit, dispatch }, payload) {
 		const output = []
 
 		Object.keys(payload)
@@ -539,8 +580,9 @@ const actions = {
 		}
 
 		await axios.post('https://secureapi.atpoc.com/api-suite/8.2/answersihp', postPayload)
-			.then(() => {
-				commit('setAnswers', output)
+			.then(async () => {
+				await commit('setAnswers', output)
+				dispatch('isSubmitLoaded')
 			})
 			.catch((err) => console.log(err))
 	},
@@ -626,6 +668,7 @@ const actions = {
 			dispatch('setCurrView', incomplete[0].view)
 		}
 
+		dispatch('setGuruResponseURL', null)
 		dispatch('setContinueButtonText')
 	},
 	setCmeInfoVisible({ commit }, val) {
@@ -676,8 +719,17 @@ const actions = {
 }
 
 const getters = {
+	redirectURL(state) {
+		return state.redirectURL
+	},
+	posttestURL(state) {
+		return state.posttestURL
+	},
 	isLoading(state) {
 		return state.isLoading
+	},
+	isSubmitLoading(state) {
+		return state.isSubmitLoading
 	},
 	appMode(state) {
 		return state.appMode

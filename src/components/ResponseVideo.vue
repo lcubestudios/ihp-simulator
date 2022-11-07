@@ -49,7 +49,7 @@ export default {
 	watch: {
 		currView(to) {
 			const currStage = this.progress.stages.filter((stage) => stage.view === to)[0]
-			if (currStage?.stage === this.stage && currStage?.group === this.group) this.setVideoUrl()
+			if (currStage?.stage === this.stage && currStage?.group === this.group) this.setVideoURL()
 		},
 	},
 	data() {
@@ -61,7 +61,7 @@ export default {
 	mounted() {
 		setTimeout(() => {
 			const currStage = this.progress.stages.filter((stage) => stage.view === this.currView)[0]
-			if (currStage?.stage === this.stage && currStage?.group === this.group) this.setVideoUrl()
+			if (currStage?.stage === this.stage && currStage?.group === this.group) this.setVideoURL()
 		}, 100)
 	},
 	computed: {
@@ -76,7 +76,7 @@ export default {
 		},
 	},
 	methods: {
-		setVideoUrl() {
+		setVideoURL() {
 			const question = this.$store.getters?.stages[this.stage].questions[this.group]
 			const correctAnswers = question.answers ? question?.answers.filter((answer) => answer.choice_is_correct)?.length : null
 			const correctChoices = question.choices ? question?.choices.filter((choice) => choice.choice_is_correct)?.length : null
@@ -85,6 +85,7 @@ export default {
 			else this.videoUrl = question?.incorrect_video_url.replace(/\{\{INCORRECT_VIDEO\}\}/gi, 'global/guru-not-quite.mp4')
 
 			setTimeout(() => {
+				console.log('test')
 				this.$el.querySelector('video').play()
 				this.$el.querySelector('video').muted = false
 			}, 100)

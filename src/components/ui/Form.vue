@@ -34,9 +34,9 @@
 					</div>
 				</template>
 				<template v-if="type === 'multichoice'">
-					<v-radio-group v-model="selectedRadio">
-						<div class="d-flex flex-column gap-3">
-							<template v-if="isCompleted">
+					<template v-if="isCompleted">
+						<v-radio-group v-model="selectedRadio">
+							<div class="d-flex flex-column gap-3">
 								<v-radio 
 									v-for="(choice, choice_ndx) in choices" 
 									:key="choice_ndx"
@@ -50,8 +50,12 @@
 									color="#4e9d2d"
 									:input-value="isAnswered(choice.choice_order)"
 								></v-radio>
-							</template>
-							<template v-else>
+							</div>
+						</v-radio-group>
+					</template>
+					<template v-else>
+						<v-radio-group>
+							<div class="d-flex flex-column gap-3">
 								<v-radio 
 									v-for="(choice, choice_ndx) in choices" 
 									:key="choice_ndx"
@@ -63,9 +67,9 @@
 									:ripple="false"
 									color="#4e9d2d"
 								></v-radio>
-							</template>
-						</div>
-					</v-radio-group>
+							</div>
+						</v-radio-group>
+					</template>
 				</template>
 			</div>
 		</div>
@@ -127,8 +131,14 @@ export default {
 				)[0]
 				.isCompleted
 		},
-		selectedRadio() {
-			return this.answers[0]?.choice_order || -1
+		selectedRadio()  {
+			return this.$store.getters?.progress?.stages
+				.filter(
+					(stage) => stage.stage === this.stage
+						&& stage.group === this.group
+						&& stage.type === 'question'
+				)[0]
+				.choice_order
 		}
 	},
 	methods: {

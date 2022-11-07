@@ -1,5 +1,5 @@
 <template>
-	<div class="h-100">
+	<div id="pageSidebar" class="h-100">
 		<div
 			v-if="currSidebarView === 0"
 			class="h-100 d-flex flex-column"

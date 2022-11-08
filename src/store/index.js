@@ -312,19 +312,22 @@ const actions = {
 	userLogout({ dispatch }) {
 		dispatch('setUserToken', null)
 	},
-	async getRefData({ commit }, jobnum) {
+	setRedirectURL({ commit }, val) {
+		commit('setRedirectURL', val)
+	},
+	async getRefData({ dispatch, commit }, jobnum) {
 		if (jobnum) {
 			const getCmeInfo = await axios
 				.get(`https://cdn.atpoc.com/cdn/ihp/${ jobnum }/${ jobnum }.json`)
 				.then((res) => { return res.data })
 				.catch(() => {
-					commit('setRedirectURL', `/invalid/${ jobnum }`)
+					dispatch('setRedirectURL', `/invalid/?jn=${ jobnum }`)
 				})
 			const getCaseData = await axios
 				.get(`https://cdn.atpoc.com/cdn/ihp/${ jobnum }/case.json`)
 				.then((res) => { return res.data })
 				.catch(() => {
-					commit('setRedirectURL', `/invalid/${ jobnum }`)
+					dispatch('setRedirectURL', `/invalid/?jn=${ jobnum }`)
 				})
 	
 			return await Promise.all([
@@ -344,7 +347,7 @@ const actions = {
 						return output
 					})
 					.catch(() => {
-						commit('setRedirectURL', `/invalid/${ jobnum }`)
+						dispatch('setRedirectURL', `/invalid/?jn=${ jobnum }`)
 					})
 		}
 	},

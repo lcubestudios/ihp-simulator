@@ -8,12 +8,12 @@ import Simulator from '@/pages/Simulator'
 
 const routes = [
 	{
-		path: '/:jn',
+		path: '/',
 		name: 'simulator',
 		component: Simulator,
 	},
 	{
-		path: '/',
+		path: '/missing',
 		name: 'missing',
 		component: MissingPage,
 		meta: {
@@ -21,7 +21,7 @@ const routes = [
 		}
 	},
 	{
-		path: '/invalid/:jn',
+		path: '/invalid',
 		name: 'invalid',
 		component: InvalidPage,
 		meta: {

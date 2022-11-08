@@ -5,7 +5,7 @@
 				<section 
 					class="d-none pa-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center"
 				>
-					<h3 class="primary-color">Invalid Job Number - {{ $route.params.jn }}</h3>
+					<h3 class="primary-color">Invalid Job Number - {{ $route.query.jn }}</h3>
 				</section>
 			</v-row>
 		</v-container>

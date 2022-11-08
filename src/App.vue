@@ -250,8 +250,10 @@ export default {
 		}
 	},
 	mounted() {
+		if (!this.$route.query.jn) this.$store.dispatch('setRedirectURL', `/missing`)
+
 		this.setAppMode()
-		this.$store.dispatch('setEnvironment', this.$route.params.jn)
+		this.$store.dispatch('setEnvironment', this.$route.query.jn)
 
 		window.addEventListener('resize', () => {
 			this.setAppMode()

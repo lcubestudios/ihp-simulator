@@ -18,76 +18,128 @@
 											alt="Peer Reviewed" 
 										>
 									</div>
-									<p v-html="funderLine"></p>
+									<div class="cme-funder-line" v-html="funderLine"></div>
 								</section>
-								<section v-if="content.authorbyline">
-									<h4>Medical Writer</h4>
-									<p v-html="content.authorbyline"></p>
+								<section v-if="faculty && faculty.length > 0">
+									<div class="d-flex flex-column gap-4">
+										<div
+											v-for="(fac, fac_ndx) in faculty"
+											:key="fac_ndx"
+										>
+											<h4>{{ fac.role }}</h4>
+											<div class="d-flex flex-row gap-2.5"> 
+												<div class="faculty-image">
+													<img
+														:src="fac.facultyImage"
+														:alt="fac.fullName"
+													/>
+												</div>
+												<div class="d-flex flex-column gap-2.5">
+													<p class="ma-0 fw-bold">{{ fac.fullName }}</p>
+													<p class="ma-0" v-html="fac.jobAffiliations"></p>
+												</div>
+											</div>
+										</div>
+									</div>
 								</section>
-								<section v-if="content.reviewerbyline">
-									<h4>Reviewer</h4>
-									<p v-html="content.reviewerbyline"></p>
+								<section v-if="estimatedTimeToComplete">
+									<h4>{{ estimatedTimeToComplete.availFor }}</h4>
+									<v-container class="ettc-table text-center d-flex flex-column">
+										<v-row class="fw-bold border-bottom">
+											<v-col class="d-flex justify-content-center align-items-center"></v-col>
+											<v-col class="d-flex justify-content-center align-items-center">Physicians</v-col>
+											<v-col class="d-flex justify-content-center align-items-center">Nurses</v-col>
+										</v-row>
+										<v-row class="border-bottom">
+											<v-col class="d-flex justify-content-center align-items-center fw-bold">Release Date</v-col>
+											<v-col class="d-flex justify-content-center align-items-center">{{ estimatedTimeToComplete.cme_publishDate }}</v-col>
+											<v-col class="d-flex justify-content-center align-items-center">{{ estimatedTimeToComplete.cpe_publishDate }}</v-col>
+										</v-row>
+										<v-row>
+											<v-col class="d-flex justify-content-center align-items-center fw-bold">Termination Date</v-col>
+											<v-col class="d-flex justify-content-center align-items-center">{{ estimatedTimeToComplete.cme_terminationDate }}</v-col>
+											<v-col class="d-flex justify-content-center align-items-center">{{ estimatedTimeToComplete.cpe_terminationDate }}</v-col>
+										</v-row>
+									</v-container>
 								</section>
-								<section v-if="content.releasedate">
-									<h4>{{ label }}</h4>
-									<table class="table-auto w-full border border-gray-004 text-center">
-										<tr class="border-b border-gray-004">
-											<th class="border-r border-gray-004"></th>
-											<th class="border-r border-gray-004">Physicians</th>
-											<th>Nurses</th>
-										</tr>
-										<tr class="border-b border-gray-004">
-											<td class="border-r border-gray-004"><strong>Release Date</strong></td>
-											<td class="border-r border-gray-004">{{ content.releasedate.split(' ')[0] }}</td>
-											<td>{{ content.releasedate.split(' ')[0] }}</td>
-										</tr>
-										<tr v-if="content.termdate">
-											<td class="border-r border-gray-004"><strong>Termination Date</strong></td>
-											<td class="border-r border-gray-004">{{ content.termdate }}</td>
-											<td>{{ content.termdate }}</td>
-										</tr>
-									</table>
+								<section v-if="creditsAvailable && creditsAvailable.length > 0">
+									<h4>Credits Available</h4>
+									<div class="d-flex flex-column gap-2.5">
+										<p
+											class="ma-0" 
+											v-for="(credAvail, credAvail_ndx) in creditsAvailable"
+											:key="credAvail_ndx"
+										>
+											{{ credAvail.creditType }}: {{ credAvail.actualCredit }}
+										</p>
+									</div>
 								</section>
-								<section v-if="hasEstimate">
-									<h4>Estimated time for completion of this activity</h4>
-									<p v-if="content.cme_credit">CME: {{ content.cme_credit }}</p>
-									<p v-if="content.ce_credit">CNE: {{ content.ce_credit }}</p>
-									<p v-if="hasMoc">{{ content.moc_credit_information }}</p>
+								<section v-if="credits && credits.length > 0">
+									<h4>Estimated time for completion of this activity:</h4>
+									<div class="d-flex flex-column gap-2.5">
+										<p
+											class="ma-0" 
+											v-for="(cred, cred_ndx) in credits"
+											:key="cred_ndx"
+										>
+											{{ cred.creditType }}: {{ cred.actualCredit }}
+										</p>
+										<p v-if="isMoc" class="ma-0 font-italic">You are Eligible for AMA PRA Category 1 Credit(s)<sup>&trade;</sup> ABIM MOC points</p>
+									</div>
 								</section>
-								<section v-if="content.cmedisclosures">
-									<h4>CME/CE Instructions</h4>
-									<p v-html="content.cmedisclosures"></p>
+								<section v-if="cmeInstructions && cmeInstructions.length > 0">
+									<div>
+										<div
+											v-for="(instruction, instruction_ndx) in cmeInstructions"
+											:key="instruction_ndx"
+										>
+											<div class="cme-instructions" v-html="instruction.cmeInstructions"></div>
+											<p v-if="instruction.noFeeDisclaimer">{{ instruction.noFeeDisclaimer }}</p>
+										</div>
+									</div>
 								</section>
-								<section v-if="content.contact_information">
-									<h4>Contact Information</h4>
-									<p v-html="content.contact_information"></p>
+								<section v-if="contactInfo">
+									<div v-html="contactInfo"></div>
 								</section>
-								<section v-if="content.target_audience">
+								<section v-if="targetAudience">
 									<h4>Target Audience</h4>
-									<p v-html="content.target_audience"></p>
+									<p>{{ targetAudience }}</p>
 								</section>
-								<section v-if="content.activity_goal">
+								<section v-if="activityGoal">
 									<h4>Activity Goal</h4>
-									<p v-html="content.activity_goal"></p>
+									<p>{{ activityGoal }}</p>
 								</section>
-								<section v-if="content.learning_objectives">
-									<h4>Learning Objectives</h4>
-									<p v-html="content.learning_objectives"></p>
+								<section v-if="learningObjectives && learningObjectives.length > 0">
+									<h4>Learning Objective(s)</h4>
+									<ul class="custom-list">
+										<li 
+											v-for="(objective, objective_ndx) in learningObjectives"
+											:key="objective_ndx"
+											class="ma-0"
+										>{{ objective.objective }}</li>
+									</ul>
 								</section>
-								<section v-if="content.cme_statement">
-									<p v-html="content.cme_statement"></p>
+								<section v-if="cmeInfo && cmeInfo.length > 0">
+									<div>
+										<div
+											v-for="(info, info_ndx) in cmeInfo"
+											:key="info_ndx"
+										>
+											<div class="cme-instructions" v-html="info.creditDesignation"></div>
+										</div>
+									</div>
 								</section>
-								<section v-if="content.nursingcestatement">
-									<p v-html="content.nursingcestatement"></p>
+								<section v-if="disclosureInformation">
+									<h4>Disclosure Information</h4>
+									<div v-html="disclosureInformation"></div>
 								</section>
-								<section v-if="content.responsibility_contract">
-									<h4>Contract for Mutual Responsibility in CME/CE</h4>
-									<p v-html="content.responsibility_contract"></p>
+								<section v-if="mutualResponsibility">
+									<div v-html="mutualResponsibility"></div>
 								</section>
 							</section>
 							<footer class="mt-5">
-								<p v-if="content.trademark" v-html="content.trademark"></p>
-								<p v-if="content.jobnum">{{ content.jobnum }}</p>
+								<p v-if="trademark" v-html="trademark"></p>
+								<p v-if="jobnum">{{ jobnum }}</p>
 							</footer>
 						</article>
 					</div>
@@ -112,11 +164,14 @@ export default {
 	name: 'CmeInfo',
 	computed: {
 		content() {
-			return null // this.$store.getters?.refData?.cme_information
+			return this.$store.getters?.refData?.cme_information
+		},
+		isMoc() {
+			return this?.content?.is_moc == 1
 		},
 		label() {
-			return this?.content?.is_moc == 1
-				? 'CME/CE/ABIM CE'
+			return this.isMoc
+				? 'CME/CE/ABIM MOC'
 				: 'CME/CE'
 		},
 		funderLine() {
@@ -124,9 +179,47 @@ export default {
 				?.funderInfo[0]
 				?.funderHTML
 		},
-		facebulty() {
-			return this?.content
-				?.faculty
+		faculty() {
+			return this?.content?.faculty
+		},
+		estimatedTimeToComplete() {
+			return this?.content?.estimatedTimeToComplete[0]
+		},
+		creditsAvailable() {
+			return this?.content?.credits_available
+		},
+		credits() {
+			return this?.content?.credits
+		},
+		cmeInstructions() {
+			return this?.content?.cmeInstructions
+		},
+		contactInfo() {
+			return this?.content?.contactInfo
+		},
+		targetAudience() {
+			return this?.content?.targetAudience
+		},
+		activityGoal() {
+			return this?.content?.activityGoal
+		},
+		learningObjectives() {
+			return this?.content?.learningObjectives
+		},
+		cmeInfo() {
+			return this?.content?.cmeInfo
+		},
+		disclosureInformation() {
+			return this?.content?.disclosureInformation
+		},
+		mutualResponsibility() {
+			return this?.content?.mutualResponsibility
+		},
+		trademark() {
+			return this?.content?.trademark
+		},
+		jobnum() {
+			return this.$store.getters?.refData?.jobnum
 		},
 		isCmeInfoVisible() {
 			return this.$store.getters.isCmeInfoVisible
@@ -176,12 +269,39 @@ export default {
 	height: 0;
 
 	article {
-		section {
-			border-bottom: 1px solid #d7d2cd;
+		> section {
+			> section {
+				padding: 24px 0px;
+				border-bottom: 1px solid #d7d2cd;
+
+				h4 {
+					margin-bottom: 16px !important;
+				}
+			}
 		}
 		img {
 			margin-bottom: 0 !important;
 		}
 	}
+
+	.faculty-image {
+		min-width: 120px;
+		img {
+			min-width: 100%;
+		}
+	}
+
+	// .ettc-table {
+	// 	> div {
+	// 		> div {
+	// 			padding:
+	// 		}
+	// 	}
+	// }
 }
+</style>
+
+<style>
+.cme-funder-line p { margin-bottom: 0 !important; }
+.cme-instructions h3 { font-size: calc(1.275rem + 0.3vw) !important; }
 </style>

@@ -30,7 +30,7 @@ const state = () => {
 		refData: null,
 		isLightBoxVisible: false,
 		lightBoxImage: null,
-		isCmeInfoVisible: false,
+		isCmeInfoVisible: true,
 		isReferenceDataVisible: false,
 		isTOCVisible: false,
 		guruResponseURL: null,
@@ -154,8 +154,48 @@ const mutations = {
 }
 
 const actions = {
-	submitAnalytics() {
-		console.log('analytics')
+	async submitAnalytics({ state }, payload) {
+		const defaultData = {
+			app_id: 'xxxxxxxx',
+			appname: location.href,
+			apptype: 'ihp simulator',
+			category: 'poc',
+			metavalue: `${ location.href } | IHP Simulator`,
+			event: null,
+			label: null,
+			platform: 'web',
+			session: null,
+			token: state.authToken,
+			userAgent: navigator.userAgent,
+			value: 1,
+		}
+
+		const params = {}
+	
+		const body = Object.assign(defaultData, payload || {})
+
+		if (body?.token !== '') params.token = body.token
+	
+		const urlParams = Object
+			.keys(params)
+			.map((key) => { 
+				return key + '=' + params[key]
+			})
+			.join('&')
+			|| null
+	
+		const url = 'https://secureapi.atpoc.com/api-suite/8.2/analytics/eventihp' + (urlParams ? '?' + urlParams : '')
+
+		console.log(url)
+		console.log(body)
+
+		// await axios.post(url, body, {
+		// 	headers: {
+		// 		'content-type': 'text/json'
+		// 	}
+		// })
+		// 	.then((data) => { console.log(body) })
+		// 	.catch((e) => console.log(e))
 	},
 	setPosttestURL({ commit }, val) {
 		commit('setPosttestURL', val)
@@ -192,6 +232,11 @@ const actions = {
 
 		dispatch('setProgress', progress)
 		dispatch('setPatientIntroComplete', true)
+		dispatch('submitAnalytics', {
+			event: 'View',
+			label: `Guru Introduction`,
+			metavalue: `${ location.href } | IHP Simulator | View`,
+		})
 	},
 	resetPatientIntro({ dispatch }) {
 		const progress = Object.assign(
@@ -205,7 +250,7 @@ const actions = {
 	setGuruIntroComplete({ commit }, val) {
 		commit('setGuruIntroComplete', val)
 	},
-	completeGuruIntro({ dispatch }) {
+	completeGuruIntro({ state, dispatch }) {
 		const progress = Object.assign(
 			JSON.parse(Cookies.get('ihp_progress')), 
 			{ isGuruIntroComplete: true }
@@ -216,6 +261,11 @@ const actions = {
 		dispatch('setProgress', progress)
 		dispatch('setGuruIntroComplete', true)
 		dispatch('updateProgress')
+		dispatch('submitAnalytics', {
+			event: 'View',
+			label: `stage ${ state.stages[0].id } | group ${ state.stages[0].questions[0].id }`,
+			metavalue: `${ location.href } | IHP Simulator | View`,
+		})
 	},
 	resetGuruIntro({ dispatch }) {
 		const progress = Object.assign(
@@ -401,7 +451,7 @@ const actions = {
 		dispatch('setProgress', progress)
 		dispatch('setContinueButtonText')
 	},
-	async setEnvironment({ dispatch }, jobnum) {
+	async setEnvironment({ state, dispatch }, jobnum) {
 		let userToken, sessionId, refData, progress
 		// Get Reference Data
 		refData = await dispatch('getRefData', jobnum)
@@ -430,6 +480,30 @@ const actions = {
 			if (!progress) progress = await dispatch('createProgress')
 			// Store progress
 			await dispatch('setProgress', progress)
+			// View Analytics
+			// Patient analytics
+			if (!progress.isPatientIntroComplete) {
+				dispatch('submitAnalytics', {
+					event: 'View',
+					label: `Patient Introduction`,
+					metavalue: `${ location.href } | IHP Simulator | View`,
+				})
+			}
+			// Guru analytics
+			else if (!progress.isGuruIntroComplete) {
+				dispatch('submitAnalytics', {
+					event: 'View',
+					label: `Guru Introduction`,
+					metavalue: `${ location.href } | IHP Simulator | View`,
+				})
+			}
+			else if (!progress.stages[0].isCompleted) {
+				dispatch('submitAnalytics', {
+					event: 'View',
+					label: `stage ${ state.stages[0].id } | group ${ state.stages[0].questions[0].id }`,
+					metavalue: `${ location.href } | IHP Simulator | View`,
+				})
+			}
 			// Set stage + view
 			if (progress.isPatientIntroComplete && progress.isGuruIntroComplete) {
 				const incomplete = progress.stages.filter((stage) => !stage.isCompleted)
@@ -505,7 +579,7 @@ const actions = {
 					groupKeys.push(0)
 				}
 			})
-		
+
 		commit('setCurrGroup', groupKeys[state.currView])
 	},
 	setCurrGroup({ commit } ,val) {
@@ -583,6 +657,23 @@ const actions = {
 			.then(async () => {
 				await commit('setAnswers', output)
 				dispatch('isSubmitLoaded')
+				dispatch('submitAnalytics', {
+					event: 'Submit',
+					label: `${
+						state.stages[state.currStage].name
+					} | stage ${
+						state.stages[state.currStage].id
+					} | group ${ 
+						state.stages[state.currStage].questions[state.currGroup].id 
+					} | ${ output.length > 1 ? 'choices' : 'choice' } ${
+						output.map((ans) => {
+							return ans.choice_id
+						}).join(',')
+					}`,
+					metavalue: `${ location.href } | IHP Simulator | ${
+						state.stages[state.currStage].questions[state.currGroup].question
+					}`,
+				})
 			})
 			.catch((err) => console.log(err))
 	},

@@ -288,7 +288,7 @@ export default {
 	},
 	watch: {
 		isClipboardVisible(to) {
-			if (!to) this.setDefaultView()
+			if (to) this.setDefaultView()
 		}
 	},
 	computed: {

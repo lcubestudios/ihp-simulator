@@ -252,6 +252,7 @@ export default {
 	mounted() {
 		this.setAppMode()
 		this.$store.dispatch('setEnvironment', this.$route.params.jn)
+
 		window.addEventListener('resize', () => {
 			this.setAppMode()
 		})
@@ -328,6 +329,31 @@ export default {
 		},
 		redirectURL(to) {
 			if (to) this.$router.push(to)
+		},
+		currView(to) {
+			const stage = this.progress.stages
+				.filter((stage) => stage.view === to)[0]
+			this.$store.dispatch('submitAnalytics', {
+				event: 'View',
+				label: `${
+					this.stages[stage.stage].name
+				} | stage ${
+					this.stages[stage.stage].id
+				}${
+					stage.type === 'question' || stage.type === 'feedback'
+					? ` | group ${ this.stages[stage.stage].questions[stage.group].id }`
+					: ''
+				} | type ${
+					stage.type
+				}`,
+				metavalue: `${ location.href } | IHP Simulator${
+					stage.type === 'question' || stage.type === 'feedback'
+					? ` | ${ this.stages[stage.stage].questions[stage.group].question }`
+					: stage.type === 'info'
+					? ` | ${ this.stages[stage.stage].content }`
+					: ''
+				}`,
+			})
 		}
 	},
 	methods: {

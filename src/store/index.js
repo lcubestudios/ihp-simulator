@@ -174,7 +174,7 @@ const actions = {
 	
 		const body = Object.assign(defaultData, payload || {})
 
-		if (body?.token !== '') params.token = body.token
+		if (state?.userToken !== '') params.token = state.userToken
 	
 		const urlParams = Object
 			.keys(params)

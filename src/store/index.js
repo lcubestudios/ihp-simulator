@@ -30,7 +30,7 @@ const state = () => {
 		refData: null,
 		isLightBoxVisible: false,
 		lightBoxImage: null,
-		isCmeInfoVisible: true,
+		isCmeInfoVisible: false,
 		isReferenceDataVisible: false,
 		isTOCVisible: false,
 		guruResponseURL: null,
@@ -186,16 +186,13 @@ const actions = {
 	
 		const url = 'https://secureapi.atpoc.com/api-suite/8.2/analytics/eventihp' + (urlParams ? '?' + urlParams : '')
 
-		console.log(url)
-		console.log(body)
-
-		// await axios.post(url, body, {
-		// 	headers: {
-		// 		'content-type': 'text/json'
-		// 	}
-		// })
-		// 	.then((data) => { console.log(body) })
-		// 	.catch((e) => console.log(e))
+		await axios.post(url, body, {
+			headers: {
+				'content-type': 'text/json'
+			}
+		})
+			.then(() => { console.log(body) })
+			.catch((e) => console.log(e))
 	},
 	setPosttestURL({ commit }, val) {
 		commit('setPosttestURL', val)

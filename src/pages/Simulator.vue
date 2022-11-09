@@ -43,22 +43,26 @@
 											</section>	
 											<div 
 												v-if="appMode === 'desktop'"
+												class="d-flex flex-column gap-2.5"
 											>
-												<v-btn
-													v-if="isContinueEnabled"
-													class="next-button text-white primary-bg font-18"
-													large
-													block
-													@click="stageClick()"
-												>{{ continueButtonLabel }}</v-btn>
-												<v-btn
-													v-else
-													class="next-button text-white primary-bg font-18"
-													large
-													block
-													disabled
-													@click="stageClick()"
-												>{{ continueButtonLabel }}</v-btn>
+												<div>
+													<v-btn
+														v-if="isContinueEnabled"
+														class="next-button text-white primary-bg font-18"
+														large
+														block
+														@click="stageClick()"
+													>{{ continueButtonLabel }}</v-btn>
+													<v-btn
+														v-else
+														class="next-button text-white primary-bg font-18"
+														large
+														block
+														disabled
+														@click="stageClick()"
+													>{{ continueButtonLabel }}</v-btn>
+												</div>
+												<PageProgress />
 											</div>
 										</div>
 									</div>
@@ -88,7 +92,7 @@
 												<PageLoader />
 											</template>
 											<template v-else>
-												<section
+												<GuruResponse 
 													v-if="appMode === 'mobile'
 														&& stage_ndx === currStage
 														&& question_ndx === currGroup
@@ -96,16 +100,8 @@
 															stage.view === currView
 															&& stage.type === 'feedback'
 															&& !stage.isCompleted
-														).length > 0" >
-													<GuruResponse 
-														v-if="appMode === 'mobile'
-															&& progress.stages.filter((stage) => 
-																stage.view === currView
-																&& stage.type === 'feedback'
-																&& !stage.isCompleted
-															).length > 0" 
-													/>
-												</section>
+														).length > 0" 
+												/>
 												<section class="flex-grow-1 overflow-y-auto">
 													<UiResult 
 														:question="question.question"
@@ -136,22 +132,28 @@
 											<section class="flex-grow-1">
 												<div v-html="stage.content"></div>
 											</section>
-											<div v-if="appMode === 'desktop'">
-												<v-btn
-													v-if="isContinueEnabled"
-													class="next-button text-white primary-bg font-18"
-													large
-													block
-													@click="stageClick()"
-												>{{ continueButtonLabel }}</v-btn>
-												<v-btn
-													v-else
-													class="next-button text-white primary-bg font-18"
-													large
-													block
-													disabled
-													@click="stageClick()"
-												>{{ continueButtonLabel }}</v-btn>
+											<div 
+												v-if="appMode === 'desktop'"
+												class="d-flex flex-column gap-2.5"
+											>
+												<div>
+													<v-btn
+														v-if="isContinueEnabled"
+														class="next-button text-white primary-bg font-18"
+														large
+														block
+														@click="stageClick()"
+													>{{ continueButtonLabel }}</v-btn>
+													<v-btn
+														v-else
+														class="next-button text-white primary-bg font-18"
+														large
+														block
+														disabled
+														@click="stageClick()"
+													>{{ continueButtonLabel }}</v-btn>
+												</div>
+												<PageProgress />
 											</div>
 										</div>
 									</div>
@@ -171,6 +173,7 @@ import UiResult from '@/components/ui/Result'
 import ResultFeedback from '@/components/ResultFeedback'
 import GuruResponse from '@/components/GuruResponse'
 import PageLoader from '@/components/page/Loader'
+import PageProgress from '@/components/page/Progress'
 
 export default {
 	name: "DemoPage",
@@ -180,6 +183,7 @@ export default {
     ResultFeedback,
     GuruResponse,
     PageLoader,
+		PageProgress
 	},
 	data() {
 		return {

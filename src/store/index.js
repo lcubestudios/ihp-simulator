@@ -299,10 +299,10 @@ const actions = {
 		dispatch('isLoading')
 		await axios.get(`https://secureapi.atpoc.com/api-suite/8.2/auth/token?email=${ creds.email }&password=${ creds.password }`)
 			.then(async (res) => {
-				if (res.data.error) throw res.data.error
-				if (res.data.token) {
+				if (res?.data?.error) throw res.data.error
+				if (res?.data?.token) {
 					await dispatch('setUserToken', res.data.token)
-					await dispatch('setEnvironment')
+					return true
 				}
 			})
 			.catch((err) => {
@@ -342,6 +342,8 @@ const actions = {
 							...caseData,
 							cme_information: cmeInfo?.cme
 						}
+
+						console.log(output)
 	
 						commit('setStages', output.stages)
 						return output

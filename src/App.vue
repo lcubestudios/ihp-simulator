@@ -327,7 +327,7 @@ export default {
 	watch: {
 		appMode() {
 			this.$store.dispatch('isLoading')
-			this.$store.dispatch('setEnvironment')
+			this.$store.dispatch('setEnvironment', this.$route.query.jn)
 		},
 		redirectURL(to) {
 			if (to) this.$router.push(to)

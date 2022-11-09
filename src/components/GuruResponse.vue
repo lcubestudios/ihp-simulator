@@ -1,56 +1,64 @@
 <template>
 	<v-card 
 		id="guruResponse" 
-		class="w-100 gray8-bg rounded-0"
+		class="w-100 rounded-0 gray2-bg"
 		:class="{
 			'position-absolute': appMode === 'desktop',
 			'top-0': appMode === 'desktop',
 			'w-100': appMode === 'desktop',
+			'h-100': appMode === 'desktop',
 		}"
 		:elevation="0"
 	>
-		<div class="w-100 h-100 d-flex justify-content-center align-items-center">
-			<video 
-				v-if="videoURL"
-				id="guruResponseVideo" 
-				class="w-100"
-				@ended="onVideoEnd"
-				@pause="onVideoPause"
-				@play="onVideoPlay"
-				:poster="thumbnail"
-				playsinline
-				muted
-			>
-				<source :src="videoURL" type="video/mp4" />
-			</video>
-		</div>
 		<div 
-			v-if="appMode === 'desktop'"
-			class="video-overlay position-absolute top-0 left-0 bottom-0 right-0 d-flex flex-column justify-content-center align-items-center ma-2.5"
-			@click="toggleVideo()"
+			class="video-wrap w-100 h-100 d-flex flex-column justify-content-center align-items-center"
+			:class="{
+				'flex-column': appMode === 'desktop'
+			}"
 		>
-			<v-btn v-if="!isVideoPlaying" icon :ripple="false">
-				<v-icon
-					size="160"
-					color="#4e9d2d"
-				>mdi-play-circle-outline</v-icon>
-			</v-btn>
-		</div>
-		<div 
-			v-else
-			class="position-absolute top-0 left-0 w-100 h-100"
-			@click="toggleVideo()"
-		>
-			<v-btn 
-				class="position-absolute bottom-0 left-0 ma-2.5"
-				icon
+			<div 
+				class="position-relative w-100"
+				:class="{
+					'h-100': appMode === 'mobile'
+				}"
 			>
-				<v-icon
-					size="32"
-					color="#4e9d2d"
-					:ripple="false"
-				>{{ isVideoPlaying ? 'mdi-pause-circle-outline' : 'mdi-play-circle-outline' }}</v-icon>
-			</v-btn>
+				<video 
+					v-if="videoURL"
+					id="guruResponseVideo" 
+					class="w-100"
+					@ended="onVideoEnd"
+					@pause="onVideoPause"
+					@play="onVideoPlay"
+					:poster="thumbnail"
+					playsinline
+					muted
+				>
+					<source :src="videoURL" type="video/mp4" />
+				</video>
+				<div 
+					class="position-absolute top-0 left-0 w-100 h-100"
+					@click="toggleVideo()"
+				>
+					<v-btn 
+						class="position-absolute bottom-0 left-0 ma-2.5"
+						icon
+					>
+						<v-icon
+							size="32"
+							color="#4e9d2d"
+							:ripple="false"
+						>{{ isVideoPlaying ? 'mdi-pause-circle-outline' : 'mdi-play-circle-outline' }}</v-icon>
+					</v-btn>
+				</div>
+			</div>
+			<div v-if="appMode === 'desktop'" class="pa-4">
+				<v-card
+					class="secondary-light-bg pa-4"
+					:elavation="2"
+				>
+					<p class="ma-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>
+				</v-card>
+			</div>
 		</div>
 	</v-card>
 </template>
@@ -142,7 +150,7 @@ export default {
 		showVideo() {
 			const movement = this.appMode === 'desktop'
 				? { xPercent: 100 }
-				: { yPercent: 100, marginBottom: '16px' }
+				: { height: '240px', maxHeight: '240px', marginBottom: '16px' }
 
 			this.gsap.to(this.$el, {
 				duration: 0.25,
@@ -160,7 +168,7 @@ export default {
 		hideVideo() {
 			const movement = this.appMode === 'desktop'
 				? { xPercent: -100 }
-				: { yPercent: -100, marginBottom: '0px' }
+				: { height: '0px', maxHeight: '0px', marginBottom: '0px' }
 
 			this.gsap.to(this.$el, {
 				duration: 0.25,
@@ -185,11 +193,20 @@ export default {
 <style lang="scss" scoped>
 #guruResponse {
 	margin-bottom: 16px;
-	transform: translateY(-100%);
-
+	overflow: hidden !important;
+	
 	@media (min-width: 961px) {
 		margin-bottom: 0;
 		transform: translateX(-100%);
+	}
+	> .video-wrap {
+		height: 240px;
+	}
+
+	video {
+		height: 100%;
+		max-height: 100%;
+		max-width: 100%;
 	}
 }
 </style>

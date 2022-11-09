@@ -1,5 +1,5 @@
 <template>
-	<v-card id="guruIntro" class="position-absolute top-0 w-100 h-100 white-bg">
+	<v-card id="guruIntro" class="position-absolute top-0 w-100 h-100 gray2-bg">
 		<div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
 			<div class="position-relative">
 				<video 
@@ -34,7 +34,7 @@
 					class="secondary-light-bg pa-4"
 					:elavation="2"
 				>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>
+					<p class="ma-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>
 				</v-card>
 			</div>
 		</div>

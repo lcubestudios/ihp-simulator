@@ -43,11 +43,13 @@ export default {
 		}
 	},
 	methods: {
-		userLogin() {
-			this.$store.dispatch('userLogin', {
+		async userLogin() {
+			await this.$store.dispatch('userLogin', {
 				email: this.email,
 				password: this.password,
 			})
+
+			await this.$store.dispatch('setEnvironment', this.$route.query.jn)
 		}
 	}
 }

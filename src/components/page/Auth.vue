@@ -38,8 +38,8 @@ export default {
 	name: 'PageAuth',
 	data() {
 		return {
-			email: 'lukasavb@live.com',
-			password: 'pikAVB93'
+			email: '',
+			password: ''
 		}
 	},
 	methods: {

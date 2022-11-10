@@ -134,7 +134,7 @@
 												>
 													<div class="text-center">
 														<p v-if="!isGuruIntroComplete">
-															Welcome to IHP Simulator.
+															Welcome to <strong>{{ appTitle }}</strong>.
 															<br>
 															Click Button Below to Skip and Continue.
 														</p>
@@ -261,6 +261,9 @@ export default {
 		isLoading() {
 			return this.$store.getters.isLoading
 		},
+		appTitle() {
+			return this?.refData?.title || 'IHP Simulator'
+		},
     appMode() {
 			return this.$store.getters?.appMode
 		},
@@ -317,6 +320,9 @@ export default {
 		},
 		redirectURL() {
 			return this.$store.getters?.redirectURL
+		},
+		refData() {
+			return this.$store.getters?.refData
 		}
 	},
 	watch: {

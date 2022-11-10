@@ -289,9 +289,25 @@ export default {
 	watch: {
 		isClipboardVisible(to) {
 			if (to) this.setDefaultView()
+		},
+		isGuruIntroComplete(to) {
+			if (to) {
+				this.$el.querySelector('#patientVideo').play()
+				this.$el.querySelector('#patientVideo').muted = false
+				this.toggleView('profile')
+			}
+		},
+		isPatientIntroComplete(to) {
+			if (to) this.toggleView('findings')
 		}
 	},
 	computed: {
+		isGuruIntroComplete() {
+			return this.$store.getters.isGuruIntroComplete
+		},
+		isPatientIntroComplete() {
+			return this.$store.getters.isPatientIntroComplete
+		},
 		isClipboardVisible() {
 			return this.$store.getters.isClipboardVisible
 		},
@@ -321,7 +337,8 @@ export default {
 		}
 	},
 	mounted() {
-		if (!this.$store.getters.isPatientIntroComplete) {
+		if (!this.$store.getters.isPatientIntroComplete
+		&& this.$store.getters.isGuruIntroComplete) {
 			setTimeout(() => {
 				this.$el.querySelector('#patientVideo').play()
 				this.$el.querySelector('#patientVideo').muted = false
@@ -331,7 +348,7 @@ export default {
 	},
   methods: {
 		setDefaultView() {
-			if (!this.$store.getters.isPatientIntroComplete)  this.toggleView('profile')
+			if (!this.$store.getters.isPatientIntroComplete && this.$store.getters.isGuruIntroComplete) this.toggleView('profile')
 			else this.toggleView('findings')
 		},
 		onVideoPlay() {

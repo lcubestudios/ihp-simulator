@@ -47,9 +47,6 @@
 								></router-view>
 								<PageGuruIntro 
 									v-if="!isGuruIntroComplete" 
-									:class="{
-										'opacity-0': !isPatientIntroComplete
-									}"
 								/>
 								<CmeInfo />
 								<ReferenceData />
@@ -105,15 +102,13 @@
 									<PageGuruIntro 
 										v-if="!isGuruIntroComplete" 
 										:class="{
-											'above': isPatientIntroComplete && !isGuruIntroComplete,
-											'below': !isPatientIntroComplete,
-											'opacity-0': !isPatientIntroComplete
+											'above': !isGuruIntroComplete,
 										}"
 									/>
 									<PageSidebar 
 										:class="{
-											'above': !isPatientIntroComplete,
-											'below': isPatientIntroComplete && !isGuruIntroComplete,
+											'above': isGuruIntroComplete && !isPatientIntroComplete,
+											'below': !isGuruIntroComplete,
 										}" 
 									/>
 									<GuruResponse 
@@ -138,15 +133,15 @@
 													class="d-flex flex-column gap-2.5 pa-0"
 												>
 													<div class="text-center">
-														<p v-if="!isPatientIntroComplete">
-															Review Patient Information in Sidebar
-															<br>
-															Click Button Below to Continue.
-														</p>
-														<p v-if="isPatientIntroComplete && !isGuruIntroComplete">
-															Questions Will Begin Once Video Ends.
+														<p v-if="!isGuruIntroComplete">
+															Welcome to IHP Simulator.
 															<br>
 															Click Button Below to Skip and Continue.
+														</p>
+														<p v-if="isGuruIntroComplete && !isPatientIntroComplete">
+															Review Patient Information before Continuing to Questions.
+															<br>
+															Click Button Below to Continue.
 														</p>
 													</div>
 													<div>
@@ -396,19 +391,22 @@ export default {
 				}
 			}
 			else {
-				viewType = !this.isPatientIntroComplete
-					? 'patient-intro'
-					: !this.isGuruIntroComplete
+				viewType = !this.isGuruIntroComplete
 					? 'guru-intro'
+					: !this.isPatientIntroComplete
+					? 'patient-intro'
 					:  null
 
-				if (viewType === 'patient-intro') {
+				console.log(viewType)
+
+				if (viewType === 'guru-intro') {
+					await this.$store.dispatch('completeGuruIntro')
+					this.$store.dispatch('setContinueButtonText')
+				}
+				else if (viewType === 'patient-intro') {
 					await this.$store.dispatch('completePatientIntro')
 					this.$el.querySelector('#patientVideo').pause()
 					this.$store.dispatch('setContinueButtonText')
-				}
-				else if (viewType === 'guru-intro') {
-					await this.$store.dispatch('completeGuruIntro')
 				}
 			}
 		},

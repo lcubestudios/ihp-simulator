@@ -12,7 +12,7 @@
 			:class="{ 
 				'opacity-0': !isPatientIntroComplete || !isGuruIntroComplete,
 				'pointer-events-none': !isPatientIntroComplete || !isGuruIntroComplete,
-				'pointer-events-initial': isPatientIntroComplete || isGuruIntroComplete,
+				'pointer-events-initial': isPatientIntroComplete,
 			}"
 			@click="toggleClipboard"
 		>
@@ -115,6 +115,22 @@ export default {
 				}, 100)
 			}
 		},
+		isGuruIntroComplete(to) {
+			if (to && !this.isPatientIntroComplete) {
+				this.$store.dispatch('showClipboard')
+				setTimeout(() => {
+					const wrap = this.$el.closest("[class*=\"-container\"]");
+					const body = wrap
+						.querySelector(".page-body")
+						.querySelector(".v-card");
+					const handle = this.$el.querySelector(".clipboard-handle");
+
+					this.gsap.set(body, {
+						paddingTop: handle.offsetHeight
+					});
+				}, 100)
+			}
+		},
 		isActive(to) {
 			if (to) this.showClipboard()
 			else this.hideClipboard()
@@ -137,7 +153,7 @@ export default {
 				paddingTop: handle.offsetHeight
 			});
 
-			if (this.isActive || !this.isPatientIntroComplete) {
+			if (this.isActive || (!this.isPatientIntroComplete && this.isGuruIntroComplete)) {
 				this.$store.dispatch('showClipboard')
 				if (this.isActive) this.showClipboard()
 			}

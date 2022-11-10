@@ -271,17 +271,17 @@ export default {
 				}
 			}
 			else {
-				viewType = !this.isPatientIntroComplete
-					? 'patient-intro'
-					: !this.isGuruIntroComplete
+				viewType = !this.isGuruIntroComplete
 					? 'guru-intro'
+					: !this.isPatientIntroComplete
+					? 'patient-intro'
 					:  null
-				if (viewType === 'patient-intro') {
+				if (viewType === 'guru-intro') {
+					await this.$store.dispatch('completeGuruIntro')
+				}
+				else if (viewType === 'patient-intro') {
 					await this.$store.dispatch('completePatientIntro')
 					this.$el.querySelector('#patientVideo').pause()
-				}
-				else if (viewType === 'guru-intro') {
-					await this.$store.dispatch('completeGuruIntro')
 				}
 			}
 		},

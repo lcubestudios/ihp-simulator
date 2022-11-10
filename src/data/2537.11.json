@@ -1,0 +1,168 @@
+{
+	"jobnum": "",
+	"guru_intro_video_url": "",
+	"guru_intro_video_thumbnail": "",
+	"references": "",
+	"learning_objectives": "",
+	"patient_information": {
+		"patient_image_url": "",
+		"patient_video_url": "",
+		"patient_video_thumbnail": "",
+		"profile": [
+			{
+				"label": "",
+				"value": ""
+			},{
+				"label": "",
+				"value": ""
+			},{
+				"label": "",
+				"value": ""
+			}
+		],
+		"vitals": [
+			{ 
+				"label": "", 
+				"value": ""
+			},{ 
+				"label": "", 
+				"value": "",
+				"other": [
+					{
+						"label": "",
+						"value": ""
+					},{
+						"label": "",
+						"value": ""
+					},{
+						"label": "",
+						"value": ""
+					}
+				]
+			},{ 
+				"label": "", 
+				"value": "",
+				"other": [
+					{
+						"label": "",
+						"value": ""
+					},{
+						"label": "",
+						"value": ""
+					}
+				]
+			},{ 
+				"label": "",
+				"other": [
+					{
+						"label": "",
+						"value": ""
+					},{
+						"label": "",
+						"value": ""
+					},{
+						"label": "",
+						"value": ""
+					},{
+						"label": "",
+						"value": ""
+					}
+				]
+			}
+		],
+		"key_findings": [
+			"The physical examination revealed diffuse rales and overall distant breath sounds.",
+			"The patient appeared cachectic and of low weight, with a BMI of 17.8.",
+			"There was trace bilateral edema in his ankles.",
+			"Otherwise the examination was normal."
+		],
+		"medical_history": {
+			"description": "",
+			"data": [
+				{
+					"label": "",
+					"value": [
+						{
+							"label": "",
+							"value": ""
+						},
+						{
+							"label": "",
+							"value": ""
+						}
+					]
+				},
+				{
+					"label": "",
+					"value": ""
+				},
+				{
+					"label": "",
+					"value": ""
+				}
+			]
+		},
+		"physical_exams": {
+			"description": null,
+			"data": [
+				{
+					"label": "",
+					"value": ""
+				},
+				{
+					"label": "",
+					"value": ""
+				}
+			]
+		}
+	},
+	"stages": [
+		{
+			"id": 0,
+			"order": 0,
+			"name": "",
+			"type": "",
+			"questions": [
+				{
+					"id": 0,
+					"question": "",
+					"type": "",
+					"correct_video_url": "",
+					"incorrect_video_url": "",
+					"choices": [
+						{
+							"choice_id": 0,
+							"choice_text": "",
+							"choice_order": 0,
+							"choice_value": 0,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": {
+								"description": "",
+								"result": {
+									"text": "",
+									"image_url": ""
+								}
+							}
+						}
+					],
+					"feedback": null
+				}
+			]
+		},
+		{
+			"id": 0,
+			"order": 0,
+			"name": "Feedback",
+			"type": "info",
+			"content": ""
+		},
+		{
+			"id": 0,
+			"order": 0,
+			"name": "Conclusion",
+			"type": "info",
+			"content": ""
+		}
+	]
+}

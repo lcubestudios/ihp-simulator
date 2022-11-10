@@ -240,7 +240,6 @@ export default {
 		} 
 	},
 	mounted() {
-		console.log(this.$store.getters?.refData?.cme_information)
 		if (this.isCmeInfoVisible) this.showCmeInfo()
 		else this.hideCmeInfo()
 	},

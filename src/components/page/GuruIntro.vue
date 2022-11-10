@@ -63,24 +63,9 @@ export default {
 			return this.$store.getters?.refData?.guru_intro_video_thumbnail
 		}
 	},
-	watch: {
-		isPatientIntroComplete(to) {
-			if (to && !this.isGuruIntroComplete) {
-				setTimeout(() => {
-					this.$el.querySelector('video').play()
-					setTimeout(() => {
-						this.$el.querySelector('video').muted = false
-					}, 500)
-				}, 150)
-			}
-		},
-		isGuruIntroComplete(to) {
-			if (to) console.log('hide guru intro')
-		}
-	},
 	mounted() {
 		setTimeout(() => {
-			if (this.isPatientIntroComplete && !this.isGuruIntroComplete) {
+			if (!this.isGuruIntroComplete) {
 					this.$el.querySelector('video').play()
 					setTimeout(() => {
 						this.$el.querySelector('video').muted = false

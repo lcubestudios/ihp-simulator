@@ -221,17 +221,22 @@ const actions = {
 	setPatientIntroComplete({ commit }, val) {
 		commit('setPatientIntroComplete', val)
 	},
-	completePatientIntro({ dispatch }) {
+	completePatientIntro({ state, dispatch }) {
 		const progress = Object.assign(
 			JSON.parse(Cookies.get('ihp_progress')), 
 			{ isPatientIntroComplete: true }
 		)
 
+		console.log('complete patient')
+
 		dispatch('setProgress', progress)
 		dispatch('setPatientIntroComplete', true)
+		dispatch('setCurrStage', 0)
+		dispatch('setCurrView', 0)
+		dispatch('updateProgress')
 		dispatch('submitAnalytics', {
 			event: 'View',
-			label: `Guru Introduction`,
+			label: `stage ${ state.stages[0].id } | group ${ state.stages[0].questions[0].id }`,
 			metavalue: `${ location.href } | IHP Simulator | View`,
 		})
 	},
@@ -247,20 +252,17 @@ const actions = {
 	setGuruIntroComplete({ commit }, val) {
 		commit('setGuruIntroComplete', val)
 	},
-	completeGuruIntro({ state, dispatch }) {
+	completeGuruIntro({ dispatch }) {
 		const progress = Object.assign(
 			JSON.parse(Cookies.get('ihp_progress')), 
 			{ isGuruIntroComplete: true }
 		)
 
-		dispatch('setCurrStage', 0)
-		dispatch('setCurrView', 0)
 		dispatch('setProgress', progress)
 		dispatch('setGuruIntroComplete', true)
-		dispatch('updateProgress')
 		dispatch('submitAnalytics', {
 			event: 'View',
-			label: `stage ${ state.stages[0].id } | group ${ state.stages[0].questions[0].id }`,
+			label: `Guru Introduction`,
 			metavalue: `${ location.href } | IHP Simulator | View`,
 		})
 	},
@@ -342,8 +344,6 @@ const actions = {
 							...caseData,
 							cme_information: cmeInfo?.cme
 						}
-
-						console.log(output)
 	
 						commit('setStages', output.stages)
 						return output
@@ -483,19 +483,19 @@ const actions = {
 			// Store progress
 			await dispatch('setProgress', progress)
 			// View Analytics
-			// Patient analytics
-			if (!progress.isPatientIntroComplete) {
-				dispatch('submitAnalytics', {
-					event: 'View',
-					label: `Patient Introduction`,
-					metavalue: `${ location.href } | IHP Simulator | View`,
-				})
-			}
 			// Guru analytics
-			else if (!progress.isGuruIntroComplete) {
+			if (!progress.isGuruIntroComplete) {
 				dispatch('submitAnalytics', {
 					event: 'View',
 					label: `Guru Introduction`,
+					metavalue: `${ location.href } | IHP Simulator | View`,
+				})
+			}
+			// Patient analytics
+			else if (!progress.isPatientIntroComplete) {
+				dispatch('submitAnalytics', {
+					event: 'View',
+					label: `Patient Introduction`,
 					metavalue: `${ location.href } | IHP Simulator | View`,
 				})
 			}
@@ -598,10 +598,10 @@ const actions = {
 		totalGroup = state.stages[state.currStage].type === 'question'
 			? state.stages[state.currStage]?.questions.length
 			: 1
-		const type = !state.isPatientIntroComplete
-			? 'patient-intro'
-			: !state.isGuruIntroComplete
+		const type = !state.isGuruIntroComplete
 			? 'guru-intro'
+			: !state.isPatientIntroComplete
+			? 'patient-intro'
 			: state.progress.stages.findIndex((stage) => stage.view === state.currView) + 1 === state.progress.stages.length
 				? 'end'
 				: state.progress.stages.filter((stage) => stage.view === state.currView)[0].type === 'question'
@@ -609,7 +609,7 @@ const actions = {
 						? 'feedback'
 						: state.progress.stages.filter((stage) => stage.view === state.currView)[0].type
 
-		const val = type === 'guru-intro'
+		const val = type === 'patient-intro'
 			? 'Continue to ' + state.stages[0].name
 			: type === 'question'
 				? 'Submit ' + state.stages[state.currStage].name + (

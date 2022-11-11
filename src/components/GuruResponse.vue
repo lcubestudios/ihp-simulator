@@ -68,7 +68,8 @@ export default {
 	name: 'PageGuruIntro',
 	data() {
 		return {
-			isVideoPlaying: false
+			isVideoPlaying: false,
+			script: null
 		}
 	},
 	computed: {
@@ -98,9 +99,6 @@ export default {
 		},
 		view() {
 			return this.$store.getters.currView
-		},
-		script() {
-			return null
 		}
 	},
 	mounted() {
@@ -132,13 +130,20 @@ export default {
 				const correctChoices = question.choices ? question?.choices.filter((choice) => choice.choice_is_correct)?.length : null
 				let videoURL
 
-				if (correctAnswers === correctChoices) videoURL = question?.correct_video_url.replace(/\{\{CORRECT_VIDEO\}\}/gi, 'global/guru-spot-on.mp4')
-				else videoURL = question?.incorrect_video_url.replace(/\{\{INCORRECT_VIDEO\}\}/gi, 'global/guru-not-quite.mp4')
+				if (correctAnswers === correctChoices) {
+					videoURL = question?.correct_video_url.replace(/\{\{CORRECT_VIDEO\}\}/gi, 'global/guru-spot-on.mp4')
+					this.script = question?.correct_video_text
+				}
+				else {
+					videoURL = question?.incorrect_video_url.replace(/\{\{INCORRECT_VIDEO\}\}/gi, 'global/guru-not-quite.mp4')
+					this.script = question?.incorrect_video_text
+				}
 
 				this.$store.dispatch('setGuruResponseURL', videoURL)
 			}
 			else {
 				this.$store.dispatch('setGuruResponseURL', null)
+				this.script = null
 			}
 		},
 		onVideoPlay() {

@@ -9,7 +9,7 @@
 		<v-card class="h-100 gray6-bg overflow-hidden">
 			<div class="h-100 d-flex flex-column white-bg">
 				<header class="primary-light-bg d-flex flex-row justify-content-between align-items-center pl-2.5">
-					<h4 class="primary-color ma-0">Your Progress</h4>
+					<h4 class="primary-color ma-0">My Progress</h4>
 					<v-btn 
 						class="primary-color ma-2"
 						icon 

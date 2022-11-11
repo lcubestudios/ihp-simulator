@@ -39,7 +39,7 @@
 					view-id="1"
 					@click="goToSidebarView(1)"
 				>
-					Your Progress
+					My Progress
 				</v-btn>
 				<v-btn 
 					class="toggle-sidebar"

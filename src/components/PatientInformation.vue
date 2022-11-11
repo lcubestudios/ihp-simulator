@@ -95,10 +95,11 @@
 					>
 						<v-container>
 							<v-row 
+								v-if="introduction"
 								class="mb-4"
 								no-gutters
 							>
-								<p class="pa-0 ma-0">Hi, I'm Pete. I'm 69. I've had COPD for a while, but now I'm feeling worse. I'm always out of breath and I've lost a lot of weight. Please help me!</p>
+								<p class="pa-0 ma-0">{{ introduction }}</p>
 							</v-row>
 							<v-row 
 								class="mb-4"
@@ -322,6 +323,9 @@ export default {
 		},
 		vitals() {
 			return this?.info?.vitals
+		},
+		introduction() {
+			return this?.info?.introduction
 		},
 		profile() {
 			return this?.info?.profile

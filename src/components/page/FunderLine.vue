@@ -4,7 +4,7 @@
 			<v-col cols="12">
 				<div class="w-100 d-flex flex-row flex-nowrap justify-content-between align-items-center gap-2.5">
 					<div 
-						class="pa-2.5 fex-grow-1"
+						class="pa-2.5 flex-grow-1"
 					>
 						<div class="funder-line" v-html="funderLine"></div>
 					</div>
@@ -61,7 +61,7 @@ export default {
 <style lang="scss">
 .funder-line {
 	p {
-		font-size: 10px !important;
+		font-size: 12px !important;
 		&:last-child { margin-bottom: 0 !important; }
 	}
 }

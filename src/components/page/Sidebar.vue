@@ -16,7 +16,7 @@
 			class="h-100 d-flex flex-column"
 		>
 			<div class="height-60 d-flex align-items-center primary-light-bg rounded-0 pa-2.5 primary-color">
-				<h3 class="font-18 ma-0">Your Progress</h3>
+				<h3 class="font-18 ma-0">My Progress</h3>
 			</div>
 			<div class="flex-grow-1 d-flex flex-column pt-2">
 				<PageProgressMenu />

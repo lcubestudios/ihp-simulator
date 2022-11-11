@@ -71,12 +71,7 @@
 				]
 			}
 		],
-		"key_findings": [
-			"The physical examination revealed diffuse rales and overall distant breath sounds.",
-			"The patient appeared cachectic and of low weight, with a BMI of 17.8.",
-			"There was trace bilateral edema in his ankles.",
-			"Otherwise the examination was normal."
-		],
+		"key_findings": [],
 		"medical_history": {
 			"description": "",
 			"data": [
@@ -129,7 +124,9 @@
 					"question": "",
 					"type": "",
 					"correct_video_url": "",
+					"correct_video_text": "",
 					"incorrect_video_url": "",
+					"incorrect_video_text": "",
 					"choices": [
 						{
 							"choice_id": 0,

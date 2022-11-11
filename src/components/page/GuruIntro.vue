@@ -29,12 +29,12 @@
 					</v-btn>
 				</div>
 			</div>
-			<div class="pa-4">
+			<div v-if="script" class="pa-4">
 				<v-card
 					class="secondary-light-bg pa-4"
 					:elavation="2"
 				>
-					<p class="ma-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>
+					<p class="ma-0">{{ script }}</p>
 				</v-card>
 			</div>
 		</div>
@@ -61,6 +61,9 @@ export default {
 		},
 		thumbnail() {
 			return this.$store.getters?.refData?.guru_intro_video_thumbnail
+		},
+		script() {
+			return this.$store.getters?.refData?.guru_intro_video_text
 		}
 	},
 	mounted() {

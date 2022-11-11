@@ -139,7 +139,7 @@
 															Click Button Below to Skip and Continue.
 														</p>
 														<p v-if="isGuruIntroComplete && !isPatientIntroComplete">
-															Review Patient Information before Continuing to Questions.
+															Review <strong>Patient Information</strong>.
 															<br>
 															Click Button Below to Continue.
 														</p>

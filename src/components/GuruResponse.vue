@@ -51,12 +51,12 @@
 					</v-btn>
 				</div>
 			</div>
-			<div v-if="appMode === 'desktop'" class="pa-4">
+			<div v-if="script && appMode === 'desktop'" class="pa-4">
 				<v-card
 					class="secondary-light-bg pa-4"
 					:elavation="2"
 				>
-					<p class="ma-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>
+					<p class="ma-0">{{ script }}</p>
 				</v-card>
 			</div>
 		</div>
@@ -98,6 +98,9 @@ export default {
 		},
 		view() {
 			return this.$store.getters.currView
+		},
+		script() {
+			return null
 		}
 	},
 	mounted() {

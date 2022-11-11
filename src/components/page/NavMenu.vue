@@ -6,9 +6,9 @@
 		transition="dialog-top-transition"
 		class="nav-menu"
 	>
-		<v-card class="h-100 gray6-bg text-right">
+		<v-card class="h-100 gray6-bg">
 			<div class="h-100 primary-light-bg">
-				<header>
+				<header class="text-right">
 					<v-btn 
 						class="primary-color ma-2"
 						icon 
@@ -24,7 +24,7 @@
 							class="text-dark font-18" text
 							@click="showTOC"
 						>
-							Your Progress
+							My Progress
 						</v-btn>
 					</div>
 					<div>

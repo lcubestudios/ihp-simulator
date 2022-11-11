@@ -2,7 +2,7 @@
   <div class="z_index pa-0">
 		<v-toolbar class="radious-header shadow-none">
 			<div class="brand h-100 d-flex flex-row gap-2.5">
-				<img class="h-100" src="https://secureapi.atpoc.com/cdn/assets/production/suite-library/pik-icon.png" />
+				<img class="h-100" src="https://secureapi.atpoc.com/cdn/assets/production/suite-library/pik-icon.png" @click="restart"/>
 				<span class="w-1px h-100 gray6-bg"></span>
 				<img class="h-100" src="https://secureapi.atpoc.com/cdn/assets/production/suite-library/ihp-logo.png" />
 			</div>
@@ -53,19 +53,6 @@
 					@click="goToSidebarView(2)"
 				>
 					Referrences
-				</v-btn>
-				<v-btn 
-					class="toggle-sidebar"
-					:class="{
-						'gray8-color': currSidebarView !== 2,
-						'primary-color': currSidebarView === 2,
-						'pointer-events-none': currSidebarView === 2,
-					}"
-					text
-					view-id="2"
-					@click="restart"
-				>
-					Restart
 				</v-btn>
 			</div>
 		</v-toolbar>

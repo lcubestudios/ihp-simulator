@@ -61,14 +61,6 @@
 					<div>
 						<v-btn
 							class="text-dark font-18" text
-							@click="restart"
-						>
-							Restart
-						</v-btn>
-					</div>
-					<div>
-						<v-btn
-							class="text-dark font-18" text
 							@click="userLogout"
 						>
 							Log Out
@@ -107,9 +99,6 @@ export default {
 		},
 		showReferenceData() {
 			this.$store.dispatch('showReferenceData')
-		},
-		restart() {
-			this.$store.dispatch('restartCase')
 		}
 	}
 }

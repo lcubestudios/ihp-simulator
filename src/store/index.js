@@ -811,13 +811,11 @@ const actions = {
 	},
 	async restartCase({ state, dispatch }) {
 		const { 
-			isGuruIntroComplete,
-			isPatientIntroComplete,
 			stages
 		} = state.progress
 		const output = {
-			isGuruIntroComplete,
-			isPatientIntroComplete,
+			isGuruIntroComplete: false,
+			isPatientIntroComplete: false,
 			stages: stages.map((stage) => {
 				stage.isCompleted = false
 				if (stage.type === 'question') stage.answers = []

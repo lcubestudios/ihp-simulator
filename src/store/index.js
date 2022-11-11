@@ -285,7 +285,7 @@ const actions = {
 		if (val) {
 			await axios.get(`https://secureapi.atpoc.com/api-suite/8.2/profile?token=${ val }`)
 				.then((res) => {
-					Cookies.set('ihp_user_token', val)
+					Cookies.set('ihp_user_token', val, { expires: 0.25 })
 					dispatch('setUserProfile', res?.data?.personal)
 					dispatch('setAuth', true)
 				})
@@ -359,7 +359,7 @@ const actions = {
 	createSessionId({ state }) {
 		const sessionId = Date.now() + '.' + state.userToken
 
-		Cookies.set('ihp_session_id', sessionId)
+		Cookies.set('ihp_session_id', sessionId, { expires: 1 })
 		return sessionId
 	},
 	setSessionId({ commit }, val) {
@@ -420,7 +420,7 @@ const actions = {
 		return progress
 	},
 	async setProgress({ dispatch, commit }, val) {
-		Cookies.set('ihp_progress', JSON.stringify(val))
+		Cookies.set('ihp_progress', JSON.stringify(val), { expires: 1 })
 		commit('setProgress', val)
 		const progress = val
 
@@ -808,7 +808,35 @@ const actions = {
 	},
 	setGuruResponseURL({ commit }, val) {
 		commit('setGuruResponseURL', val)
-	} 
+	},
+	async restartCase({ state, dispatch }) {
+		const { 
+			isGuruIntroComplete,
+			isPatientIntroComplete,
+			stages
+		} = state.progress
+		const output = {
+			isGuruIntroComplete,
+			isPatientIntroComplete,
+			stages: stages.map((stage) => {
+				stage.isCompleted = false
+				if (stage.type === 'question') stage.answers = []
+				return stage
+			})
+		}
+
+		await dispatch('isLoading')
+		
+		dispatch('hideLightBox')
+		dispatch('hideNavMenu')
+		dispatch('hideReferenceData')
+		dispatch('hideCmeInfo')
+		if (state.isPatientIntroComplete) dispatch('hideClipboard')
+		dispatch('hideTOC')
+
+		await dispatch('setProgress', output)
+		location.reload()
+	}
 }
 
 const getters = {

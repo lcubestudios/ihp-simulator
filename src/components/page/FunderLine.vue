@@ -4,12 +4,12 @@
 			<v-col cols="12">
 				<div class="w-100 d-flex flex-row flex-nowrap justify-content-between align-items-center gap-2.5">
 					<div 
-						class="pa-2.5 flex-grow-1"
+						class="flex-grow-1"
 					>
 						<div class="funder-line" v-html="funderLine"></div>
 					</div>
 					<div
-						class="pa-2.5 menu-box d-flex flex-row flex-sm-row gap-2 align-items-center justify-content-center justify-content-sm-end"
+						class="menu-box d-flex flex-row flex-sm-row gap-2 align-items-center justify-content-center justify-content-sm-end"
 					>
 						<v-btn
 							class="primary-light-bg font-9 text-capitalize fw-bold"
@@ -61,7 +61,7 @@ export default {
 <style lang="scss">
 .funder-line {
 	p {
-		font-size: 12px !important;
+		font-size: 10px !important;
 		&:last-child { margin-bottom: 0 !important; }
 	}
 }

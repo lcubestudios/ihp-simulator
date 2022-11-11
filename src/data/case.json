@@ -339,8 +339,7 @@
 						}
 					],
 					"feedback": null
-				}
-				{
+				}, {
 					"order": 2,
 					"id": 2,
 					"question": "Which treatment would you recommend after initial treatment failure?",

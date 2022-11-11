@@ -54,6 +54,19 @@
 				>
 					Referrences
 				</v-btn>
+				<v-btn 
+					class="toggle-sidebar"
+					:class="{
+						'gray8-color': currSidebarView !== 2,
+						'primary-color': currSidebarView === 2,
+						'pointer-events-none': currSidebarView === 2,
+					}"
+					text
+					view-id="2"
+					@click="restart"
+				>
+					Restart
+				</v-btn>
 			</div>
 		</v-toolbar>
   </div>
@@ -81,6 +94,9 @@ export default {
 		},
 		showNavMenu() {
 			this.$store.dispatch('showNavMenu')
+		},
+		restart() {
+			this.$store.dispatch('restartCase')
 		}
 	},
 };

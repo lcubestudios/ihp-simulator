@@ -247,6 +247,8 @@ export default {
 	mounted() {
 		if (!this.$route.query.jn) this.$store.dispatch('setRedirectURL', `/missing`)
 
+		console.log('stage -', this.$route.query.stage)
+
 		this.setAppMode()
 		this.$store.dispatch('setEnvironment', this.$route.query.jn)
 

@@ -236,6 +236,7 @@ export default {
 	watch: {
 		currView() {
 			this.setView()
+			this.resizeResults()
 			this.$store.dispatch('checkLabs')
 		},
 	},

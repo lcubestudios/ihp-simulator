@@ -3,7 +3,27 @@
 		<div class="position-absolute top-0 left-0 right-0 bottom-0">
 			<div class="w-100 h-100 pa-5 overflow-y-auto">
 				<h2 v-if="showTitle" class="primary-color">References</h2>
-				<div v-if="data" v-html="data"></div>
+				<ol 
+					v-if="references && references.length > 0"
+					class="reference-list"
+				>
+					<li
+						v-for="(reference, reference_ndx) in references"
+						:key="reference_ndx"
+					>
+						<p>
+							{{ reference.title }} 
+							<a 
+								v-if="reference.href"
+								:href="reference.href"
+								target="_blank"
+								rel="noreferrer no follow"
+							>
+								{{ reference.link_text || reference.href }}
+							</a>
+						</p>
+					</li>
+				</ol>
 			</div>
 		</div>
 	</section>
@@ -13,7 +33,7 @@
 export default {
 	name: 'ReferenceContent',
 	computed: {
-		data() {
+		references() {
 			return this.$store.getters?.refData?.references
 		},
 	},

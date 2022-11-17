@@ -138,6 +138,7 @@ export default {
 						&& stage.group === this.group
 						&& stage.type === 'question'
 				)[0]
+				.answers[0]
 				.choice_order
 		}
 	},

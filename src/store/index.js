@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+// import testData from '@/data'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ const state = () => {
 		isSubmitLoading: false,
 		isPatientIntroComplete: false,
 		isGuruIntroComplete: false,
+		isGuruIntroVisible: false,
 		appMode: 'desktop',
 		isAuth: false,
 		userToken: null,
@@ -60,6 +62,9 @@ const mutations = {
 	},
 	setGuruIntroComplete(state, val) {
 		state.isGuruIntroComplete = val
+	},
+	setGuruIntroVisible(state, val) {
+		state.isGuruIntroVisible = val
 	},
 	setAuth(state, val) {
 		state.isAuth = val
@@ -223,7 +228,7 @@ const actions = {
 	},
 	completePatientIntro({ state, dispatch }) {
 		const progress = Object.assign(
-			JSON.parse(Cookies.get('ihp_progress')), 
+			JSON.parse(Cookies.get(`ihp_progress_${ state.refData.jobnum }`)), 
 			{ isPatientIntroComplete: true }
 		)
 
@@ -240,9 +245,9 @@ const actions = {
 			metavalue: `${ location.href } | IHP Simulator | View`,
 		})
 	},
-	resetPatientIntro({ dispatch }) {
+	resetPatientIntro({ state, dispatch }) {
 		const progress = Object.assign(
-			JSON.parse(Cookies.get('ihp_progress')), 
+			JSON.parse(Cookies.get(`ihp_progress_${ state.refData.jobnum }`)), 
 			{ isPatientIntroComplete: false }
 		)
 
@@ -252,28 +257,38 @@ const actions = {
 	setGuruIntroComplete({ commit }, val) {
 		commit('setGuruIntroComplete', val)
 	},
-	completeGuruIntro({ dispatch }) {
+	completeGuruIntro({ state, dispatch }) {
 		const progress = Object.assign(
-			JSON.parse(Cookies.get('ihp_progress')), 
+			JSON.parse(Cookies.get(`ihp_progress_${ state.refData.jobnum }`)), 
 			{ isGuruIntroComplete: true }
 		)
 
 		dispatch('setProgress', progress)
 		dispatch('setGuruIntroComplete', true)
+		dispatch('setContinueButtonText')
 		dispatch('submitAnalytics', {
 			event: 'View',
 			label: `Guru Introduction`,
 			metavalue: `${ location.href } | IHP Simulator | View`,
 		})
 	},
-	resetGuruIntro({ dispatch }) {
+	resetGuruIntro({ state, dispatch }) {
 		const progress = Object.assign(
-			JSON.parse(Cookies.get('ihp_progress')), 
+			JSON.parse(Cookies.get(`ihp_progress_${ state.refData.jobnum }`)), 
 			{ isGuruIntroComplete: false }
 		)
 
 		dispatch('setProgress', progress)
 		dispatch('setGuruIntroComplete', false)
+	},
+	setGuruIntroVisible({ commit }, val) {
+		commit('setGuruIntroComplete', val)
+	},
+	showGuruIntro({ dispatch }) {
+		dispatch('setGuruIntroVisible', true)
+	},
+	hideGuruIntro({ dispatch }) {
+		dispatch('setGuruIntroVisible', false)
 	},
 	setAuth({ commit }, val) {
 		commit('setAuth', val)
@@ -326,11 +341,13 @@ const actions = {
 					dispatch('setRedirectURL', `/invalid/?jn=${ jobnum }`)
 				})
 			const getCaseData = await axios
-				.get(`https://cdn.atpoc.com/cdn/ihp/${ jobnum }/case.json`)
+				.get(`https://cdn.atpoc.com/cdn/ihp/${ jobnum }/${ jobnum }-case.json`)
 				.then((res) => { return res.data })
 				.catch(() => {
 					dispatch('setRedirectURL', `/invalid/?jn=${ jobnum }`)
 				})
+			// const getCmeInfo = {}
+			// const getCaseData = testData[jobnum]
 	
 			return await Promise.all([
 					getCmeInfo,
@@ -419,8 +436,8 @@ const actions = {
 
 		return progress
 	},
-	async setProgress({ dispatch, commit }, val) {
-		Cookies.set('ihp_progress', JSON.stringify(val), { expires: 1 })
+	async setProgress({ state, dispatch, commit }, val) {
+		Cookies.set(`ihp_progress_${ state.refData.jobnum }`, JSON.stringify(val), { expires: 1 })
 		commit('setProgress', val)
 		const progress = val
 
@@ -434,7 +451,7 @@ const actions = {
 		dispatch('setLabs', progress.stages)
 	},
 	async updateProgress({ state, dispatch }) {
-		const progress = JSON.parse(Cookies.get('ihp_progress'))
+		const progress = JSON.parse(Cookies.get(`ihp_progress_${ state.refData.jobnum }`))
 		const startIndex = progress.stages
 			.findIndex((stage) => 
 				stage.stage === state.currStage 
@@ -475,8 +492,8 @@ const actions = {
 			// Store session id
 			await dispatch('setSessionId', sessionId)
 			// Check progress
-			progress = Cookies.get('ihp_progress')
-				? JSON.parse(Cookies.get('ihp_progress'))
+			progress = Cookies.get(`ihp_progress_${ state.refData.jobnum }`)
+				? JSON.parse(Cookies.get(`ihp_progress_${ state.refData.jobnum }`))
 				: null
 			// IF no progress -> create progress
 			if (!progress) progress = await dispatch('createProgress')
@@ -539,7 +556,7 @@ const actions = {
 		dispatch('setNavMenuVisible', true)
 		dispatch('hideCmeInfo')
 		dispatch('hideReferenceData')
-		if (state.isPatientIntroComplete) dispatch('hideClipboard')
+		if (state.isPatientIntroComplete || (!state.isGuruIntroComplete && state.isClipboardVisible)) dispatch('hideClipboard')
 		dispatch('hideLightBox')
 		dispatch('hideTOC')
 	},
@@ -706,7 +723,7 @@ const actions = {
 			})
 	},
 	setChoiceLabsRead({ state, dispatch, commit }, id) {
-		const progress = JSON.parse(Cookies.get('ihp_progress'))
+		const progress = JSON.parse(Cookies.get(`ihp_progress_${ state.refData.jobnum }`))
 		
 		progress.stages
 			.filter((stage) => stage.view === state.currView)[0]
@@ -722,7 +739,11 @@ const actions = {
 			? state.stages[state.currStage]
 					.questions[state.currGroup]
 					.choices
-					.filter((choice) => !!choice.choice_labs && !choice.choice_is_labs_read)
+					.filter((choice) => 
+						!!choice.choice_labs 
+						&& !choice.choice_is_labs_read
+						&& choice.choice_is_correct
+					)
 					.length > 0
 			: null
 		
@@ -735,7 +756,7 @@ const actions = {
 		dispatch('hideNavMenu')
 		dispatch('hideReferenceData')
 		dispatch('hideCmeInfo')
-		if (state.isPatientIntroComplete) dispatch('hideClipboard')
+		if (state.isPatientIntroComplete || (!state.isGuruIntroComplete && state.isClipboardVisible)) dispatch('hideClipboard')
 		dispatch('hideTOC')
 	},
 	hideLightBox({ commit }) {
@@ -745,8 +766,8 @@ const actions = {
 	setLightBoxImage({ commit }, val) {
 		commit('setLightBoxImage', val)
 	},
-	goToStage({ dispatch }, val) {
-		const progress = JSON.parse(Cookies.get('ihp_progress'))
+	goToStage({ state, dispatch }, val) {
+		const progress = JSON.parse(Cookies.get(`ihp_progress_${ state.refData.jobnum }`))
 
 		const stage = progress.stages.filter((stage) => stage.stage === val)
 		const incomplete = stage.filter((items) => !items.isCompleted)
@@ -771,7 +792,7 @@ const actions = {
 		dispatch('setCmeInfoVisible', true)
 		dispatch('hideNavMenu')
 		dispatch('hideReferenceData')
-		if (state.isPatientIntroComplete) dispatch('hideClipboard')
+		if (state.isPatientIntroComplete || (!state.isGuruIntroComplete && state.isClipboardVisible)) dispatch('hideClipboard')
 		dispatch('hideLightBox')
 		dispatch('hideTOC')
 	},
@@ -785,7 +806,7 @@ const actions = {
 		dispatch('setReferenceDataVisible', true)
 		dispatch('hideNavMenu')
 		dispatch('hideCmeInfo')
-		if (state.isPatientIntroComplete) dispatch('hideClipboard')
+		if (state.isPatientIntroComplete || (!state.isGuruIntroComplete && state.isClipboardVisible)) dispatch('hideClipboard')
 		dispatch('hideLightBox')
 		dispatch('hideTOC')
 	},
@@ -799,7 +820,7 @@ const actions = {
 		dispatch('setTOCVisible', true)
 		dispatch('hideNavMenu')
 		dispatch('hideCmeInfo')
-		if (state.isPatientIntroComplete) dispatch('hideClipboard')
+		if (state.isPatientIntroComplete || (!state.isGuruIntroComplete && state.isClipboardVisible)) dispatch('hideClipboard')
 		dispatch('hideLightBox')
 		dispatch('hideReferenceData')
 	},
@@ -809,7 +830,7 @@ const actions = {
 	setGuruResponseURL({ commit }, val) {
 		commit('setGuruResponseURL', val)
 	},
-	async restartCase({ state, dispatch }) {
+	async restartSimulator({ state, dispatch }) {
 		const { 
 			stages
 		} = state.progress
@@ -829,7 +850,7 @@ const actions = {
 		dispatch('hideNavMenu')
 		dispatch('hideReferenceData')
 		dispatch('hideCmeInfo')
-		if (state.isPatientIntroComplete) dispatch('hideClipboard')
+		if (state.isPatientIntroComplete || (!state.isGuruIntroComplete && state.isClipboardVisible)) dispatch('hideClipboard')
 		dispatch('hideTOC')
 
 		await dispatch('setProgress', output)
@@ -858,6 +879,9 @@ const getters = {
 	},
 	isGuruIntroComplete(state) {
 		return state.isGuruIntroComplete
+	},
+	isGuruIntroVisible(state) {
+		return state.isGuruIntroVisible
 	},
 	isAuth(state) {
 		return state.isAuth

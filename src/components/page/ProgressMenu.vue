@@ -1,22 +1,47 @@
 <template>
 	<section class="flex-grow-1 d-flex flex-column position-relative">
 		<div class="position-absolute top-0 left-0 bottom-0 right-0">
-			<div class="w-100 h-100 d-flex flex-column justify-content-around overflow-y-auto pa-2.5">
-				<div
-					v-for="(stage, stage_ndx) in stages"
-					:key="stage_ndx"
-					class="toc-item d-flex flex-row gap-2.5 align-items-center"
-					:class="{
-						'active': stage_ndx == activeIndex, 
-						'pointer-events-none': !isPatientIntroComplete && !isGuruIntroComplete,
-						'gray7-color': stage_ndx !== activeIndex && !isCompleted(stage_ndx) && !isPatientIntroComplete && !isGuruIntroComplete,
-						'primary-color': stage_ndx == activeIndex,
-						'black-color': isCompleted(stage_ndx),
-					}"
-					@click="goToStage(stage_ndx)"
-				>
-					<p class="ma-0 font-16">{{ stage.name }}</p>
+			<div class="w-100 h-100 d-flex flex-column">
+				<div class="w-100 flex-grow-1 d-flex flex-column justify-content-around overflow-y-auto pa-2.5">
+					<div
+						v-if="false"
+						class="toc-item d-flex flex-row gap-2.5 align-items-center"
+						:class="{
+							'active': isGuruIntroVisible, 
+							'pointer-events-none': !isPatientIntroComplete && !isGuruIntroComplete,
+							'primary-color': isGuruIntroVisible,
+							'black-color': !isGuruIntroVisible,
+						}"
+						@click="showGuruIntro()"
+					>
+						<p class="ma-0 font-16">Welcome</p>
+					</div>
+					<div
+						v-for="(stage, stage_ndx) in stages"
+						:key="stage_ndx"
+						class="toc-item d-flex flex-row gap-2.5 align-items-center"
+						:class="{
+							'active': !isGuruIntroVisible && stage_ndx == activeIndex, 
+							'pointer-events-none': !isPatientIntroComplete && !isGuruIntroComplete,
+							'gray7-color': stage_ndx !== activeIndex && !isCompleted(stage_ndx) && !isPatientIntroComplete && !isGuruIntroComplete,
+							'primary-color': !isGuruIntroVisible && stage_ndx == activeIndex,
+							'black-color': isCompleted(stage_ndx),
+						}"
+						@click="goToStage(stage_ndx)"
+					>
+						<p class="ma-0 font-16">{{ stage.name }}</p>
+					</div>
 				</div>
+				<footer class="pa-2.5">
+					<v-btn 
+						class="restart-simulator text-white primary-bg font-18 w-100"
+						text
+						view-id="0"
+						@click="restartSimulator"
+					>
+						Restart
+					</v-btn>
+				</footer>
 			</div>
 		</div>
 	</section>
@@ -38,6 +63,9 @@ export default {
 		},
 		isGuruIntroComplete() {
 			return this.$store.getters.isGuruIntroComplete
+		},
+		isGuruIntroVisible() {
+			return this.$store.getters.isGuruIntroVisible
 		}
 	},
 	methods: {
@@ -51,6 +79,12 @@ export default {
 		goToStage(ndx) {
 			this.$store.dispatch('goToStage', ndx)
 			this.hideTOC()
+		},
+		showGuruIntro() {
+			this.$store.dispatch('showGuruIntro')
+		},
+		restartSimulator() {
+			this.$store.dispatch('restartSimulator')
 		}
 	}
 }
@@ -58,7 +92,8 @@ export default {
 
 <style lang="scss" scoped>
 .toc-item {
-	&.active { border-left: none !important; }
+	cursor: pointer;
+	&.active { border-left: none !important; pointer-events: none; cursor: initial; }
 	&::before {
 		content: '';
 		display: inline-block;

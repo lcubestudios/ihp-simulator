@@ -1,83 +1,85 @@
 <template>
-	<div class="result-item d-flex flex-row flex-nowrap gap-2.5">
-		<div>
-			<span class="primary-color font-13 fw-bold">
-				<span v-if="!isAnswered(order) && isCorrect">&ndash;&nbsp;&nbsp;</span>
-				<span v-if="!isAnswered(order) && !isCorrect">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-				<v-icon
-					v-if="isAnswered(order) && isCorrect"
-					size="13"
-					color="#4e9d2d"
-				>mdi-check</v-icon>
-				<v-icon
-					v-if="isAnswered(order) && !isCorrect"
-					size="13"
-					color="#4e9d2d"
-				>mdi-close</v-icon>
-			</span>
-		</div>
-		<div class="flex-grow-1">
-			<div class="d-flex flex-row flex-nowrap align-items-start gap-2.5">
-				<p 
-					class="flex-grow-1 ma-0"
-					:class="{
-						'fw-bold': isCorrect
-					}"
-				>{{ text }}</p>
-				<div class="d-flex flex-row flex-nowrap">
-					<v-btn 
-						v-if="feedback"
-						class="h-auto pa-0 ma-0" 
-						width="28"
-						icon
-						@click="toggleFeedback"
-					>
-						<span>
-							<v-icon
-								size="20"
-								color="#082ecf"
-							>mdi-information-outline</v-icon>
-						</span>
-					</v-btn>
-					<v-btn 
-						v-if="labs"
-						class="h-auto pa-0 ma-0" 
-						width="28"
-						icon
-						@click="toggleLabs"
-					>
-						<span>
-							<v-icon
-								size="20"
-								color="#082ecf"
-							>{{ isLabsRead ? 'mdi-clipboard-check' : 'mdi-clipboard-text' }}</v-icon>
-						</span>
-					</v-btn>
+	<div
+		v-if="!(!isAnswered(order) && !isCorrect)"
+		class="pa-2.5 mb-1/2"
+		:class="{
+			'primary-lighter-bg': isCorrect
+		}"
+	>
+		<div class="result-item d-flex flex-row flex-nowrap gap-2.5">
+			<div>
+				<span class="primary-color font-13 fw-bold">
+					<v-icon
+						v-if="isAnswered(order) && isCorrect"
+						size="13"
+						color="#4e9d2d"
+					>mdi-check</v-icon>
+					<v-icon
+						v-if="(!isAnswered(order) && isCorrect) || (isAnswered(order) && !isCorrect)"
+						size="13"
+						color="#9E1539"
+					>mdi-close</v-icon>
+				</span>
+			</div>
+			<div class="flex-grow-1">
+				<div class="d-flex flex-row flex-nowrap align-items-start gap-2.5">
+					<p 
+						class="flex-grow-1 ma-0"
+						:class="{
+							'fw-bold': isCorrect
+						}"
+					>{{ text }}</p>
+					<div class="d-flex flex-row flex-nowrap">
+						<v-btn 
+							v-if="feedback"
+							class="h-auto pa-0 ma-0" 
+							width="28"
+							icon
+							@click="toggleFeedback"
+						>
+							<span>
+								<v-icon
+									size="20"
+									color="#082ecf"
+								>mdi-information-outline</v-icon>
+							</span>
+						</v-btn>
+						<v-btn 
+							v-if="labs"
+							class="h-auto pa-0 ma-0" 
+							width="28"
+							icon
+							@click="toggleLabs"
+						>
+							<span>
+								<v-icon
+									size="20"
+									color="#082ecf"
+								>{{ isLabsRead ? 'mdi-clipboard-check' : 'mdi-clipboard-text' }}</v-icon>
+							</span>
+						</v-btn>
+					</div>
 				</div>
-			</div>
-			<div 
-				v-if="feedback" 
-				class="result-item-feedback font-12 overflow-hidden"
-			>
-				<div class="pt-2.5" v-html="feedback"></div>
-			</div>
-			<div 
-				v-if="labs"
-				class="result-item-labs font-12 overflow-hidden"
-			>
-				<div class="pt-2.5">
-					<h3 class="font-inherit fw-bold">Labs</h3>
-					<div v-if="labs.description" v-html="labs.description"></div>
-					<div class="labs" v-if="labs.result">
-						<div class="position-relative mb-4" v-if="labs.result.image_url">
-							<img :src="labs.result.image_url" />
-							<div 
-								class="position-absolute top-0 left-0 bottom-0 right-0"
-								@click="showLightBox(labs.result.image_url)"
-							>
+				<div 
+					v-if="feedback" 
+					class="result-item-feedback font-12 overflow-hidden"
+				>
+					<div class="pt-2.5" v-html="feedback"></div>
+				</div>
+				<div 
+					v-if="labs"
+					class="result-item-labs font-12 overflow-hidden"
+				>
+					<div class="pt-2.5">
+						<h3 class="font-inherit fw-bold mb-4">Labs</h3>
+						<div v-if="labs.description" v-html="labs.description"></div>
+						<div class="labs" v-if="labs.result">
+							<div v-if="labs.result.text" v-html="labs.result.text"></div>
+							<div class="position-relative mb-4" v-if="labs.result.image_url">
+								<img :src="labs.result.image_url" />
 							</div>
+							<div v-if="labs.result.reference" v-html="labs.result.reference"></div>
 						</div>
-						<div v-if="labs.result.text" v-html="labs.result.text"></div>
 					</div>
 				</div>
 			</div>
@@ -207,9 +209,6 @@ export default {
 		setChoiceLabsRead() {
 			this.$store.dispatch('setChoiceLabsRead', this.order)
 			this.isLabsRead = true
-		},
-		showLightBox(image_url) {
-			this.$store.dispatch('showLightBox', { image_url })
 		}
 	}
 }

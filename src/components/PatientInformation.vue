@@ -2,6 +2,7 @@
   <div class="tabs-menu d-flex flex-column h-100 w-100">
     <ul class="menu cf">
 			<li
+				v-if="profile"
 				:class="{
 					'active': currView === 'profile'
 				}"
@@ -10,6 +11,7 @@
 				<a class="top-10" v-text="'Profile'"></a>
 			</li>
 			<li
+				v-if="history"
 				:class="{
 					'active': currView === 'history'
 				}"
@@ -18,6 +20,7 @@
 				<a class="top-10" v-text="'History'"></a>
 			</li>
 			<li
+				v-if="physical"
 				:class="{
 					'active': currView === 'physical'
 				}"
@@ -26,6 +29,7 @@
 				<a class="top-10" v-text="'Physical'"></a>
 			</li>
 			<li
+				v-if="vitals"
 				:class="{
 					'active': currView === 'vitals'
 				}"
@@ -34,6 +38,7 @@
 				<a class="top-10" v-text="'Vitals'"></a>
 			</li>
 			<li
+				v-if="tests"
 				class="d-none"
 				:class="{
 					'active': currView === 'tests'
@@ -43,6 +48,7 @@
 				<a class="top-10" v-text="'Tests'"></a>
 			</li>
 			<li
+				v-if="findings"
 				:class="{
 					'active': currView === 'findings'
 				}"
@@ -90,6 +96,7 @@
 			<section class="flex-grow-1 position-relative">
 				<div class="position-absolute top-2.5 left-2.5 bottom-2.5 right-2.5 overflow-y-auto">
 					<div 
+						v-if="profile"
 						v-show="currView === 'profile'"
 						class="patient-profile"
 					>
@@ -99,7 +106,7 @@
 								class="mb-4"
 								no-gutters
 							>
-								<p class="pa-0 ma-0">{{ introduction }}</p>
+								<p class="pa-0 ma-0" v-html="introduction"></p>
 							</v-row>
 							<v-row 
 								class="mb-4"
@@ -117,6 +124,7 @@
 						</v-container>
 					</div>
 					<div 
+						v-if="history"
 						v-show="currView === 'history'"
 						class="medical-history"
 					>
@@ -126,7 +134,7 @@
 								class="mb-4"
 								no-gutters
 							>
-								<p class="pa-0 ma-0">{{ history.description }}</p>
+								<div v-html="history.description"></div>
 							</v-row>
 							<v-row 
 								class="mb-4"
@@ -160,7 +168,7 @@
 
 											</template>
 											<template v-else-if="typeof hist.value === 'string'">
-												<p class="ma-0">{{ hist.value }}</p>
+												<div v-html="hist.value"></div>
 											</template>
 										</v-expansion-panel-content>
 									</v-expansion-panel>
@@ -169,6 +177,7 @@
 						</v-container>
 					</div>
 					<div 
+						v-if="physical"
 						v-show="currView === 'physical'"
 						class="physical-exams"
 					>
@@ -178,7 +187,7 @@
 								class="mb-4"
 								no-gutters
 							>
-								<p class="pa-0 ma-0">{{ physical.description }}</p>
+								<div v-htm="physical.description"></div>
 							</v-row>
 							<v-row 
 								class="mb-4"
@@ -212,7 +221,7 @@
 
 											</template>
 											<template v-else-if="typeof phys.value === 'string'">
-												<p class="ma-0">{{ phys.value }}</p>
+												<div v-html="phys.value"></div>
 											</template>
 										</v-expansion-panel-content>
 									</v-expansion-panel>
@@ -221,6 +230,7 @@
 						</v-container>
 					</div>
 					<div 
+						v-if="vitals"
 						v-show="currView === 'vitals'"
 						class="vitals-sign"
 					>
@@ -245,6 +255,7 @@
 						</v-container>
 					</div>
 					<div 
+						v-if="findings"
 						v-show="currView === 'findings'"
 						class="key-findings"
 					>
@@ -335,6 +346,9 @@ export default {
 		},
 		physical() {
 			return this?.info?.physical_exams
+		},
+		tests() {
+			return this?.info?.tests
 		},
 		findings() {
 			return this?.info?.key_findings

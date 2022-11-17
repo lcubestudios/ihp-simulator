@@ -1,0 +1,426 @@
+{
+	"jobnum": "2539.11",
+	"title": "Treatment Considerations for HR+, HER2- Early Breast Cancer at Higher Risk of Recurrence",
+	"guru_intro_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-intro.mp4",
+	"guru_intro_video_thumbnail": "https://cdn.atpoc.com/cdn/ihp/global/guru-placeholder.png",
+	"guru_intro_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>",
+	"references": [
+		{
+			"title": "Pan H, Gray R, Braybrooke J, et al. 20-Year risks of breast-cancer recurrence after stopping endocrine therapy at 5 years. N Engl J Med. 2017;377:1836-1846."
+		},
+		{
+			"title": " Burstein HJ. Systemic therapy for estrogen receptor-positive, HER2-Negative breast cancer. N Engl J Med. 2020;383:2557-2570."
+		},
+		{
+			"title": " Sheffield KM, Peachey JR, Method M, et al. A real-world US study of recurrence risks using combined clinicopathological features in HR-positive, HER2-negative early breast cancer. Future Oncol. 2022;18:2667-2682."
+		},
+		{
+			"title": " Polewski MD, Nielsen GB, Gu Y, et al. A standardized investigational Ki-67 immunohistochemistry assay used to assess high-risk early breast cancer patients in the monarchE phase 3 clinical study identifies a population with greater risk of disease recurrence when treated with endocrine therapy alone. Appl Immunohistochem Mol Morphol. 2022;30:237-245."
+		},
+		{
+			"title": " Nielsen TO, Leung SCY, Rimm DL, et al. Assessment of Ki67 in breast cancer: updated recommendations from the International Ki67 in Breast Cancer Working Group. J Natl Cancer Inst. 2021;113:808-819."
+		},
+		{
+			"title": " NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines®) for Breast Cancer, V.4.2022. © National Comprehensive Cancer Network, Inc. 2022. All rights reserved. Accessed 10/17/22 at:",
+			"link_text": "www.nccn.org",
+			"href": "https://www.nccn.org"
+		},
+		{
+			"title": " Plichta JK, Ren Y, Thomas SM, et al. Implications for breast cancer restaging based on the 8th Edition AJCC Staging Manual. Ann Surg. 2020;271:169-176."
+		},
+		{
+			"title": "  Brown J, Scardo S, Method M, et al. A real-world retrospective study of the use of Ki-67 testing and treatment patterns in patients with HR+, HER2- early breast cancer in the United States. BMC Cancer. 2022;22:502."
+		},
+		{
+			"title": " Yau C, Osdoit M, van der Noordaa M, et al. Residual cancer burden after neoadjuvant chemotherapy and long-term survival outcomes in breast cancer: a multicentre pooled analysis of 5161 patients. Lancet Oncol. 2022;23:149-160."
+		},
+		{
+			"title": "Abdelsattar JM, Al-Hilli Z, Hoskin TL, Heins CN, Boughey JC. Validation of the CPS + EG Staging System for Disease-Specific Survival in Breast Cancer Patients Treated with Neoadjuvant Chemotherapy. Ann Surg Oncol. 2016;23:3206-3211."
+		},
+		{
+			"title": "Cancer.Net. Topic #3: imaging tests for early-stage breast cancer. Accessed 11/8/2022 at:",
+			"href": "https://www.cancer.net/about-us/collaborations/top-five-list-oncology/choosing-wisely%C2%AE-top-five-cancer-related-tests-procedures-and-treatments-many-patients-do-not-need/topic-3-imaging-tests-early-stage-breast-cancer"
+		},
+		{
+			"title": "Cancer.Net. Electrocardiogram (EKG) and echocardiogram. Accessed 11/8/2022 at:",
+			"href": "https://www.cancer.net/navigating-cancer-care/diagnosing-cancer/tests-and-procedures/electrocardiogram-ekg-and-echocardiogram"
+		},
+		{
+			"title": "Giordano SH, Freedman RA, Somerfield MR. Abemaciclib with endocrine therapy in the treatment of high-risk early breast cancer: ASCO optimal adjuvant chemotherapy and targeted therapy guideline expert panel. J Clin Oncol. 2022;40:307-309."
+		},
+		{
+			"title": "Johnston SRD, Harbeck N, Hegg R, et al. Abemaciclib combined with endocrine therapy for the adjuvant treatment of HR+, HER2-, node-positive, high-risk, early breast cancer (monarchE). J Clin Oncol. 2020;38:3987-3998."
+		},
+		{
+			"title": "Harbeck N, Rastogi P, Martin M, et al. Adjuvant abemaciclib combined with endocrine therapy for high-risk early breast cancer: updated efficacy and Ki-67 analysis from the monarchE study. Ann Oncol. 2021;32:1571-1581."
+		},
+		{
+			"title": "Martin M, Hegg R, Kim SB, et al. Treatment with adjuvant abemaciclib plus endocrine therapy in patients with high-risk early breast cancer who received neoadjuvant chemotherapy: a prespecified analysis of the monarchE randomized clinical trial. JAMA Oncol. 2022;8:1190-1194."
+		},
+		{
+			"title": "Tutt ANJ, Garber JE, Kaufman B, et al. Adjuvant olaparib for patients with BRCA1- or BRCA2-mutated breast cancer. N Engl J Med. 2021;384:2394-2405."
+		},
+		{
+			"title": "Masuda N, Lee SJ, Ohtani S, et al. Adjuvant capecitabine for breast cancer after preoperative chemotherapy. N Engl J Med. 2017;376:2147-2159."
+		},
+		{
+			"title": "Gnant M, Dueck AC, Frantal S, et al. Adjuvant palbociclib for early breast cancer: the PALLAS trial results (ABCSG-42/AFT-05/BIG-14-03). J Clin Oncol. 2022;40:282-293."
+		},
+		{
+			"title": "Association of Community Cancer Centers. Shared decision-making: practical implementation for the oncology team. Accessed 11/8/2022 at: https://www.accc-cancer.org/docs/projects/sdm/shared-decision-making-publication_final.pdf?sfvrsn=994b7f55_0"
+		},
+		{
+			"title": "Agency for Healthcare Research and Quality. The CAHPS ambulatory care improvement guide. Section 6: Strategies for improving patient experience with ambulatory care. July 2017. Accessed 11/8/2022 at:",
+			"href": "https://www.ahrq.gov/sites/default/files/wysiwyg/cahps/quality-improvement/improvement-guide/6-strategies-for-improving/communication/cahps-strategy-section-6-i.pdf"
+		},
+		{
+			"title": "Josfeld L, Keinki C, Pammer C, Zomorodbakhsch B, Hübner J. Cancer patients' perspective on shared decision-making and decision aids in oncology. J Cancer Res Clin Oncol. 2021;147:1725-1732."
+		},
+		{
+			"title": "Verzenio® [package insert]. Indianapolis, IN: Lilly USA, LLC. October 2021. Accessed 11/8/2022 at:",
+			"href": "https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=be4bc0de-0fdc-4d46-8d25-be43c79e6a06&type=display"
+		},
+		{
+			"title": "Rugo HS, O'Shaughnessy J, Boyle F, et al. Adjuvant abemaciclib combined with endocrine therapy for high-risk early breast cancer: safety and patient-reported outcomes from the monarchE study. Ann Oncol. 2022;33:616-627."
+		},
+		{
+			"title": "Lee JL, Dy SM, Gurses AP, Kim JM, et al. Towards a more patient-centered approach to medication safety. J Patient Exp. 2018;5:83-87."
+		},
+		{
+			"title": "Selby P, Popescu R, Lawler M, Butcher H, Costa A. The value and future developments of multidisciplinary team cancer care. Am Soc Clin Oncol Educ Book. 2019;39:332-340."
+		},
+		{
+			"title": "Dang TH, Forkan ARM, Wickramasinghe N, et al. Investigation of intervention solutions to enhance adherence to oral anticancer medicines in adults: overview of reviews. JMIR Cancer. 2022;8:e34833."
+		},
+		{
+			"title": "Finitsis DJ, Vose BA, Mahalak JG, Salner AL. Interventions to promote adherence to endocrine therapy among breast cancer survivors: A meta-analysis. Psycho-Oncology. 2019;28:255-263."
+		},
+		{
+			"title": "Cheung WY. Difficult to swallow: issues affecting optimal adherence to oral anticancer agents. Am Soc Clin Oncol Educ Book. 2013;265-270."
+		}
+	],
+	"learning_objectives": [
+		"Assess patients with early-stage, HR+, HER2- breast cancer for risk of recurrence using recommended protocols.",
+		"Evaluate available clinical data on adjuvant treatment options for patients with early-stage, high-risk, HR+, HER2- breast cancer.",
+		"Provide patients with early-stage, high-risk HR+, HER2- breast cancer on-label adjuvant treatment that considers recent clinical evidence and drug safety and efficacy.",
+		"Implement strategies for improving patient persistence and adherence to oral therapies for early-stage breast cancer.",
+		"Incorporate shared decision-making best practices and tools by engaging in fruitful patient-provider discussions related to risks and benefits of therapy, treatment expectations, and goals.",
+		"Coordinate care and communicate with the multidisciplinary team to help address patient educational needs, and appropriately monitor, recognize, and manage side effects associated with therapy."
+	],
+	"patient_information": {
+		"patient_image_url": "https://cdn.atpoc.com/cdn/ihp/2539.11/assets/2539.11-patient-icon.png",
+		"patient_video_url": "https://cdn.atpoc.com/cdn/ihp/2539.11/assets/patient.mp4",
+		"patient_video_thumbnail": "https://cdn.atpoc.com/cdn/ihp/2539.11/assets/patient-placeholder.png",
+		"introduction": "<p>Hi, my name is Paula, I'm 42. I have stage III breast cancer. I've recently had surgery and radiation. I want to discuss next steps to prevent this cancer from spreading.</p>",
+		"profile": [
+			{
+				"label": "Patient Name",
+				"value": "Paula"
+			},{
+				"label": "Age",
+				"value": "42"
+			},{
+				"label": "Biological Sex",
+				"value": "Female"
+			}
+		],
+		"vitals": [
+			{ 
+				"label": "Temperature", 
+				"value": "98.6° F"
+			},{ 
+				"label": "Respiration", 
+				"value": "14 breaths/minute",
+				"other": [
+					{
+						"label": "rhythm",
+						"value": "regular"
+					},{
+						"label": "effort",
+						"value": "unlabored"
+					},{
+						"label": "SpO2",
+						"value": "98%"
+					}
+				]
+			},{ 
+				"label": "Pulse", 
+				"value": "88 bpm",
+				"other": [
+					{
+						"label": "rhythm",
+						"value": "regular"
+					},{
+						"label": "strength",
+						"value": "normal"
+					}
+				]
+			},{ 
+				"label": "Blood Pressure",
+				"other": [
+					{
+						"label": "left",
+						"value": "142/80 mm Hg"
+					},{
+						"label": "right",
+						"value": "144/82 mm Hg"
+					},{
+						"label": "assessment",
+						"value": "elevated"
+					},{
+						"label": "pulse pressure",
+						"value": "normal"
+					}
+				]
+			}
+		],
+		"key_findings": [
+			"Paula is a patient who comes for additional treatment recommendations to reduce her risk of recurrence",
+			"She is recovered from chemotherapy-related toxicities and from surgery",
+			"She is experiencing mild fatigue but is otherwise doing well",
+			"Extensive review of systems is negative",
+			"On examination, the only relevant finding is a well healed surgical scar with a deflated expander in place in the right chest wall. There is minimal skin erythema. The rest of her examination is negative"
+		],
+		"medical_history": {
+			"description": "<p>Paula is a lovely 42-year-old woman who self-palpated a mass in her right breast and underwent evaluation by her gynecologist. A mammogram and an ultrasound were ordered, and the mammogram revealed a large mass measuring close to 6 cm with associated suspicious calcifications. Ultrasound revealed at least 3 suspicious axillary lymph nodes. The tumor mass was measured to be 6.2 cm x 3.5 cm. Biopsy confirmed an invasive ductal carcinoma grade 3. In addition, there was evidence of lymphovascular invasion (LVI), 80% estrogen receptor (ER) positive, 50% progesterone receptor (PR) positive, and HER2- (0 by IHC) and Ki-67 score 30%. Fine needle aspiration of her lymph nodes was positive for malignancy.</p><p>Paula's genetic evaluation was negative for pathogenic germline mutations. She was not interested in fertility preservation. At the time of presentation, she underwent an extensive review of systems and stated that she had low back pain, which was evaluated with computed tomography (CT) and bone scans; there was no evidence of metastatic disease.</p><p>Paula received neoadjuvant systemic chemotherapy with weekly paclitaxel for 12 cycles and dose-dense doxorubicin and cyclophosphamide for 4 cycles. She experienced typical mild toxicities but did not experience any serious side effects. There was mild reduction in the size of her tumor during chemotherapy, but no change in the size or shape of the lymph nodes. She then underwent a right mastectomy with axillary lymph node dissection. Pathology demonstrated mild treatment effect, and the pathology report indicated a residual tumor measuring 5.5 cm x 3.0 cm with 40% cellularity. Axillary lymph node dissection found 2 of 12 positive axillary nodes, with the largest metastases measuring 1.5 cm.</p><p>She recovered well from surgery and has started her postmastectomy radiation therapy but wants to discuss additional steps in her treatment to reduce risk of recurrence.</p>",
+			"data": [
+				{
+					"label": "Past Medical History",
+					"value": [
+						{
+							"label": "Medical",
+							"value": "<p>Mild asthma as a child, seasonal allergies. Otherwise, negative</p>"
+						},
+						{
+							"label": "Medications (prescribed, OTC)",
+							"value": "<p>Paula takes over-the-counter multivitamins and antihistamines as needed</p>"
+						}
+					]
+				},
+				{
+					"label": "Family History",
+					"value": "<p>Negative</p>"
+				},
+				{
+					"label": "Social History",
+					"value": "<p>Paula is employed as a teacher. She is married with two children aged 5 and 7 years old. Never smoker.</p>"
+				}
+			]
+		}
+	},
+	"stages": [
+		{
+			"id": 1,
+			"order": 1,
+			"name": "Choice of Tests",
+			"type": "question",
+			"questions": [
+				{
+					"id": 1,
+					"question": "Which of the following tests would you recommend for this patient? (multiple choice)",
+					"type": "multichoice",
+					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
+					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>",
+					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
+					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>",
+					"choices": [
+						{
+							"choice_id": 1,
+							"choice_text": "Ki-67 score",
+							"choice_order": 1,
+							"choice_value": 1,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": {
+								"description": null,
+								"result": {
+									"text": "<p>30% (based on pathology reports from initial biopsy and surgical specimen: invasive ductal carcinoma grade 3, evidence of LVI, ER 80%, PR 50%, HER2- (0 by IHC). Invasive residual tumor measured 5.5 cm x 3.0 cm with 40% cellularity. Axillary dissection with 2 of 12 positive axillary nodes, largest metastasis measured 1.5 cm).</p>"
+								}
+							}
+						},
+						{
+							"choice_id": 2,
+							"choice_text": "CT scan",
+							"choice_order": 2,
+							"choice_value": 2,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": {
+								"description": null,
+								"result": {
+									"text": "<p>No evidence of metastatic disease (based on complaint of low back pain at the time of presentation)</p>",
+									"image_url": "https://cdn.atpoc.com/cdn/ihp/2539.11/assets/2539.11_1_1_2.png"
+								}
+							}
+						},
+						{
+							"choice_id": 3,
+							"choice_text": "Echocardiogram",
+							"choice_order": 3,
+							"choice_value": 3,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},
+						{
+							"choice_id": 4,
+							"choice_text": "Bone scintigraphy",
+							"choice_order": 4,
+							"choice_value": 4,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": {
+								"description": null,
+								"result": {
+									"text": "<p>No evidence of metastatic disease (based on complaint of low back pain at the time of presentation)</p>",
+									"image_url": "https://cdn.atpoc.com/cdn/ihp/2539.11/assets/2539.11_1_1_4.png"
+								}
+							}
+						},
+						{
+							"choice_id": 5,
+							"choice_text": "None",
+							"choice_order": 5,
+							"choice_value": 5,
+							"choice_is_correct": 1,
+							"choice_feedback": "None because the patient already underwent these tests for past assessments.",
+							"choice_labs": null
+						}
+					],
+					"feedback_title": "Patient Assessment",
+					"feedback": "<h1>Patient Assessment</h1><p>This young patient presented with locally advanced breast cancer, which is associated with an increased risk for recurrence. However, all patients are at risk for recurrence over time, with evidence showing a persistent risk of recurrence and death due to breast cancer for up to 20 years or more following the original diagnosis, based on a meta-analysis of 88 trials of 62,923 women with HR+ breast cancer who were disease-free after treatment with ET for 5 years.<sup>1,2</sup> Notably, there are patients who are at a higher risk of recurrence, such as those with ≥4 positive axillary lymph nodes and a Ki-67 score ≥20% or those with 1 to 3 positive axillary lymph nodes and at least one of the following: tumor size ≥5 cm, tumor size ≥5 cm among patients who had neoadjuvant chemotherapy, histological grade 3, Ki-67 score ≥20%, Ki-67 score ≥20% only, or Ki-67 score ≥20% and tumor size ≥5 cm and/or histological grade 3.<sup>3</sup></p><p>Ki-67 IHC is a widely used biomarker to evaluate tumor proliferation based on its expression in proliferative cell cycle phases (G1, G2, and M).<sup>4,5</sup> A Ki-67 score is defined as the total number of staining and nonstaining viable tumor cells in the invasive cancer component x 100.<sup>4</sup>  The International Ki67 in Breast Cancer Working Group notes that Ki-67 is clinically valid for determining prognosis for a patient with early-stage breast cancer, but with specific clinical utility.<sup>5</sup> The National Comprehensive Cancer Network (NCCN) does not currently recommend assessment of Ki-67, unless the patient is HR+, HER2-, and adjuvant abemaciclib is being considered.<sup>6</sup></p><p>In this case, the patient's Ki-67 score is 30%, based on pathology reports from the initial biopsy and surgical specimen. Furthermore, the patient's risk of recurrence at 5 years is approximately 30% to 35%. This is based on clinicopathological features like grade 3 breast cancer, LVI, and high Ki-67 (>30%).</p><p>There are various methods available to estimate a patient's risk of recurrence. For example, the American Joint Committee on Cancer Staging Manual, 8th edition incorporates anatomic factors, tumor grade, receptor status, and tumor multigene panel testing for prognostic staging of patients who have received adjuvant therapy.<sup>7</sup></p><p>Risk of recurrence can also be calculated in patients who have received neoadjuvant therapy, despite limited use of neoadjuvant therapy in clinical practice.<sup>8</sup> The residual cancer burden (RCB) method provides standardized methods to evaluate and quantify the extent of residual disease in a patient's lymph nodes (breast and axillary) after neoadjuvant chemotherapy. The result is a continuous score with cut points defining four RCB classes that represent increasing residual disease burden from RCB-0 to RCB-3.<sup>9</sup> In this case, the patient has an RCB-3 score corresponding to a 5-year disease free survival of 70%. Another method utilizes the CPS + EG staging system, which combines the presenting clinical stage and post-treatment pathological stage, along with ER status and nuclear grade.<sup>10</sup> In this patient's case, her CPS + EG score is 3, corresponding to a 5-year distant metastases-free survival of 79%.</p><p>In addition, at the time of this patient's presentation, she had stated that she had low back pain. CT and bone scans may be useful for evaluating potential spread of disease.<sup>11</sup> An echocardiogram may be required before starting treatment with chemotherapy, for example, or to assess the patient for treatment-related cardiotoxicity.<sup>12</sup></p>"
+				}
+			]
+		},
+		{
+			"id": 2,
+			"order": 2,
+			"name": "Choice of Treatment",
+			"type": "question",
+			"questions": [
+				{
+					"id": 1,
+					"question": "In addition to adjuvant endocrine therapy with ovarian suppression and an aromatase inhibitor, which treatment would you recommend to this patient?",
+					"type": "multichoice",
+					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
+					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
+					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"choices": [
+						{
+							"choice_id": 1,
+							"choice_text": "Capecitabine",
+							"choice_order": 1,
+							"choice_value": 1,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},{
+							"choice_id": 2,
+							"choice_text": "Olaparib",
+							"choice_order": 2,
+							"choice_value": 2,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},{
+							"choice_id": 3,
+							"choice_text": "Abemaciclib",
+							"choice_order": 3,
+							"choice_value": 3,
+							"choice_is_correct": 1,
+							"choice_feedback": null,
+							"choice_labs": null
+						},{
+							"choice_id": 4,
+							"choice_text": "Palbociclib",
+							"choice_order": 4,
+							"choice_value": 4,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},{
+							"choice_id": 5,
+							"choice_text": "Pembrolizumab",
+							"choice_order": 5,
+							"choice_value": 5,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						}
+					],
+					"feedback_title": "Choice of treatment",
+					"feedback": "<h1>Choice of treatment</h1><p>The decision to treat this patient with abemaciclib is based on several factors. Given Paula's high risk of recurrence, every possible effort should be made to optimize her adjuvant therapy. In this case, the recommendation is to add abemaciclib for 2 years to her ET, considering the patient's values and preferences.</p><p>According to the most recent version of the NCCN Clinical Practice Guidelines in Oncology for Breast Cancer, 2 years of adjuvant abemaciclib can be considered in combination with ET if patients have HR+, HER2-, high-risk breast cancer. High-risk breast cancer is defined as those with ≥4 positive lymph nodes, or 1 to 3 positive lymph nodes with ≥1 of the following: Grade 3 disease, tumor size ≥5 cm, or a Ki-67 score  ≥20%.<sup>6</sup> The American Society of Clinical Oncology also recommends 2 years of adjuvant abemaciclib plus ET in patients with HR+, HER2-, node-positive, early breast cancer with a high risk of recurrence and a Ki-67 score ≥20%; 2 years of abemaciclib plus ET for ≥5 years may be offered to patients with resected, HR+, HER2-, node-positive, early breast cancer at high risk of recurrence, as defined by the NCCN guidelines above.<sup>13</sup></p><p>These recommendations are based on evidence from the open-label, global, randomized, phase 3, monarchE study of abemaciclib added to standard adjuvant ET vs ET alone in patients with HR+/HER2-, node-positive, high-risk (as defined above), early breast cancer. Patients (N=5637) were allowed to be treated with up to 12 weeks of ET after the last non-ET treatment prior to being randomized and were randomly assigned within 16 months of definitive breast cancer surgery. The primary endpoint was IDFS and the secondary endpoint was DRFS (defined as time from randomization to distant recurrence or death from any cause, whichever occurred first).<sup>14</sup></p><p>At the time of the March 16, 2020 data cutoff, the median follow-up time was approximately 15.5 months in both treatment arms. Patients randomized to abemaciclib plus ET had a lower risk of IDFS (HR, 0.75; 95% CI, 0.60 to 0.93) and the 2-year rate was 92.2% compared with 88.7% among patients in the control arm. An improvement in DRFS was also observed with abemaciclib plus ET compared with ET alone, and the 2-year rate was 93.6% and 90.3%, respectively.<sup>14</sup></p><p>Results from a prespecified primary outcome analysis (data cutoff of July 8, 2020), a regulatory request for additional follow-up analysis (data cutoff of April 1, 2021), and Ki-67 levels are also available and based on a median follow-up of 19 to 27 months. The abemaciclib plus ET arm continued to demonstrate clinically meaningful benefit in the primary outcome analysis, and the IDFS effect size was even greater (HR, 0.71; 95% CI, 0.58 to 0.87; P<0.001). Similarly, clinically meaningful benefit was observed for DRFS in the abemaciclib plus ET arm (HR, 0.69; 95% CI, 0.57 to 0.83; P<0.001). In the additional follow-up, the benefit was maintained for both IDFS and DRFS. In addition, in the Ki-67-high population (Ki-67 ≥20%), abemaciclib plus ET significantly reduced the risk developing both IDFS and DRFS events.<sup>15</sup></p><p>Efficacy and safety data are also available from the primary outcome analysis (data cutoff of July 8, 2020) for patients who received neoadjuvant chemotherapy, which was 36.5% of the monarchE population. Consistent with the primary results, patients randomized to abemaciclib plus ET had a lower risk of developing an IDFS event compared with ET alone (HR, 0.61; 95% CI, 0.47 to 0.80; P<0.001) and of developing a DRFS event.<sup>16</sup></p><p>Paula is not a candidate to receive olaparib because she has no pathogenic germline BRCA1/2 mutations.<sup>17</sup> Capecitabine is not a viable option because the benefit of capecitabine was mostly seen among patients with triple-negative breast cancer in the CREATE-X trial.<sup>18</sup> Palbociclib is not an option because adjuvant palbociclib plus ET did not improve outcomes in the HR+ patient population.<sup>19</sup> Abemaciclib is therefore the only FDA-approved cyclin-dependent kinase 4/6 inhibitor to be used in the adjuvant setting. Immunotherapy has no role in this patient.</p><p>In addition to the efficacy and safety data, it is critical to involve the patient in shared decision-making, based on research showing its favorable impact on health outcomes, along with increased confidence about choices, increased satisfaction with treatment, and increased patient trust in their providers.<sup>20,21</sup> Shared decision-making is a process that involves patients, their caregiver(s), and providers, all of whom work together to make fully informed treatment decisions based on the best available evidence and taking into consideration the patient's values and preferences.<sup>20</sup> And it is especially appropriate in scenarios where various treatment options are available and when the patient's values and preferences drive the decision-making process.<sup>20</sup> Ensuring the patient is fully informed is a key step, especially given the complexity of cancer care and patient experience of feeling overwhelmed or underinformed during the consultation with their physician.<sup>21,22</sup> A number of strategies can be utilized to engage patients in this process, such as providing a reliable way for patients to get answers to their questions, assessing barriers to care, using the teach-back method to evaluate and increase patient understanding of information, provision of high-quality and consistent patient education information, etc.<sup>20</sup></p>"
+				}
+			]
+		},
+		{
+			"id": 3,
+			"order": 3,
+			"name": "Adverse events",
+			"type": "question",
+			"questions": [
+				{
+					"id": 1,
+					"question": "Which of these is the most common AE with abemaciclib treatment?",
+					"type": "multichoice",
+					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
+					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
+					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"choices": [
+						{
+							"choice_id": 1,
+							"choice_text": "Neutropenia",
+							"choice_order": 1,
+							"choice_value": 1,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},{
+							"choice_id": 2,
+							"choice_text": "QT prolongation",
+							"choice_order": 2,
+							"choice_value": 2,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},{
+							"choice_id": 3,
+							"choice_text": "Diarrhea",
+							"choice_order": 3,
+							"choice_value": 3,
+							"choice_is_correct": 1,
+							"choice_feedback": null,
+							"choice_labs": null
+						},{
+							"choice_id": 4,
+							"choice_text": "Thromboembolic events",
+							"choice_order": 4,
+							"choice_value": 4,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						}
+					],
+					"feedback_title": "Adverse Events",
+					"feedback": "<h1>Adverse Events</h1><p>During the first 2 weeks after initiating abemaciclib, Paula reported an increase of 5 stools per day over baseline, which did not resolve within the first 24 hours of starting an antidiarrheal and increasing her intake of oral fluids. As such, abemaciclib was suspended until her diarrhea resolved, and she was restarted on the same dose of abemaciclib, without recurrence.</p><p>Safety findings from the phase 3 monarchE study of abemaciclib plus ET compared to ET alone included 5591 patients, of which 5141 experienced ≥1 treatment-emergent AE (97.9% of patients in the abemaciclib plus ET group compared with 86.1% in the ET group).<sup>14</sup> Table 1 shows adverse reactions occurring in ≥10% of patients and with a difference between arms of ≥2% in monarchE.<sup>23</sup></p><h3>Table 1. Adverse Reactions in ≥10% of patients and With a Difference Between Arms of ≥2% in monarchE</h3><div><img src=\"https://cdn.atpoc.com/cdn/ihp/2539.11/assets/2539.11_3_1-1_feedback.png\" /></div><p><sup>a</sup>Includes the following fatal adverse reactions: diarrhea (n=1), and infections (n=4).</p><p><sup>b</sup>Includes the following fatal adverse reactions: infections (n=5).</p><p><sup>c</sup>Includes mouth ulceration, mucosal inflammation, oropharyngeal pain, stomatitis.</p><p><sup>d</sup>Includes all reported preferred terms that are part of the Infections and Infestations system organ class. Most common infections (>5%) include upper respiratory tract infection, urinary tract infection, and nasopharyngitis.</p><p><sup>e</sup>Includes asthenia, fatigue.</p><p><sup>f</sup>Includes exfoliative rash, mucocutaneous rash, rash, rash erythematous, rash follicular, rash generalized, rash macular, rash maculo-papular, rash maculovesicular, rash morbilliform, rash papular, rash papulosquamous, rash pruritic, rash vesicular, vulvovaginal rash.</p><p>The most frequently reported AEs in the abemaciclib plus ET group included diarrhea, neutropenia, and fatigue compared with arthralgia, hot flush, and fatigue in the ET group.</p><p>Deaths while on study treatment or within 30 days of discontinuing treatment were balanced between the groups, with two considered possibly related to study treatment in the abemaciclib plus ET group.<sup>14</sup></p><p>Additional safety analyses from monarchE are available and are based on a median of 27 months of follow-up with a cutoff of April 1, 2021.<sup>24</sup> Grade ≥3 AEs were mainly related to laboratory cytopenias, including neutropenia and leukopenia, and were more frequent in the abemaciclib plus ET group.<sup>24</sup> The most frequently reported serious AEs were infections and gastrointestinal disorders for both treatment arms.<sup>24</sup> Discontinuations of abemaciclib were the highest in the first month and stabilized after 6 months.<sup>24</sup> Abemaciclib dose modifications (holds and reductions) due to AEs were generally related to diarrhea, neutropenia, or fatigue, preceded discontinuation in approximately half of patients, and mostly occurred within the first 6 months and decreased over time.<sup>24</sup> Clinically relevant AEs occurring in ≥10% of patients in the abemaciclib plus ET arm included diarrhea, infections, neutropenia, fatigue, nausea, anemia, headache, vomiting, stomatitis, thrombocytopenia, decreased appetite, alopecia, alanine aminotransferase increase, aspartate aminotransferase increase, and rash.<sup>24</sup></p><p>In total, the safety results are consistent with the overall safety profile of abemaciclib and support a positive risk-benefit ratio for patients with HR+, HER2-, node-positive, high-risk early breast cancer.<sup>24</sup></p><p>Maximizing medication safety is an important goal of providing high-quality care.<sup>25</sup> A patient-centered approach to safety has the potential to improve the effectiveness of medication safety intervention, as well as realize potential benefits of treatment.<sup>25</sup> Patient-centered care includes establishing good communication between patients and their cancer care team; developing and communicating evidence-based information to educate patients, caregivers, and the cancer care team about treatment options; and practicing shared decision-making. As such, when it comes to patient safety, this could entail eliciting the patient's perspective on the risks and benefits of treatment and addressing their concerns, communicating the importance of medication adherence, preparing the patient to recognize AEs as they occur and instructing them on appropriate action, acknowledging and validating patient-reported symptoms, and offering solutions to help minimize side effects.<sup>25</sup></p><p>Since Paula wants to minimize her risk of breast cancer recurrence, she understands the rationale for the treatment recommendation, but needs additional information and education on how to manage potential side effects. Many clinicians like to provide patients with written information describing these side effects, and this is usually very helpful. It is important to provide the patient with close follow-up to monitor tolerance.</p><p>According to the prescribing information for abemaciclib, monitoring complete blood counts for signs of neutropenia should start before treatment, continue every 2 weeks for the first 2 months, monthly for the next 2 months, and as clinically indicated.<sup>23</sup> Patients should also be monitored for signs and symptoms of thrombosis (ie, venous thromboembolism or pulmonary embolism).<sup>23</sup></p><p>Information on management of diarrhea is essential and highlighted in Table 2, and dose reductions, if needed, are appropriate.<sup>23</sup></p><h3>Table 2.</h3><div><img src=\"https://cdn.atpoc.com/cdn/ihp/2539.11/assets/2539.11_3_1-2_feedback.png\" /></div><p>Abbreviation: CTCAE = Common Terminology Criteria for Adverse Events.</p><p>Due to the safety and monitoring considerations of her treatment, communication and coordination are critical within the multidisciplinary care team and with the patient. The patient must have contact information to connect with the medical team if issues present and patients should be educated on the identification of emergencies. Here, it should be emphasized that members of the multidisciplinary care team can support patient-centered care by assisting with patient education, monitoring, and timely follow-up to address issues related to side effects.<sup>26</sup></p><p>Given the potential impact of side effects on adherence to treatment and subsequent detrimental impact on outcomes, persistence and adherence to therapy are also important to address. This is especially pertinent with oral anticancer medications that may be administered at home.<sup>27</sup> While the evidence base supporting the use of specific tools and strategies to address medication adherence is varied, the literature suggests that multidimensional interventions focusing on collective strategies (eg, education, reminder, cognitive, behavioral, and affective) to promote adherence are potentially more effective than single strategies like education, reminders, or monitoring, for example.<sup>27</sup> In addition, interventions encouraging bidirectional communication promote greater adherence, and may include eliciting information from, and providing information to, patients.<sup>28</sup> Some specific strategies and tools for use might be<sup>29</sup>:</p><ul class=\"custom-list\"><li>Addressing patient misconceptions about the specified treatment</li><li>Encouraging and facilitating communication among the care team, patients, and family</li><li>Emphasizing the benefits of persistence and adherence to treatment</li><li>Educating patients on other consequences of poor adherence, such as unnecessary changes to treatment</li><li>Promoting routine monitoring and not missing appointments</li><li>Scheduling frequent follow-ups to discuss challenges with treatment</li><li>Educating patients to be proactive about managing side effects of their treatment</li><li>Instructing patients to contact their care team when and if severe side effects occur</li><li>Engaging patients and family members in understanding the disease, treatment risks and benefits, and potential interactions with food or other medicines</li><li>Providing patient tools to support dose management and monitoring at home (eg, pillboxes, calendar, electronic reminders, support groups)</li><li>Supporting patient access to treatment, such as through short-term prescriptions or money-saving refill options</li></ul><p>Notably, nurses and pharmacists are well positioned to play a key role in promoting adherence. For example, nurse provision of clinical support (eg, individualizing patient education according to their needs) and symptom assessment and management can empower a patient's ability to adhere to their treatment regimen.<sup>27</sup></p>"
+				}
+			]
+		},
+		{
+			"id": 0,
+			"order": 0,
+			"name": "Follow-Up",
+			"type": "info",
+			"content": "<p>Paula has continued her recommended treatment. She is receiving abemaciclib in addition to ovarian suppression and an aromatase inhibitor. She has mild occasional diarrhea that she manages very well with over-the-counter medications. As per the prescribing information, she was monitored with complete blood counts every 2 weeks for the first 2 months and monthly for the next 2 months. She is 6  months into her treatment now and is being seen for blood work approximately every 2 to 3 months. She reports adherence to her medications. She has some hot flashes and vaginal dryness associated with her endocrine therapy but is doing very well overall.</p>"
+		},
+		{
+			"id": 0,
+			"order": 0,
+			"name": "Conclusion",
+			"type": "info",
+			"content": "<ul class=\"custom-list\"><li>All patients with early breast cancer are at risk for recurrence with rates relatively constant over time (early or late). It is therefore important to identify patients who may be appropriate for treatment to reduce their risk of recurrence and to inform them of the benefits and risks</li><li>Patients considered at high risk of recurrence have clinicopathological factors, such as ≥4 positive axillary lymph nodes and Ki-67 score ≥20% or those with 1 to 3 positive axillary lymph nodes and at least one of the following: tumor size ≥5 cm, tumor size ≥5 cm among patients who had neoadjuvant chemotherapy, histological grade 3, Ki-67 score ≥20%, Ki-67 score ≥20% only, or Ki-67 score ≥20% and tumor size ≥5 cm and/or histological grade 3</li><li>The Ki-67 score is a marker of cell proliferation</li><li>Various methods are available to estimate a patient's risk of disease recurrence</li><li>New treatments are available to help reduce the risk of recurrence in high-risk patients. Adjuvant abemaciclib plus ET is a newer treatment option for patients with early breast cancer that are at risk for recurrence, based on results from the phase 3 monarchE study</li><li>Patient-centered care, shared decision-making, and multidisciplinary care are recommended to improve outcomes</li><li>Patient education on, and management of, side effects and toxicities associated with treatment is important to ensure adherence and the benefit of therapy</li></ul>"
+		}
+	]
+}

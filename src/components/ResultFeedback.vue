@@ -15,7 +15,11 @@
 									color="#4e9d2d"
 								>{{ isActive ? 'mdi-menu-down' : 'mdi-menu-up' }}</v-icon>
 							</span>
-							<p class="fw-bold ma-0">Read More</p>
+							<p class="fw-bold ma-0">Read More 
+								<template v-if="title">
+									About<br>{{ title }}
+								</template>
+							</p>
 						</div>
 					</v-btn>
 				</div>
@@ -36,6 +40,10 @@ export default {
 		data: {
 			type: String,
 			required: true
+		},
+		title: {
+			type: String,
+			default : '...'
 		}
 	},
 	data() {

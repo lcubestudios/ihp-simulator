@@ -27,7 +27,7 @@
 			class="h-100 d-flex flex-column"
 		>
 			<div class="height-60 d-flex align-items-center primary-light-bg rounded-0 pa-2.5 primary-color">
-				<h3 class="font-18 ma-0">Referrences</h3>
+				<h3 class="font-18 ma-0">References</h3>
 			</div>
 			<div class="position-relative flex-grow-1 d-flex flex-column pt-2">
 				<ReferenceContent :show-title="false" />

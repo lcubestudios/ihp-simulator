@@ -24,7 +24,7 @@
 							class="primary-light-bg font-9 text-capitalize fw-bold"
 							text
 							small
-							@click="showCmeInfo"
+							@click="toggleCmeInfo"
 						>
 							CME Info
 						</v-btn>
@@ -48,11 +48,15 @@ export default {
 		},
 		posttestURL() {
 			return this.$store.getters?.posttestURL
-		}
+		},
+		isCmeInfoVisible() {
+			return this.$store.getters?.isCmeInfoVisible
+		} 
 	},
 	methods: {
-		showCmeInfo() {
-			this.$store.dispatch('showCmeInfo')
+		toggleCmeInfo() {
+			if (this.isCmeInfoVisible) this.$store.dispatch('hideCmeInfo')
+			else this.$store.dispatch('showCmeInfo')
 		}
 	}
 }

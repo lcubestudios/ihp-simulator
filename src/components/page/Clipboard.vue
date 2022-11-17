@@ -10,9 +10,9 @@
 		<div 
 			class="clipboard-handle"
 			:class="{ 
-				'opacity-0': !isPatientIntroComplete || !isGuruIntroComplete,
-				'pointer-events-none': !isPatientIntroComplete || !isGuruIntroComplete,
-				'pointer-events-initial': isPatientIntroComplete,
+				'opacity-0': (!isPatientIntroComplete && isGuruIntroComplete) || (!isGuruIntroComplete && !isActive),
+				'pointer-events-none': (!isPatientIntroComplete && isGuruIntroComplete) || (!isGuruIntroComplete && !isActive),
+				'pointer-events-initial': (isPatientIntroComplete) || (!isGuruIntroComplete && isActive),
 			}"
 			@click="toggleClipboard"
 		>

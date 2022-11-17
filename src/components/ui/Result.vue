@@ -2,22 +2,15 @@
 	<div class="result position-relative">
 		<header class="mb-4 d-flex flex-row gap-2 align-items-end">
 			<h4 class="font-18 fw-bold ma-0">Results</h4>
-			<p v-if="hasLabs" class="ma-0 font-12">(view all <v-icon size="20" color="#222121">mdi-clipboard-text</v-icon> to continue)</p>
+			<p v-if="hasLabs" class="ma-0 font-12">(click on all <v-icon size="20" color="#222121">mdi-clipboard-text</v-icon> to continue)</p>
 		</header>
 		<section>
-			<div
+			<ResultItem 
 				v-for="(choice, choice_index) in choices" 
 				:key="choice_index"
-				class="pa-2.5 mb-1/2"
-				:class="{
-					'primary-lighter-bg': choice.choice_is_correct
-				}"
-			>
-				<ResultItem 
-					:data="choice"
-					:answers="answers"
-				/>
-			</div>
+				:data="choice"
+				:answers="answers"
+			/>
 		</section>
 	</div>
 </template>

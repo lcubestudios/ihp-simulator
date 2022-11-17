@@ -1,14 +1,22 @@
 {
 	"jobnum": "",
 	"title": "",
-	"guru_intro_video_url": "",
-	"guru_intro_video_thumbnail": "",
-	"references": "",
-	"learning_objectives": "",
+	"guru_intro_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-intro.mp4",
+	"guru_intro_video_thumbnail": "https://cdn.atpoc.com/cdn/ihp/global/guru-placeholder.png",
+	"guru_intro_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>",
+	"references": [
+		{
+			"title": "",
+			"link_text": "",
+			"href": ""
+		}
+	],
+	"learning_objectives": [],
 	"patient_information": {
 		"patient_image_url": "",
 		"patient_video_url": "",
 		"patient_video_thumbnail": "",
+		"introduction": "",
 		"profile": [
 			{
 				"label": "",
@@ -123,10 +131,10 @@
 					"id": 0,
 					"question": "",
 					"type": "",
-					"correct_video_url": "",
-					"correct_video_text": "",
-					"incorrect_video_url": "",
-					"incorrect_video_text": "",
+					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
+					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>",
+					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
+					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>",
 					"choices": [
 						{
 							"choice_id": 0,
@@ -144,6 +152,7 @@
 							}
 						}
 					],
+					"feedback_title": null,
 					"feedback": null
 				}
 			]

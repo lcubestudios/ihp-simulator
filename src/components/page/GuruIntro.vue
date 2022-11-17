@@ -34,7 +34,7 @@
 					class="secondary-light-bg pa-4"
 					:elavation="2"
 				>
-					<p class="ma-0">{{ script }}</p>
+					<div v-html="script"></div>
 				</v-card>
 			</div>
 		</div>

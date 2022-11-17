@@ -2,7 +2,7 @@
   <div class="z_index pa-0">
 		<v-toolbar class="radious-header shadow-none">
 			<div class="brand h-100 d-flex flex-row gap-2.5">
-				<img class="h-100" src="https://secureapi.atpoc.com/cdn/assets/production/suite-library/pik-icon.png" @click="restart"/>
+				<img class="h-100" src="https://secureapi.atpoc.com/cdn/assets/production/suite-library/pik-icon.png"/>
 				<span class="w-1px h-100 gray6-bg"></span>
 				<img class="h-100" src="https://secureapi.atpoc.com/cdn/assets/production/suite-library/ihp-logo.png" />
 			</div>
@@ -52,7 +52,7 @@
 					view-id="2"
 					@click="goToSidebarView(2)"
 				>
-					Referrences
+					References
 				</v-btn>
 			</div>
 		</v-toolbar>
@@ -63,6 +63,9 @@
 export default {
   name: "PageHeader",
 	computed: {
+		isGuruIntroComplete() {
+			return this.$store.getters.isGuruIntroComplete
+		},
 		currSidebarView() {
 			return this.$store.getters.sidebarView
 		},
@@ -76,14 +79,12 @@ export default {
 		}
 	},
   methods: {
-		goToSidebarView(id) {
+		async goToSidebarView(id) {
+			if (!this.isGuruIntroComplete) await this.$store.dispatch('completeGuruIntro')
 			this.$store.dispatch('setSidebarView', id)
 		},
 		showNavMenu() {
 			this.$store.dispatch('showNavMenu')
-		},
-		restart() {
-			this.$store.dispatch('restartCase')
 		}
 	},
 };

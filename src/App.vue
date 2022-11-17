@@ -56,7 +56,7 @@
 							v-if="!isLoading"
 							class="page-footer"
 							:class="{
-								'opacity-0': !(!isClipboardVisible || !isPatientIntroComplete)
+								'opacity-0': !(!isClipboardVisible || !isPatientIntroComplete) || (isClipboardVisible && !isGuruIntroComplete)
 							}" 
 							no-gutters
 						>
@@ -90,7 +90,9 @@
 										@click="stageClick()"
 									>{{ continueButtonLabel }}</v-btn>
 								</template>
-								<PageProgress v-if="isPatientIntroComplete && isGuruIntroComplete" />
+								<PageProgress :class="{
+									'opacity-0': !(isPatientIntroComplete && isGuruIntroComplete)
+								}" />
 							</div>
 						</v-row>
 						<PageTOC />
@@ -124,7 +126,6 @@
 									<v-row class="position-relative font-16" no-gutters>
 										<template v-if="isPatientIntroComplete && isGuruIntroComplete">
 											<router-view></router-view>
-											<CmeInfo />
 										</template>
 										<template v-else>
 											<div class="d-flex justify-content-center align-items-center">
@@ -176,6 +177,7 @@
 												</div>	
 											</div>											
 										</template>
+										<CmeInfo />
 									</v-row>
 								</v-card>
 							</v-col>
@@ -277,6 +279,9 @@ export default {
 		},
 		isGuruIntroComplete() {
 			return this.$store.getters?.isGuruIntroComplete
+		},
+		isGuruIntroVisible() {
+			return this.$store.getters?.isGuruIntroVisible
 		},
 		isClipboardVisible() {
 			return this.$store.getters?.isClipboardVisible
@@ -394,6 +399,9 @@ export default {
 					await this.$store.dispatch('submitQuestion', payload)
 					this.nextStage()
 				}
+				else if (viewType === 'end') {
+					window.open(this.$store.getters?.posttestURL, '_blank')
+				}
 				else {
 					this.nextStage()
 				}
@@ -405,7 +413,6 @@ export default {
 					? 'patient-intro'
 					:  null
 
-				console.log(viewType)
 
 				if (viewType === 'guru-intro') {
 					await this.$store.dispatch('completeGuruIntro')

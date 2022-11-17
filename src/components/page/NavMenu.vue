@@ -21,7 +21,8 @@
 				<section class="d-flex flex-column gap-4 mt-4">
 					<div>
 						<v-btn
-							class="text-dark font-18" text
+							class="text-dark font-18"
+							text
 							@click="showTOC"
 						>
 							My Progress
@@ -29,7 +30,8 @@
 					</div>
 					<div>
 						<v-btn
-							class="text-dark font-18" text
+							class="text-dark font-18"
+							text
 							@click="showClipboard"
 						>
 							Patient Information
@@ -37,7 +39,8 @@
 					</div>
 					<div>
 						<v-btn
-							class="text-dark font-18" text
+							class="text-dark font-18"
+							text
 							@click="showCmeInfo"
 						>
 							CME Information
@@ -45,7 +48,8 @@
 					</div>
 					<div>
 						<v-btn
-							class="text-dark font-18" text
+							class="text-dark font-18"
+							text
 							@click="showReferenceData"
 						>
 							References
@@ -53,14 +57,18 @@
 					</div>
 					<div>
 						<v-btn
-							class="text-dark font-18" text
+							class="text-dark font-18" 
+							text
+							:href="posttestURL"
+							target="blank"
 						>
 							Claim Credit
 						</v-btn>
 					</div>
 					<div>
 						<v-btn
-							class="text-dark font-18" text
+							class="text-dark font-18"
+							text
 							@click="userLogout"
 						>
 							Log Out
@@ -79,6 +87,9 @@ export default {
 		isNavMenuVisible() {
 			return this.$store.getters.isNavMenuVisible
 		},
+		posttestURL() {
+			return this.$store.getters?.posttestURL
+		}
 	},
 	methods: {
 		hideNavMenu() {
@@ -88,16 +99,20 @@ export default {
 			this.hideNavMenu()
 			this.$store.dispatch('userLogout')
 		},
-		showTOC() {
+		async showTOC() {
+			if (!this.isGuruIntroComplete) await this.$store.dispatch('completeGuruIntro')
 			this.$store.dispatch('showTOC')
 		},
-		showClipboard() {
+		async showClipboard() {
+			if (!this.isGuruIntroComplete) await this.$store.dispatch('completeGuruIntro')
 			this.$store.dispatch('showClipboard')
 		},
-		showCmeInfo() {
+		async showCmeInfo() {
+			if (!this.isGuruIntroComplete) await this.$store.dispatch('completeGuruIntro')
 			this.$store.dispatch('showCmeInfo')
 		},
-		showReferenceData() {
+		async showReferenceData() {
+			if (!this.isGuruIntroComplete) await this.$store.dispatch('completeGuruIntro')
 			this.$store.dispatch('showReferenceData')
 		}
 	}

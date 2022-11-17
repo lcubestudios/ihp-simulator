@@ -77,7 +77,7 @@
 												)[0]
 												.isCompleted
 										}"
-										data-view-type="feedback"
+										:data-view-type="(stage_ndx + 1) === stages.length ? 'end' : 'feedback'"
 									>
 										<div class="result-content">
 											<template v-if="isSubmitLoading
@@ -118,6 +118,7 @@
 											v-if="question.feedback" 
 											class="result-feedback"
 											:data="question.feedback" 
+											:title="question.feedback_title" 
 										/>
 									</div>
 								</div>
@@ -126,7 +127,7 @@
 								<div class="group">
 									<div
 										class="view"
-										data-view-type="info"
+										:data-view-type="(stage_ndx + 1) === stages.length ? 'end' : 'info'"
 									>
 										<div class="d-flex flex-column">
 											<section class="flex-grow-1">
@@ -245,12 +246,23 @@ export default {
 		setTimeout(() => {
 			this.resizeResults()
 		}, 100)
+		setTimeout(() => {
+			this.$el.querySelectorAll('img')
+				.forEach((img) => {
+					img.addEventListener('click', () => {
+						this.showLightBox(img.getAttribute('src'))
+					})
+				})
+		}, 1000)
 		window.addEventListener('resize', this.resizeResults)
 	},
 	destroyed() {
 		window.removeEventListener('resize', this.resizeResults)
 	},
 	methods: {
+		showLightBox(image_url) {
+			this.$store.dispatch('showLightBox', { image_url })
+		},
 		async stageClick() {
 			let viewType
 			if (this.isPatientIntroComplete && this.isGuruIntroComplete) {
@@ -266,6 +278,9 @@ export default {
 
 					await this.$store.dispatch('submitQuestion', payload)
 					this.nextStage()
+				}
+				else if (viewType === 'end') {
+					window.open(this.$store.getters?.posttestURL, '_blank')
 				}
 				else {
 					this.nextStage()
@@ -435,6 +450,9 @@ export default {
 <style lang="scss">
 .feedback {
 	z-index: 9;
+	img {
+		width: 100%;
+	}
 	article {
 		font-size: 12px;
 		h1 {

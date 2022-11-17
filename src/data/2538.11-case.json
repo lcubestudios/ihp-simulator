@@ -1,0 +1,333 @@
+{
+	"jobnum": "2538.11",
+	"title": "Management of Recurrent HER2-low Metastatic Breast Cancer",
+	"guru_intro_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-intro.mp4",
+	"guru_intro_video_thumbnail": "https://cdn.atpoc.com/cdn/ihp/global/guru-placeholder.png",
+	"guru_intro_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>",
+	"references": [
+		{
+			"title": "Wolff AC, Hammond MEH, Allison KH, et al. Human epidermal growth factor receptor 2 testing in breast cancer: American Society of Clinical Oncology/College of American Pathologists Clinical Practice Guideline focused update. J Clin Oncol. 2018;36:2105-2122.",
+			"link_text": "Abstract",
+			"href": "https://pubmed.ncbi.nlm.nih.gov/29846122/"
+		},{
+			"title": "NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines®) for Breast Cancer V.4.2022. © National Comprehensive Cancer Network, Inc. 2022. All rights reserved. Accessed 10/25/2022 at:",
+			"link_text": "NCCN.org",
+			"href": "https://www.nccn.org/"
+		},{
+			"title": "Modi S, Saura C, Yamashita T, et al. Trastuzumab deruxtecan in previously treated HER2-positive breast cancer. N Engl J Med. 2020;382:610-621.",
+			"link_text": "Abstract",
+			"href": "https://pubmed.ncbi.nlm.nih.gov/31825192/"
+		},{
+			"title": "Enhertu® [package insert]. Basking Ridge, NJ: Daiichi Sankyo, Inc. August 2022. Accessed 10/25/2022 at:",
+			"link_text": "https://daiichisankyo.us/prescribing-information-portlet/getPIContent?productName=Enhertu&inline=true",
+			"href": "https://daiichisankyo.us/prescribing-information-portlet/getPIContent?productName=Enhertu&inline=true"
+		},{
+			"title": "Modi S, Jacot W, Yamashita T, et al. Trastuzumab deruxtecan in previously treated HER2-low advanced breast cancer. N Engl J Med. 2022;387:9-20.",
+			"link_text": "Abstract",
+			"href": "https://pubmed.ncbi.nlm.nih.gov/35665782/"
+		},{
+			"title": "Swain SM, Nishino M, Lancaster LH, et al. Multidisciplinary clinical guidance on trastuzumab deruxtecan (T-DXd)–related interstitial lung disease/pneumonitis–Focus on proactive monitoring, diagnosis, and management. Cancer Treat Rev. 2022;106:102378.",
+			"link_text": "Abstract",
+			"href": "https://pubmed.ncbi.nlm.nih.gov/35430509/"
+		}
+	],
+	"learning_objectives": [
+		"Review the limitations of using traditional criteria and binary human epidermal growth factor receptor 2 (HER2) classification in breast cancer care, including the risk of overlooking patients who might benefit from HER2-directed treatment.",
+		"Integrate into practice recommended strategies and technologies for quantifying HER2 levels to identify patients eligible for effective anti-HER2 treatments.",
+		"Evaluate the clinical evidence for HER2-targeted therapies that are effective in breast cancers with low expression levels of HER2.",
+		"Apply evidence-based and recommended strategies for the treatment of patients with HER2-low breast cancer."
+	],
+	"patient_information": {
+		"patient_image_url": "https://cdn.atpoc.com/cdn/ihp/2538.11/assets/2538.11-patient-icon.png",
+		"patient_video_url": "https://cdn.atpoc.com/cdn/ihp/2538.11/assets/patient.mp4",
+		"patient_video_thumbnail": "https://cdn.atpoc.com/cdn/ihp/2538.11/assets/patient-placeholder.png",
+		"introduction": "<p>My name is Cindy, I'm 56. I've had breast cancer for a few years. I've been receiving treatment for my metastases, but the cancer doesn't go away. I have 2 high schoolers and will do whatever it takes to see them graduate college.</p>",
+		"profile": [
+			{
+				"label": "Patient Name",
+				"value": "Cindy"
+			},{
+				"label": "Age",
+				"value": "56"
+			}
+		],
+		"vitals": [
+			{ 
+				"label": "Temperature", 
+				"value": "98.6° F"
+			},{ 
+				"label": "Respiration", 
+				"value": "15 respirations/min",
+				"other": [
+					{
+						"label": "rhythm",
+						"value": "regular"
+					},{
+						"label": "effort",
+						"value": "unlabored"
+					},{
+						"label": "SpO2",
+						"value": "98%"
+					}
+				]
+			},{ 
+				"label": "Pulse", 
+				"value": "92 bpm",
+				"other": [
+					{
+						"label": "rhythm",
+						"value": "regular"
+					},{
+						"label": "strength",
+						"value": "normal"
+					}
+				]
+			},{ 
+				"label": "Blood Pressure",
+				"other": [
+					{
+						"label": "left",
+						"value": "138/82 mm Hg"
+					},{
+						"label": "right",
+						"value": "140/83 mm Hg"
+					}
+				]
+			}
+		],
+		"key_findings": [
+			"ER-positive, HER2-negative breast cancer",
+			"Progressive metastatic disease following 2 lines of endocrine therapy and 1 line of chemotherapy",
+			"Visceral metastases",
+			"Excellent Karnofsky Performance Status Score"
+		],
+		"medical_history": {
+			"description": "<p>Cindy is a 56-year-old now postmenopausal woman who was first diagnosed with right T2N1 estrogen receptor (ER)-positive, HER2-negative breast cancer at the age of 48. Germline genetic testing was negative for deleterious mutations in BRCA1 and BRCA2.</p><p>She underwent upfront breast conservation surgery and received adjuvant docetaxel and cyclophosphamide for 4 cycles, followed by radiation. She received adjuvant anastrozole for 5 years.</p><p>Approximately 2 years ago (6 years after diagnosis, and 1 year after discontinuation of anastrozole), Cindy developed a cough and exacerbation of her chronic lower back pain. Chest x-ray noted a suspicious lung mass. Computed tomography (CT) of her chest/abdomen/pelvis identified a 5 cm right hilar mass, several small liver lesions of concern, and multiple osseous metastases. A biopsy of the lung mass confirmed metastatic breast cancer, ER 90%, progesterone receptor (PR) 5%, HER2-negative.</p><p>At this time, she began first-line treatment for metastatic breast cancer with letrozole and palbociclib. Denosumab was added to reduce the risk of skeletal-related events.</p><p>After about 10 months on treatment, scans demonstrated disease progression with larger liver lesions, although normal liver function. Her Karnofsky performance status (KPS) score is 90%.</p><p>She received fulvestrant for second-line treatment, but unfortunately after about 6 months, scans reveal additional lung and liver lesions. Her aspartate aminotransferase (AST) level is mildly elevated at approximately 45 U/L.</p><p>Cindy went on to receive capecitabine. After about 6 months of treatment, CT of her chest/abdomen/pelvis revealed disease progression once again, and she was bothered by grade 2 hand-foot syndrome.</p>",
+			"data": [
+				{
+					"label": "Past Medical History",
+					"value": [
+						{
+							"label": "Medical",
+							"value": "<ul class=\"custom-list\"><li>Gastroesophageal reflux</li><li>Mild hypertension</li></ul>"
+						},
+						{
+							"label": "Medications (prescribed, OTC)",
+							"value": "<ul class=\"custom-list\"><li>Omeprazole once daily</li><li>Ibuprofen as needed</li><li>Topical urea-based cream for hand-foot syndrome</li></ul>"
+						}
+					]
+				},
+				{
+					"label": "Family History",
+					"value": "<p>No family history of breast, ovary, or colorectal cancer.</p><p>Father with history of hypertension  and diabetes mellitus</p>"
+				},
+				{
+					"label": "Social History",
+					"value": "<p>Married with 2 children, aged 14 and 15 years old</p><p>Nonsmoker</p><p>No alcohol use</p><p>Employed full time as marketing executive</p>"
+				}
+			]
+		}
+	},
+	"stages": [
+		{
+			"id": 1,
+			"order": 1,
+			"name": "Choice of Tests",
+			"type": "question",
+			"questions": [
+				{
+					"id": 1,
+					"question": "Which of the following tests would you recommend for this patient?",
+					"type": "multiselect",
+					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
+					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
+					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"choices": [
+						{
+							"choice_id": 1,
+							"choice_text": "Immunohistochemistry",
+							"choice_order": 1,
+							"choice_value": 1,
+							"choice_is_correct": 1,
+							"choice_feedback": "<p><strong>IHC</strong> can be used to clarify this patient's HER2 status. While historically HER2 status has been defined as positive versus negative, there is a large proportion of patients classified as HER2-negative that actually express low levels of HER2—now defined as HER2-low—and there is now an approved therapy for these patients, making HER2 \"negative\" an insufficient test result, given that HER2 \"low\" status is now actionable. HER2-low is defined as IHC 1+ or IHC 2+ where ISH is not amplified.</p>",
+							"choice_labs": {
+								"description": null,
+								"result": {
+									"text": "<p>2+</p><p>The revised definition of IHC 2+ (equivocal) is invasive breast cancer with \"...weak to moderate complete membrane staining observed in >10% of tumor cells.\"<sup>1</sup></p>",
+									"image_url": "https://cdn.atpoc.com/cdn/ihp/2538.11/assets/2538.11_1_1_1.png",
+									"reference": "<p>Image courtesy of Tiffany A. Traina, MD</p>"
+								}
+							}
+						},{
+							"choice_id": 2,
+							"choice_text": "Dual in situ hybridization (ISH) for HER2",
+							"choice_order": 2,
+							"choice_value": 2,
+							"choice_is_correct": 1,
+							"choice_feedback": "<p><strong>ISH</strong> is used in combination with IHC to clarify a patient's HER2 status.</p>",
+							"choice_labs": {
+								"description": null,
+								"result": {
+									"text": "<p><strong>Negative</strong></p><p>Per the ASCO/CAP Guidelines, the pathologist evaluating HER2 expression should scan the entire ISH slide prior to counting at least 20 cells or use IHC to define the areas of potential HER2 amplification. If there is a second population of contiguous cells with increased HER2 signals/cell and this cell population consists of >10% of tumor cells on the slide (defined by image analysis or visual estimation of the ISH or IHC slide), a separate counting of at least 20 nonoverlapping cells must also be performed within this cell population and reported<sup>1</sup></p>"
+								}
+							}
+						},{
+							"choice_id": 3,
+							"choice_text": "Somatic tumor sequencing",
+							"choice_order": 3,
+							"choice_value": 3,
+							"choice_is_correct": 1,
+							"choice_feedback": "<p><strong>Somatic tumor sequencing</strong> should be considered to evaluate for actionable mutations, as it could reveal a PI3K mutation, which could also be actionable in this patient with ER+ metastatic breast cancer.</p>",
+							"choice_labs": {
+								"description": null,
+								"result": {
+									"text": "<p>MSS, TMB 4 mutations/megabase, ESR1 mutation present, PI3K wild-type</p>"
+								}
+							}
+						},{
+							"choice_id": 4,
+							"choice_text": "Comprehensive metabolic profile",
+							"choice_order": 4,
+							"choice_value": 4,
+							"choice_is_correct": 1,
+							"choice_feedback": "<p>A <strong>comprehensive metabolic profile</strong> helps determine the grade of her elevated liver function tests.</p>",
+							"choice_labs": {
+								"description": null,
+								"result": {
+									"text": "<p>AST: 40 U/L</p><p>ALT: 34 U/L</p>",
+									"image_url": "https://cdn.atpoc.com/cdn/ihp/2538.11/assets/2538.11_1_1_4.png",
+									"reference": "<p><strong>Abbreviations: A/G</strong>, albumin/globulin; ALT, alanine aminotransferase; ASCO/CAP, American Society of Clinical Oncology/College of American Pathologists; AST, aspartate aminotransferase; eGFR, estimated glomerular filtration rate; ESR1, estrogen receptor 1; MSS, microsatellite stable; PI3K, phosphoinositide 3-kinase; TMB, tumor mutational burden.</p>"
+								}
+							}
+						}
+					],
+					"feedback_title": null,
+					"feedback": null
+				}
+			]
+		},
+		{
+			"id": 2,
+			"order": 2,
+			"name": "Choice of Treatment",
+			"type": "question",
+			"questions": [
+				{
+					"id": 1,
+					"question": "Which of these is the most appropriate treatment to recommend to this patient with HER2-low metastatic breast cancer?",
+					"type": "multichoice",
+					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
+					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
+					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"choices": [
+						{
+							"choice_id": 1,
+							"choice_text": "Eribulin",
+							"choice_order": 1,
+							"choice_value": 1,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},{
+							"choice_id": 2,
+							"choice_text": "Trastuzumab deruxtecan",
+							"choice_order": 2,
+							"choice_value": 2,
+							"choice_is_correct": 1,
+							"choice_feedback": null,
+							"choice_labs": null
+						},{
+							"choice_id": 3,
+							"choice_text": "Paclitaxel",
+							"choice_order": 3,
+							"choice_value": 3,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},{
+							"choice_id": 4,
+							"choice_text": "Gemcitabine",
+							"choice_order": 4,
+							"choice_value": 4,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						}
+					],
+					"feedback_title": null,
+					"feedback": "<div class=\"notes\"><p>After discussion with her provider and close family, Cindy elected to begin treatment with trastuzumab deruxtecan (T-DXd).</p></div><p>Eribulin, T-DXd, paclitaxel, and gemcitabine are all active therapeutic agents in advanced breast cancer and are supported by guidelines. Most patients will be candidates for multiple lines of systemic therapy for their advanced/metastatic breast cancer, and so all of these options may be considered at some point for a patient with HER2-low breast cancer.<sup>2</sup></p><p>T-DXd is an antibody-drug conjugate (ADC) composed of an anti-HER2 antibody, a cleavable linker, and a cytotoxic \"payload\" that is a topoisomerase I inhibitor.<sup>3</sup> It was previously approved for treatment of adult patients with unresectable or metastatic HER2-positive breast cancer who had received a prior anti-HER2-based regimen,<sup>4</sup> based on results from the <a href=\"https://www.nejm.org/doi/pdf/10.1056/NEJMoa1914510?articleTools=true\" target=\"_blank\" rel=\"noreferrer nofollow\">DESTINY-Breast01 clinical trial</a>.<sup>3</sup> More recently, it was approved for the treatment of adult patients with unresectable or metastatic HER2-low (IHC 1+ or IHC 2+/ISH-negative) breast cancer who have received a prior chemotherapy in the metastatic setting or developed disease recurrence during or within 6 months of completing adjuvant chemotherapy,<sup>4</sup> and it has a category 1 guideline recommendation for this use.<sup>2</sup></p><p>Use of T-DXd in patients with HER2-low breast cancer was investigated in the <a href=\"https://pubmed.ncbi.nlm.nih.gov/35665782/\" target=\"_blank\" rel=\"noreferrer nofollow\">DESTINY-Breast04 trial</a>.<sup>5</sup> This trial enrolled 557 patients with HER2-low metastatic breast cancer—defined as a score of 1+ on IHC or a score of 2+ on IHC with negative ISH—who had received one or two previous lines of chemotherapy, to be randomized to treatment with T-DXd or physician's choice of chemotherapy. In the trial, 88.7% of patients had HR-positive disease and 11.3% had HR-negative disease; approximately 70% of enrolled patients had prior exposure to a CDK4/6 inhibitor, while approximately 5% had received prior immunotherapy. The majority had visceral disease, with approximately 5% having brain metastases.<sup>5</sup></p><p>The primary trial efficacy endpoint was progression-free survival (PFS) in the HR-positive patient cohort, which was significantly improved with T-DXd compared with chemotherapy. In these patients, median PFS was 10.1 months with T-DXd compared with 5.4 months with chemotherapy (hazard ratio [HR] 0.51; P <.001). Overall survival (OS) was also significantly improved with T-DXd, from 17.5 months with chemotherapy to 23.9 months with T-DXd (HR 0.64; P = .003).<sup>5</sup></p><p>These results were similar among all enrolled patients (both HR-positive and HR-negative): median PFS was 9.9 months with T-DXd compared with 5.1 months with chemotherapy (HR 0.50; P <.001), and median OS was 23.4 months compared with 16.8 months, respectively (HR 0.64; P = .001).<sup>5</sup></p><p>The chemotherapy options listed in this question all received a category 2A guideline recommendation—they are all appropriate regimens to consider, but appear to have lower efficacy than T-DXd in this setting.<sup>2,5</sup> Administration of single-agent chemotherapy sequentially decreases the likelihood that dose reductions will be needed for the management of side effects, and there is currently no compelling evidence that combination regimens are superior to single-agent regimens. Therefore, sequential monotherapy is preferred for most patients with recurrent metastatic disease.<sup>2</sup> Following progression on T-DXd, all of these options would be appropriate to consider for the next line of therapy for the patient in this case.</p>"
+				}
+			]
+		},
+		{
+			"id": 3,
+			"order": 3,
+			"name": "Adverse events",
+			"type": "question",
+			"questions": [
+				{
+					"id": 1,
+					"question": "Which of these is a rare but potentially fatal adverse event associated with T-DXd?",
+					"type": "multichoice",
+					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
+					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
+					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"choices": [
+						{
+							"choice_id": 1,
+							"choice_text": "Interstitial lung disease (ILD)",
+							"choice_order": 1,
+							"choice_value": 1,
+							"choice_is_correct": 1,
+							"choice_feedback": null,
+							"choice_labs": null
+						},{
+							"choice_id": 2,
+							"choice_text": "Neutropenia",
+							"choice_order": 2,
+							"choice_value": 2,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},{
+							"choice_id": 3,
+							"choice_text": "Fatigue",
+							"choice_order": 3,
+							"choice_value": 3,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},{
+							"choice_id": 4,
+							"choice_text": "Alopecia",
+							"choice_order": 4,
+							"choice_value": 4,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						}
+					],
+					"feedback_title": "Adverse Events",
+					"feedback": "<h1>Adverse Events</h1><div class=\"notes\"><p>On T-DXd, Cindy developed grade 1 nausea, despite pre-medication with an anti-emetic regimen (aprepitant, dexamethasone, and ondansetron) prior to her infusion. She was able to control this AE at home with as-needed prochlorperazine and did not need to dose reduce her T-DXd. She was also proactively monitored for ILD, with close follow-up and imaging.</p></div><p>ILD or pneumonitis are important risks associated with use of this agent, and guidelines exist for surveillance and management of this rare but important potential side effect. All patients on T-DXd should be proactively monitored for development of ILD or pneumonitis, and actively managed with prompt dose interruption should it occur.<sup>5,6</sup></p><p>For patients receiving T-DXd, the following proactive monitoring strategies are recommended<sup>6</sup>:</p><ul class=\"custom-list\"><li>Thoroughly explain the risks and benefits of treatment with T-DXd to the patient, including the symptoms of ILD and the precautions to take while on treatment; multimodal patient education is encouraged</li><li>Closely monitor for initial symptoms of ILD (dyspnea, cough, fever) and instruct the patient to call and report any of these symptoms as soon as they occur</li><li>Regularly visit with the patient every 4 to 6 weeks, and ask about symptoms at each visit</li><li>Regularly assess lungs with imaging (every 9 to 12 weeks)</li></ul><p>The following figure shows recommended diagnostic and management strategies for ILD in patients receiving T-DXd.</p><p>Figure. Recommendations for the multidisciplinary diagnosis and management of interstitial lung disease<sup>6</sup></p><div><img src=\"https://cdn.atpoc.com/cdn/ihp/2538.11/assets/2538.11_3_1-1_feedback.png\" /></div><p>With permission from Swain SM, Nishino M, Lancaster LH, et al. Multidisciplinary clinical guidance on trastuzumab deruxtecan (T-DXd)-related interstitial lung disease/pneumonitis-Focus on proactive monitoring, diagnosis, and management. Cancer Treat Rev. 2022;106:102378.</p>"
+				}
+			]
+		},
+		{
+			"id": 4,
+			"order": 4,
+			"name": "Follow-Up",
+			"type": "info",
+			"content": "<p>Cindy had repeat imaging with a CT of her chest/abdomen/pelvis after 3 months of treatment with T-DXd, which showed partial response.</p><p>She continued on therapy, with improvement of her cough and normalization of her liver function by 6 months.</p><p>At present, Cindy continues with treatment and imaging follow-up every 3 months. She will continue on T-DXd while clinical benefit is retained; in the clinical trial, median PFS was approximately 10 months.</p>"
+		},
+		{
+			"id": 5,
+			"order": 5,
+			"name": "Conclusions",
+			"type": "info",
+			"content": "<ul class=\"custom-list\"><li>It is important to assay biomarker status in patients with breast cancer, as several biomarkers are associated with FDA-approved therapies. ER/PR status and HER2 are among the first biomarkers proven to affect outcomes, but others have been identified and verified in recent years</li><li>Another recent advance in the understanding of biomarkers is the identification of patients with HER2-low cancers, which are defined as IHC 1+ or 2+/ISH-negative. These patients were previously described as \"HER2-negative,\" but it is now known that they are a separate category</li><li>T-DXd is a HER2-targeted ADC that has shown superior efficacy to chemotherapy in women with HER2-low advanced breast cancer. In clinical trials, T-DXd treatment improved PFS by 50% and OS by 36%</li><li>When using any therapy, it is important to recognize both the expected efficacy and also the potential adverse effects. T-DXd is associated with the rare but serious side effect of interstitial lung disease</li></ul>"
+		}
+	]
+}

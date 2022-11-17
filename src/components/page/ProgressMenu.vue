@@ -4,7 +4,7 @@
 			<div class="w-100 h-100 d-flex flex-column">
 				<div class="w-100 flex-grow-1 d-flex flex-column justify-content-around overflow-y-auto pa-2.5">
 					<div
-						v-if="false"
+						v-if="true"
 						class="toc-item d-flex flex-row gap-2.5 align-items-center"
 						:class="{
 							'active': isGuruIntroVisible, 

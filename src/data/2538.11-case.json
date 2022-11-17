@@ -57,7 +57,7 @@
 				"value": "98.6° F"
 			},{ 
 				"label": "Respiration", 
-				"value": "15 respirations/min",
+				"value": "15 resp/min",
 				"other": [
 					{
 						"label": "rhythm",

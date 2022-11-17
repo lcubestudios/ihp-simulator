@@ -1,13 +1,13 @@
 <template>
 	<div
-		v-if="!(!isAnswered(order) && !isCorrect)"
+		v-if="!answers || (answers && !(!isAnswered(order) && !isCorrect))"
 		class="pa-2.5 mb-1/2"
 		:class="{
 			'primary-lighter-bg': isCorrect
 		}"
 	>
 		<div class="result-item d-flex flex-row flex-nowrap gap-2.5">
-			<div>
+			<div v-if="answers">
 				<span class="primary-color font-13 fw-bold">
 					<v-icon
 						v-if="isAnswered(order) && isCorrect"
@@ -31,7 +31,7 @@
 					>{{ text }}</p>
 					<div class="d-flex flex-row flex-nowrap">
 						<v-btn 
-							v-if="feedback"
+							v-if="answers && feedback"
 							class="h-auto pa-0 ma-0" 
 							width="28"
 							icon
@@ -45,7 +45,7 @@
 							</span>
 						</v-btn>
 						<v-btn 
-							v-if="labs"
+							v-if="(isCorrect || !answers) && labs"
 							class="h-auto pa-0 ma-0" 
 							width="28"
 							icon
@@ -97,7 +97,7 @@ export default {
 		},
 		answers: {
 			type: Array,
-			default: () => []
+			default: null
 		}
 	},
 	data() {

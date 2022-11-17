@@ -12,6 +12,18 @@
 				:answers="answers"
 			/>
 		</section>
+		<template v-if="pastAssessments && pastAssessments.length > 0">
+			<header class="my-4 d-flex flex-row gap-2 align-items-end">
+				<h4 class="font-18 fw-bold ma-0">Past Assessments</h4>
+			</header>
+			<section>
+				<ResultItem 
+					v-for="(assessment, assessment_index) in pastAssessments" 
+					:key="assessment_index"
+					:data="assessment"
+				/>
+			</section>
+		</template>
 	</div>
 </template>
 
@@ -54,8 +66,19 @@ export default {
 			return this.choices
 				.filter((choice) => 
 					!!choice.choice_labs 
-					&& choice.choice_is_correct
 				).length > 0
+		},
+		pastAssessments() {
+			console.log(this.choices
+				.filter((choice) => 
+					choice.choice_labs 
+					&& !choice.choice_is_correct
+				))
+			return this.choices
+				.filter((choice) => 
+					choice.choice_labs 
+					&& !choice.choice_is_correct
+				)
 		}
 	},
 	mounted() {

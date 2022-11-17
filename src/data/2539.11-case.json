@@ -130,7 +130,7 @@
 				"value": "98.6° F"
 			},{ 
 				"label": "Respiration", 
-				"value": "14 breaths/minute",
+				"value": "14 resp/min",
 				"other": [
 					{
 						"label": "rhythm",
@@ -232,6 +232,7 @@
 							"choice_is_correct": 0,
 							"choice_feedback": null,
 							"choice_labs": {
+								"is_past_assessment": true,
 								"description": null,
 								"result": {
 									"text": "<p>30% (based on pathology reports from initial biopsy and surgical specimen: invasive ductal carcinoma grade 3, evidence of LVI, ER 80%, PR 50%, HER2- (0 by IHC). Invasive residual tumor measured 5.5 cm x 3.0 cm with 40% cellularity. Axillary dissection with 2 of 12 positive axillary nodes, largest metastasis measured 1.5 cm).</p>"
@@ -246,6 +247,7 @@
 							"choice_is_correct": 0,
 							"choice_feedback": null,
 							"choice_labs": {
+								"is_past_assessment": true,
 								"description": null,
 								"result": {
 									"text": "<p>No evidence of metastatic disease (based on complaint of low back pain at the time of presentation)</p>",
@@ -270,6 +272,7 @@
 							"choice_is_correct": 0,
 							"choice_feedback": null,
 							"choice_labs": {
+								"is_past_assessment": true,
 								"description": null,
 								"result": {
 									"text": "<p>No evidence of metastatic disease (based on complaint of low back pain at the time of presentation)</p>",
@@ -285,6 +288,23 @@
 							"choice_is_correct": 1,
 							"choice_feedback": "None because the patient already underwent these tests for past assessments.",
 							"choice_labs": null
+						},
+						{
+							"choice_id": 6,
+							"choice_text": "Complete blood count",
+							"choice_order": 6,
+							"choice_value": 6,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": {
+								"is_past_assessment": true,
+								"description": null,
+								"result": {
+									"text": "<p>Normal: no abnormalities</p>",
+									"image_url": "https://cdn.atpoc.com/cdn/ihp/2539.11/assets/2539.11_1_1_6.jpg"
+								}
+							},
+							"choice_is_hidden": false
 						}
 					],
 					"feedback_title": "Patient Assessment",

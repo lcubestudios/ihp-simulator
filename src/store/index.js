@@ -538,6 +538,7 @@ const actions = {
 				}
 			}
 			// Set button Text
+			await dispatch('checkLabs')
 			await dispatch('setContinueButtonText')
 		}
 		else {
@@ -742,7 +743,6 @@ const actions = {
 					.filter((choice) => 
 						!!choice.choice_labs 
 						&& !choice.choice_is_labs_read
-						&& choice.choice_is_correct
 					)
 					.length > 0
 			: null
@@ -831,18 +831,18 @@ const actions = {
 		commit('setGuruResponseURL', val)
 	},
 	async restartSimulator({ state, dispatch }) {
-		const { 
-			stages
-		} = state.progress
-		const output = {
-			isGuruIntroComplete: false,
-			isPatientIntroComplete: false,
-			stages: stages.map((stage) => {
-				stage.isCompleted = false
-				if (stage.type === 'question') stage.answers = []
-				return stage
-			})
-		}
+		// const { 
+		// 	stages
+		// } = state.progress
+		// const output = {
+		// 	isGuruIntroComplete: false,
+		// 	isPatientIntroComplete: false,
+		// 	stages: stages.map((stage) => {
+		// 		stage.isCompleted = false
+		// 		if (stage.type === 'question') stage.answers = []
+		// 		return stage
+		// 	})
+		// }
 
 		await dispatch('isLoading')
 		
@@ -853,7 +853,8 @@ const actions = {
 		if (state.isPatientIntroComplete || (!state.isGuruIntroComplete && state.isClipboardVisible)) dispatch('hideClipboard')
 		dispatch('hideTOC')
 
-		await dispatch('setProgress', output)
+		Cookies.remove(`ihp_progress_${ state.refData.jobnum }`)
+		Cookies.remove('ihp_session_id')
 		location.reload()
 	}
 }

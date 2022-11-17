@@ -4,7 +4,7 @@
 			<div class="brand h-100 d-flex flex-row gap-2.5">
 				<img class="h-100" src="https://cdn.atpoc.com/assets/production/pik/logo/pik-kaplan/PIK-logo-color-rgb.svg"/>
 				<span class="w-1px h-100 gray6-bg"></span>
-				<img class="h-100" src="https://secureapi.atpoc.com/cdn/assets/production/suite-library/ihp-logo.png" />
+				<img class="h-100" src="https://secureapi.atpoc.com/cdn/ihp/global/ihp-icon.png" />
 			</div>
 			<v-spacer></v-spacer>
 			<div 

@@ -106,6 +106,7 @@ export default {
 		},
 		choices() {
 			return this?.data?.choices
+				.filter((choice) => !choice.choice_is_hidden)
 		},
 		answers() {
 			return this?.data?.answers

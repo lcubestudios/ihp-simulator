@@ -51,7 +51,7 @@ export default {
 	},
 	computed: {
 		hasLabs() {
-			return this.choices.filter((choice) => !!choice.choice_labs).length > 0
+			return this.choices.filter((choice) => !!choice.choice_labs && choice.choice_is_correct).length > 0
 		}
 	},
 	mounted() {

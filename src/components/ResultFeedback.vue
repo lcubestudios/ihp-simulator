@@ -15,9 +15,9 @@
 									color="#4e9d2d"
 								>{{ isActive ? 'mdi-menu-down' : 'mdi-menu-up' }}</v-icon>
 							</span>
-							<p class="fw-bold ma-0">Read More 
+							<p class="fw-bold ma-0">Read more 
 								<template v-if="title">
-									About<br>{{ title }}
+									about<br>{{ title }}
 								</template>
 							</p>
 						</div>

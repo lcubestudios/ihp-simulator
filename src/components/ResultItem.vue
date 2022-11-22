@@ -8,14 +8,15 @@
 	>
 		<div class="result-item d-flex flex-row flex-nowrap gap-2.5">
 			<div v-if="answers">
-				<span class="primary-color font-13 fw-bold">
+				<span v-if="!isAnswered(order) && isCorrect">&nbsp;&nbsp;&nbsp;</span>
+				<span v-else class="primary-color font-13 fw-bold">
 					<v-icon
 						v-if="isAnswered(order) && isCorrect"
 						size="13"
 						color="#4e9d2d"
 					>mdi-check</v-icon>
 					<v-icon
-						v-if="(!isAnswered(order) && isCorrect) || (isAnswered(order) && !isCorrect)"
+						v-if="isAnswered(order) && !isCorrect"
 						size="13"
 						color="#9E1539"
 					>mdi-close</v-icon>

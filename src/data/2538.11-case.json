@@ -3,7 +3,7 @@
 	"title": "Management of Recurrent HER2-low Metastatic Breast Cancer",
 	"guru_intro_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-intro.mp4",
 	"guru_intro_video_thumbnail": "https://cdn.atpoc.com/cdn/ihp/global/guru-placeholder.png",
-	"guru_intro_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>",
+	"guru_intro_video_text": "<p>Hello! I'm your knowledge avatar, Fallon. As an avatar, I have accumulated a thorough understanding of science from our expert thought leaders. I've absorbed their expert knowledge as well as the evidence-based recommendations from treatment guidelines and data from cutting-edge clinical research studies. I will interact with you to enhance your learning experience. As an avatar I'm here to review, refine, and comment on your progress.</p>",
 	"references": [
 		{
 			"title": "Wolff AC, Hammond MEH, Allison KH, et al. Human epidermal growth factor receptor 2 testing in breast cancer: American Society of Clinical Oncology/College of American Pathologists Clinical Practice Guideline focused update. J Clin Oncol. 2018;36:2105-2122.",
@@ -140,9 +140,9 @@
 					"question": "Which of the following tests would you recommend for this patient?",
 					"type": "multiselect",
 					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
-					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
 					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
-					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
 					"choices": [
 						{
 							"choice_id": 1,
@@ -218,9 +218,9 @@
 					"question": "Which of these is the most appropriate treatment to recommend to this patient with HER2-low metastatic breast cancer?",
 					"type": "multichoice",
 					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
-					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
 					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
-					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
 					"choices": [
 						{
 							"choice_id": 1,
@@ -272,9 +272,9 @@
 					"question": "Which of these is a rare but potentially fatal adverse event associated with T-DXd?",
 					"type": "multichoice",
 					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
-					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
 					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
-					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
 					"choices": [
 						{
 							"choice_id": 1,

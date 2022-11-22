@@ -3,7 +3,7 @@
 	"title": "Diagnosis and Treatment of NTM-LD in a Patient Presenting With COPD",
 	"guru_intro_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-intro.mp4",
 	"guru_intro_video_thumbnail": "https://cdn.atpoc.com/cdn/ihp/global/guru-placeholder.png",
-	"guru_intro_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>",
+	"guru_intro_video_text": "<p>Hello! I'm your knowledge avatar, Fallon. As an avatar, I have accumulated a thorough understanding of science from our expert thought leaders. I've absorbed their expert knowledge as well as the evidence-based recommendations from treatment guidelines and data from cutting-edge clinical research studies. I will interact with you to enhance your learning experience. As an avatar I'm here to review, refine, and comment on your progress.</p>",
 	"references": [
 		{
 			"title": "Andréjak C, Nielsen R, Thomsen Vibeke Ø, Duhaut P, Sørensen HT, Thomsen RW. Chronic respiratory disease, inhaled corticosteroids and risk of non-tuberculous mycobacteriosis. Thorax. 2013;68(3):256-262.",
@@ -293,9 +293,9 @@
 					"question": "Which of these would you consider as part of your differential diagnosis? (Select all that apply)",
 					"type": "multiselect",
 					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
-					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
 					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
-					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
 					"choices": [
 						{
 							"choice_id": 1,
@@ -387,9 +387,9 @@
 					"question": "Which of the following tests would you recommend for Pete? (Select all that apply)",
 					"type": "multiselect",
 					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
-					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
 					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
-					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
 					"choices": [
 						{
 							"choice_id": 1,
@@ -466,9 +466,9 @@
 					"question": "Which approach would you recommend for Pete's initial treatment?",
 					"type": "multichoice",
 					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
-					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
 					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
-					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
 					"choices": [
 						{
 							"choice_id": 1,
@@ -512,9 +512,9 @@
 					"question": "Which treatment would you recommend after initial treatment failure?",
 					"type": "multichoice",
 					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
-					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
 					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
-					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
 					"choices": [
 						{
 							"choice_id": 1,
@@ -566,9 +566,9 @@
 					"question": "Which of these is the most common AE of ALIS?",
 					"type": "multichoice",
 					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
-					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
 					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
-					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
 					"choices": [
 						{
 							"choice_id": 1,

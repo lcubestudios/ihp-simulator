@@ -3,7 +3,7 @@
 	"title": "Treatment Considerations for HR+, HER2- Early Breast Cancer at Higher Risk of Recurrence",
 	"guru_intro_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-intro.mp4",
 	"guru_intro_video_thumbnail": "https://cdn.atpoc.com/cdn/ihp/global/guru-placeholder.png",
-	"guru_intro_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>",
+	"guru_intro_video_text": "<p>Hello! I'm your knowledge avatar, Fallon. As an avatar, I have accumulated a thorough understanding of science from our expert thought leaders. I've absorbed their expert knowledge as well as the evidence-based recommendations from treatment guidelines and data from cutting-edge clinical research studies. I will interact with you to enhance your learning experience. As an avatar I'm here to review, refine, and comment on your progress.</p>",
 	"references": [
 		{
 			"title": "Pan H, Gray R, Braybrooke J, et al. 20-Year risks of breast-cancer recurrence after stopping endocrine therapy at 5 years. N Engl J Med. 2017;377:1836-1846."
@@ -220,9 +220,9 @@
 					"question": "Which of the following tests would you recommend for this patient? (multiple choice)",
 					"type": "multichoice",
 					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
-					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
 					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
-					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.</p>",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
 					"choices": [
 						{
 							"choice_id": 1,
@@ -323,9 +323,9 @@
 					"question": "In addition to adjuvant endocrine therapy with ovarian suppression and an aromatase inhibitor, which treatment would you recommend to this patient?",
 					"type": "multichoice",
 					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
-					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
 					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
-					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
 					"choices": [
 						{
 							"choice_id": 1,
@@ -385,9 +385,9 @@
 					"question": "Which of these is the most common AE with abemaciclib treatment?",
 					"type": "multichoice",
 					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
-					"correct_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
 					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
-					"incorrect_video_text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere nulla sit amet enim placerat cursus. Aliquam at viverra enim. Nullam risus justo, faucibus at tristique sit amet, consectetur vel diam.",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
 					"choices": [
 						{
 							"choice_id": 1,

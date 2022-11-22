@@ -248,8 +248,10 @@ export default {
 	},
 	mounted() {
 		if (!this.$route.query.jn) this.$store.dispatch('setRedirectURL', `/missing`)
-
+		
 		console.log('stage -', this.$route.query.stage)
+
+		if (this.$route.query.token) this.$store.dispatch('setUserToken', this.$route.query.token)
 
 		this.setAppMode()
 		this.$store.dispatch('setEnvironment', this.$route.query.jn)

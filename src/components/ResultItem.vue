@@ -1,13 +1,13 @@
 <template>
 	<div
-		v-if="!answers || (answers && !(!isAnswered(order) && !isCorrect))"
+		v-if="isCorrect"
 		class="pa-2.5 mb-1/2"
 		:class="{
 			'primary-lighter-bg': isCorrect
 		}"
 	>
 		<div class="result-item d-flex flex-row flex-nowrap gap-2.5">
-			<div v-if="answers">
+			<div v-if="answers" class="d-none">
 				<span v-if="!isAnswered(order) && isCorrect">&nbsp;&nbsp;&nbsp;</span>
 				<span v-else class="primary-color font-13 fw-bold">
 					<v-icon
@@ -31,34 +31,48 @@
 						}"
 					>{{ text }}</p>
 					<div class="d-flex flex-row flex-nowrap">
-						<v-btn 
-							v-if="answers && feedback"
-							class="h-auto pa-0 ma-0" 
-							width="28"
-							icon
-							@click="toggleFeedback"
-						>
-							<span>
-								<v-icon
-									size="20"
-									color="#082ecf"
-								>mdi-information-outline</v-icon>
-							</span>
-						</v-btn>
-						<v-btn 
-							v-if="(isCorrect || !answers) && labs"
-							class="h-auto pa-0 ma-0" 
-							width="28"
-							icon
-							@click="toggleLabs"
-						>
-							<span>
-								<v-icon
-									size="20"
-									color="#082ecf"
-								>{{ isLabsRead ? 'mdi-clipboard-check' : 'mdi-clipboard-text' }}</v-icon>
-							</span>
-						</v-btn>
+						<v-tooltip top>
+							<template v-slot:activator="{ on, attrs }">
+								<v-btn 
+									v-if="answers && feedback"
+									class="h-auto pa-0 ma-0" 
+									width="28"
+									icon
+									v-bind="attrs" 
+									v-on="on"
+									@click="toggleFeedback"
+								>
+									<span>
+										<v-icon
+											size="20"
+											color="#082ecf"
+										>mdi-information-outline</v-icon>
+									</span>
+								</v-btn>
+							</template>
+							<span class="text-center">More Information</span>
+						</v-tooltip>
+						<v-tooltip top>
+							<template v-slot:activator="{ on, attrs }">
+								<v-btn 
+									v-if="(isCorrect || !answers) && labs"
+									class="h-auto pa-0 ma-0" 
+									width="28"
+									icon
+									v-bind="attrs" 
+									v-on="on"
+									@click="toggleLabs"
+								>
+									<span>
+										<v-icon
+											size="20"
+											color="#082ecf"
+										>{{ isLabsRead ? 'mdi-clipboard-check' : 'mdi-clipboard-text' }}</v-icon>
+									</span>
+								</v-btn>
+							</template>
+							<span class="text-center">View Tests and Images</span>
+						</v-tooltip>
 					</div>
 				</div>
 				<div 

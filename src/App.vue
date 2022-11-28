@@ -246,15 +246,15 @@ export default {
 			isEnd: false
 		}
 	},
-	mounted() {
+	async mounted() {
 		if (!this.$route.query.jn) this.$store.dispatch('setRedirectURL', `/missing`)
 		
 		console.log('stage -', this.$route.query.stage)
 
-		if (this.$route.query.token) this.$store.dispatch('setUserToken', this.$route.query.token)
+		if (this.$route.query.token) await this.$store.dispatch('setUserToken', this.$route.query.token)
 
-		this.setAppMode()
-		this.$store.dispatch('setEnvironment', this.$route.query.jn)
+		await this.setAppMode()
+		await this.$store.dispatch('setEnvironment', this.$route.query.jn)
 
 		window.addEventListener('resize', () => {
 			this.setAppMode()

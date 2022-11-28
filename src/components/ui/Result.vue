@@ -1,7 +1,7 @@
 <template>
 	<div class="result position-relative">
 		<header class="mb-4 d-flex flex-row gap-2 align-items-end">
-			<h4 class="font-18 fw-bold ma-0">Results</h4>
+			<h4 class="font-18 fw-bold ma-0">Correct Answers</h4>
 			<p v-if="hasLabs" class="ma-0 font-12">(click on all <v-icon size="20" color="#222121">mdi-clipboard-text</v-icon> to continue)</p>
 		</header>
 		<section>

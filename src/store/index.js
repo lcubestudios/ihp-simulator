@@ -189,7 +189,7 @@ const actions = {
 			.join('&')
 			|| null
 	
-		const url = 'https://secureapi.atpoc.com/api-suite/8.2/analytics/eventihp' + (urlParams ? '?' + urlParams : '')
+		const url = process.env.VUE_APP_ANALYTICS_API + (urlParams ? '?' + urlParams : '')
 
 		await axios.post(url, body, {
 			headers: {
@@ -298,7 +298,7 @@ const actions = {
 	},
 	async setUserToken({ dispatch, commit }, val) {
 		if (val) {
-			await axios.get(`https://secureapi.atpoc.com/api-suite/8.2/profile?token=${ val }`)
+			await axios.get(`${ process.env.VUE_APP_PROFILE_API }?token=${ val }`)
 				.then((res) => {
 					Cookies.set('ihp_user_token', val, { expires: 0.25 })
 					dispatch('setUserProfile', res?.data?.personal)
@@ -314,7 +314,7 @@ const actions = {
 	},
 	async userLogin({ dispatch }, creds) {
 		dispatch('isLoading')
-		await axios.get(`https://secureapi.atpoc.com/api-suite/8.2/auth/token?email=${ creds.email }&password=${ creds.password }`)
+		await axios.get(`${ process.env.VUE_APP_AUTH_API }?email=${ creds.email }&password=${ creds.password }`)
 			.then(async (res) => {
 				if (res?.data?.error) throw res.data.error
 				if (res?.data?.token) {
@@ -335,13 +335,13 @@ const actions = {
 	async getRefData({ dispatch, commit }, jobnum) {
 		if (jobnum) {
 			const getCmeInfo = await axios
-				.get(`https://cdn.atpoc.com/cdn/ihp/${ jobnum }/${ jobnum }.json`)
+				.get(`${ process.env.VUE_APP_CME_INFO_API }${ jobnum }`)
 				.then((res) => { return res.data })
 				.catch(() => {
 					dispatch('setRedirectURL', `/invalid/?jn=${ jobnum }`)
 				})
 			const getCaseData = await axios
-				.get(`https://cdn.atpoc.com/cdn/ihp/${ jobnum }/${ jobnum }-case.json`)
+				.get(`${ process.env.VUE_APP_CASE_DATA_API }${ jobnum }/${ jobnum }-case.json`)
 				.then((res) => { return res.data })
 				.catch(() => {
 					dispatch('setRedirectURL', `/invalid/?jn=${ jobnum }`)
@@ -650,6 +650,8 @@ const actions = {
 	async submitQuestion({ state, commit, dispatch }, payload) {
 		const output = []
 
+		console.log(payload)
+
 		Object.keys(payload)
 			.map((item) => {
 				const id = item.split('_')[2]
@@ -673,7 +675,7 @@ const actions = {
 			})
 		}
 
-		await axios.post('https://secureapi.atpoc.com/api-suite/8.2/answersihp', postPayload)
+		await axios.post(process.env.VUE_APP_ANSWER_API, postPayload)
 			.then(async () => {
 				await commit('setAnswers', output)
 				dispatch('isSubmitLoaded')
@@ -769,21 +771,28 @@ const actions = {
 	goToStage({ state, dispatch }, val) {
 		const progress = JSON.parse(Cookies.get(`ihp_progress_${ state.refData.jobnum }`))
 
-		const stage = progress.stages.filter((stage) => stage.stage === val)
-		const incomplete = stage.filter((items) => !items.isCompleted)
-		const hasIncomplete = incomplete.length > 0
+		console.log(val)
 
-		if (!hasIncomplete) {
-			dispatch('setCurrStage', stage[stage.length - 1].stage)
-			dispatch('setCurrView', stage[stage.length - 1].view)
+		if (val < -1 && (val + 1) > progress.stages.length) {
+			console.log(`stage ${ val + 1 } does not exist`)
 		}
 		else {
-			dispatch('setCurrStage', incomplete[0].stage)
-			dispatch('setCurrView', incomplete[0].view)
+			const stage = progress.stages.filter((stage) => stage.stage === val)
+			const incomplete = stage.filter((items) => !items.isCompleted)
+			const hasIncomplete = incomplete.length > 0
+	
+			if (!hasIncomplete) {
+				dispatch('setCurrStage', stage[stage.length - 1].stage)
+				dispatch('setCurrView', stage[stage.length - 1].view)
+			}
+			else {
+				dispatch('setCurrStage', incomplete[0].stage)
+				dispatch('setCurrView', incomplete[0].view)
+			}
+	
+			dispatch('setGuruResponseURL', null)
+			dispatch('setContinueButtonText')
 		}
-
-		dispatch('setGuruResponseURL', null)
-		dispatch('setContinueButtonText')
 	},
 	setCmeInfoVisible({ commit }, val) {
 		commit('setCmeInfoVisible', val)

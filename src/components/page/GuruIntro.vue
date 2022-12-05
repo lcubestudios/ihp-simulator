@@ -31,7 +31,7 @@
 			</div>
 			<div v-if="script" class="pa-4">
 				<v-card
-					class="secondary-light-bg pa-4"
+					class="guru-script secondary-light-bg pa-4"
 					:elavation="2"
 				>
 					<div v-html="script"></div>

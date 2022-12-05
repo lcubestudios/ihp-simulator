@@ -65,15 +65,6 @@
 							Claim Credit
 						</v-btn>
 					</div>
-					<div>
-						<v-btn
-							class="text-dark font-18"
-							text
-							@click="userLogout"
-						>
-							Log Out
-						</v-btn>
-					</div>
 				</section>
 			</div>
 		</v-card>

@@ -53,7 +53,7 @@
 			</div>
 			<div v-if="script && appMode === 'desktop'" class="pa-4">
 				<v-card
-					class="secondary-light-bg pa-4"
+					class="guru-script secondary-light-bg pa-4"
 					:elavation="2"
 				>
 					<div v-html="script"></div>
@@ -121,6 +121,7 @@ export default {
 				.filter((stage) => 
 					stage.stage === this.stage 
 					&& stage.group === this.group
+					&& !stage.isCompleted
 				)[0]
 
 			if (checkProgress.type === 'feedback' && !checkProgress.isCompleted) {
@@ -137,6 +138,8 @@ export default {
 					videoURL = question?.incorrect_video_url.replace(/\{\{INCORRECT_VIDEO\}\}/gi, 'global/guru-not-quite.mp4')
 					this.script = question?.incorrect_video_text
 				}
+
+				console.log(videoURL)
 
 				this.$store.dispatch('setGuruResponseURL', videoURL)
 			}
@@ -211,6 +214,14 @@ export default {
 		height: 100%;
 		max-height: 100%;
 		max-width: 100%;
+	}
+}
+</style>
+
+<style lang="scss">
+.guru-script {
+	p:last-child {
+		margin: 0 !important;
 	}
 }
 </style>

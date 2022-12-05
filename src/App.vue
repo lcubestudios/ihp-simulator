@@ -248,13 +248,27 @@ export default {
 	},
 	async mounted() {
 		if (!this.$route.query.jn) this.$store.dispatch('setRedirectURL', `/missing`)
-		
-		console.log('stage -', this.$route.query.stage)
-
 		if (this.$route.query.token) await this.$store.dispatch('setUserToken', this.$route.query.token)
+
+		if (this.$route.query.choices) console.log(this.$route.query.choices)
 
 		await this.setAppMode()
 		await this.$store.dispatch('setEnvironment', this.$route.query.jn)
+		if (this.$route.query.stage) {
+			await this.$store.dispatch('completeGuruIntro')
+			await this.$store.dispatch('completePatientIntro')
+			await this.$store.dispatch('goToStage', this.$route.query.stage - 1)
+			
+			// if (this.$route.query.choices) await this.submitQuestion(this.$route.query.choices.split(',')) 
+		}
+
+		// await this.removeUrlParam({
+		// 	params: [
+		// 		'token',
+		// 		'stage',
+		// 		'choices'
+		// 	]
+		// })
 
 		window.addEventListener('resize', () => {
 			this.setAppMode()
@@ -369,6 +383,40 @@ export default {
 		}
 	},
 	methods: {
+		async submitQuestion(choices) {
+			let payload = {}
+			
+			choices
+				.forEach((choice) => {
+					const key = this.currStage + '_' + this.currGroup + '_' + choice
+					payload[key] = ''
+				})
+
+			await this.$store.dispatch('submitQuestion', payload)
+		},
+		removeUrlParam(props) {
+			const { params } = props
+			const baseUrl = window.location.protocol
+				+ '//'
+				+ window.location.hostname 
+				+ (window.location.port ? ':' + window.location.port : '')
+
+			let newParams = []
+
+			Object.keys(this.$route.query)
+				.forEach((param) => {
+					if (!params.includes(param)) newParams.push(`${ param }=${ this.$route.query[param] }`)
+				})
+				
+			const newUrl = baseUrl 
+				+ (
+					newParams && newParams.length > 0
+					? '?' + newParams.join('&')
+					: ''
+				)
+
+				window.history.replaceState({}, document.title, newUrl);
+		},
 		setAppMode() {
 			if (window.innerWidth > 960) {
 				this.$store.dispatch('setAppMode', 'desktop')

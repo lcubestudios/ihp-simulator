@@ -17,7 +17,7 @@
 								v-if="reference.href"
 								:href="reference.href"
 								target="_blank"
-								rel="noreferrer no follow"
+								rel="noreferrer nofollow"
 							>
 								{{ reference.link_text || reference.href }}
 							</a>

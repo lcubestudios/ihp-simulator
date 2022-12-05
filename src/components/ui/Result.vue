@@ -69,11 +69,6 @@ export default {
 				).length > 0
 		},
 		pastAssessments() {
-			console.log(this.choices
-				.filter((choice) => 
-					choice.choice_labs 
-					&& !choice.choice_is_correct
-				))
 			return this.choices
 				.filter((choice) => 
 					choice.choice_labs 

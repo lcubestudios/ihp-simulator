@@ -6,30 +6,50 @@
 				<template v-if="type === 'multiselect'">
 					<div class="d-flex flex-column gap-3 disabled">
 						<template v-if="isCompleted">
-							<v-checkbox 
+							<div
 								v-for="(choice, choice_ndx) in choices" 
 								:key="choice_ndx"
-								class="ma-0 pa-0 black-label" 
-								:name="name + '_' + choice_ndx"
-								:label="choice.choice_text" 
-								:true-value="choice.choice_value"
-								:ripple="false"
-								disabled
-								color="#4e9d2d"
-								:input-value="isAnswered(choice.choice_order)"
-							></v-checkbox>
+								class="d-flex"
+							>
+								<v-checkbox 
+									:id="name + '_' + choice_ndx"
+									class="ma-0 pa-0 black-label" 
+									:name="name + '_' + choice_ndx"
+									:true-value="choice.choice_value"
+									:ripple="false"
+									disabled
+									color="#4e9d2d"
+									:input-value="isAnswered(choice.choice_order)"
+								></v-checkbox>
+								<label 
+									:for="name + '_' + choice_ndx" 
+									class="v-label theme--light mt-1" 
+									style="left: 0px; right: auto; position: relative;" 
+									v-html="choice.choice_text"
+								></label>
+							</div>
 						</template>
 						<template v-else>
-							<v-checkbox 
+							<div
 								v-for="(choice, choice_ndx) in choices" 
 								:key="choice_ndx"
-								class="ma-0 pa-0 black-label" 
-								:name="name + '_' + choice_ndx"
-								:label="choice.choice_text" 
-								:true-value="choice.choice_value"
-								:ripple="false"
-								color="#4e9d2d"
-							></v-checkbox>
+								class="d-flex"
+							>
+								<v-checkbox 
+									:id="name + '_' + choice_ndx"
+									class="ma-0 pa-0 black-label" 
+									:name="name + '_' + choice_ndx"
+									:true-value="choice.choice_value"
+									:ripple="false"
+									color="#4e9d2d"
+								></v-checkbox>
+								<label 
+									:for="name + '_' + choice_ndx" 
+									class="v-label theme--light mt-1" 
+									style="left: 0px; right: auto; position: relative;" 
+									v-html="choice.choice_text"
+								></label>
+							</div>
 						</template>
 					</div>
 				</template>

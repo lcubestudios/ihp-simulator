@@ -249,7 +249,7 @@
 									<p 
 										v-for="(other, vital_other_ndx) in vital.other"
 										:key="vital_other_ndx"
-									><strong>{{ other.label }}</strong>: {{ other.value }}</p>
+									><strong v-html="other.label"></strong>: {{ other.value }}</p>
 								</v-col>
 							</v-row>
 						</v-container>

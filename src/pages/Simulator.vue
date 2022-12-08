@@ -253,7 +253,7 @@ export default {
 						this.showLightBox(img.getAttribute('src'))
 					})
 				})
-		}, 1000)
+		}, 2000)
 		window.addEventListener('resize', this.resizeResults)
 	},
 	destroyed() {

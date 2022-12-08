@@ -1,6 +1,6 @@
 <template>
 	<div
-		v-if="isCorrect"
+		v-if="!answers || (answers && isCorrect)"
 		class="pa-2.5 mb-1/2"
 		:class="{
 			'primary-lighter-bg': isCorrect

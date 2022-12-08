@@ -29,7 +29,8 @@
 						:class="{
 							'fw-bold': isCorrect
 						}"
-					>{{ text }}</p>
+						v-html="text"
+					></p>
 					<div class="d-flex flex-row flex-nowrap">
 						<v-tooltip top>
 							<template v-slot:activator="{ on, attrs }">

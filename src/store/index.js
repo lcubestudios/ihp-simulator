@@ -232,8 +232,6 @@ const actions = {
 			{ isPatientIntroComplete: true }
 		)
 
-		console.log('complete patient')
-
 		dispatch('setProgress', progress)
 		dispatch('setPatientIntroComplete', true)
 		dispatch('setCurrStage', 0)
@@ -395,6 +393,7 @@ const actions = {
 						.map((q, q_ndx) => {
 							// Question view
 							stages.push({
+								id: stage.id,
 								stage: stage_ndx,
 								group: q_ndx,
 								view,
@@ -405,6 +404,7 @@ const actions = {
 							view += 1
 							// Feedback view
 							stages.push({
+								id: stage.id,
 								stage: stage_ndx,
 								group: q_ndx,
 								view,
@@ -418,6 +418,7 @@ const actions = {
 				else if (type === 'info') {
 					// Info View
 					stages.push({
+						id: stage.id,
 						stage: stage_ndx,
 						group: 0,
 						view,
@@ -650,14 +651,12 @@ const actions = {
 	async submitQuestion({ state, commit, dispatch }, payload) {
 		const output = []
 
-		console.log(payload)
-
 		Object.keys(payload)
 			.map((item) => {
 				const id = item.split('_')[2]
 				const question = state.stages[state.currStage].questions[state.currGroup]
 
-				output.push(question.choices[id])
+				if (question.choices[id]) output.push(question.choices[id])
 			})
 
 		const postPayload = {
@@ -768,10 +767,16 @@ const actions = {
 	setLightBoxImage({ commit }, val) {
 		commit('setLightBoxImage', val)
 	},
+	goToView({ state, dispatch }, val) {
+		const stage  = state.progress.stages.filter((stage) => stage.view == val)[0]
+		dispatch('setCurrStage', stage.stage)
+		dispatch('setCurrGroup', stage.group)
+		dispatch('setCurrView', stage.view)
+		dispatch('setGuruResponseURL', null)
+		dispatch('setContinueButtonText')
+	},
 	goToStage({ state, dispatch }, val) {
 		const progress = JSON.parse(Cookies.get(`ihp_progress_${ state.refData.jobnum }`))
-
-		console.log(val)
 
 		if (val < -1 && (val + 1) > progress.stages.length) {
 			console.log(`stage ${ val + 1 } does not exist`)

@@ -1,0 +1,371 @@
+{
+	"jobnum": "2539.61",
+	"title": "Management of an Older Patient With Hormone Receptor-Positive, HER2-Negative Breast Cancer",
+	"guru_intro_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-intro.mp4",
+	"guru_intro_video_thumbnail": "https://cdn.atpoc.com/cdn/ihp/global/guru-placeholder.png",
+	"guru_intro_video_text": "<p>Hello! I'm your knowledge avatar, Fallon. As an avatar, I have accumulated a thorough understanding of science from our expert thought leaders. I've absorbed their expert knowledge as well as the evidence-based recommendations from treatment guidelines and data from cutting-edge clinical research studies. I will interact with you to enhance your learning experience. As an avatar I'm here to review, refine, and comment on your progress.</p>",
+	"references": [
+		{
+		"title": "National Comprehensive Cancer Network. NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines<sup>&#174;</sup>). Breast Cancer. Version 4.2022 &#8212; June 21, 2022. Accessed October 25, 2022. ",
+		"href": "https://www.nccn.org/login?ReturnURL=https://www.nccn.org/professionals/physician_gls/pdf/breast.pdf/",
+		"link_text": "https://www.nccn.org/login?ReturnURL=https://www.nccn.org/professionals/physician_gls/pdf/breast.pdf/"
+		},
+		{
+		"title": "American Cancer Society. Treating Breast Cancer. Accessed November 15, 2022. https://www.cancer.org/content/dam/CRC/PDF/Public/8581.00.pdf</li>"
+		},
+		{
+		"title": "Andre F, Ismaila N, Allison KH, et al. Biomarkers for adjuvant endocrine and chemotherapy in early-stage breast cancer: ASCO guideline update. <em>J Clin Oncol</em>. 2022;40(16):1816-1837. doi:10.1200/JCO.22.00069 Published correction appears in <em>J Clin Oncol</em>. 2022;40(22):2514. doi: 10.1200/JCO.22.01388.</li>"
+		},
+		{
+		"title": "Yang SK, Cho N, Moon WK. The role of PET/CT for evaluating breast cancer. <em>Korean J Radiol</em>. 2007;8(5):429-437. doi:10.3348/kjr.2007.8.5.429</li>"
+		},
+		{
+		"title": "Giordano SH, Freedman RA, Somerfield MR; Optimal Adjuvant Chemotherapy and Targeted Therapy Guideline Expert Panel. Abemaciclib with endocrine therapy in the treatment of high-risk early breast cancer: ASCO Optimal Adjuvant Chemotherapy and Targeted Therapy Guideline Rapid Recommendation Update. <em>J Clin Oncol</em>. 2022;40(3):307-309. doi:10.1200/JCO.21.02677</li>"
+		},
+		{
+		"title": "Harbeck N, Rastogi P, Martin M, et al; monarchE Committee Members. Adjuvant abemaciclib combined with endocrine therapy for high-risk early breast cancer: updated efficacy and Ki-67 analysis from the monarchE study. <em>Ann Oncol</em>. 2021;32(12):1571-1581. doi:10.1016/j.annonc.2021.09.015</li>"
+		},
+		{
+		"title": "Johnston SRD, Harbeck N, Hegg R, et al. Abemaciclib combined with endocrine therapy for the adjuvant treatment of HR+, HER2&#8211;, node-positive, high-risk, early breast cancer (monarchE). <em>J Clin Oncol</em>. 2020;38(34):3987-3998. doi:10.1200/JCO.20.02514</li>"
+		},
+		{
+		"title": "Rugo HS, O&#8217;Shaughnessy J, Boyle F, et al; monarchE Committee Members. Adjuvant abemaciclib combined with endocrine therapy for high-risk early breast cancer: safety and patient-reported outcomes from the monarchE study. <em>Ann Oncol</em>. 2022;33(6):616-627. doi:10.1016/j.annonc.2022.03.006</li>"
+		},
+		{
+		"title": "Mayer EL, Dueck AC, Martin M, et al. Palbociclib with adjuvant endocrine therapy in early breast cancer (PALLAS): interim analysis of a multicentre, open-label, randomised, phase 3 study. <em>Lancet Oncol</em>. 2021;22(2):212-222. doi:10.1016/S1470-2045(20)30642-2</li>"
+		},
+		{
+		"title": "Gnant M, Dueck AC, Frantal S, et al. Adjuvant palbociclib for early breast cancer: the PALLAS trial results (ABCSG-42/AFT-05/BIG-14-03). <em>J Clin Oncol</em>. 2022;40(3):282-293. doi:10.1200/JCO.21.02554</li>"
+		},
+		{
+		"title": "Loibl S, Marm&#233; F, Martin M, et al. Palbociclib for residual high-risk invasive HR-positive and HER2-negative early breast cancer&#8212;the Penelope-B trial. <em>J Clin Oncol</em>. 2021;39(14):1518-1530. doi:10.1200/JCO.20.03639</li></ol></td></tr></tbody></table>"
+		}
+	],
+	"learning_objectives": [
+		"Appropriately evaluate patients with early-stage, hormone receptor&#8211;positive (HR+), human epidermal growth factor receptor 2&#8211;negative (HER&#8211;) breast cancer for risk for recurrence using recommended protocols",
+		"Critically appraise currently available clinical data on adjuvant treatment options for patients with early-stage, high-risk, HR+, HER2&#8211; breast cancer",
+		"Provide patients with early-stage, high-risk, HR+, HER2&#8211; breast cancer on-label adjuvant treatment that takes into account recent clinical evidence, as well as drug safety and efficacy",
+		"Implement strategies for improving patient adherence to and persistence with oral therapies in early-stage breast cancer",
+		"Incorporate shared decision-making best practices and tools by engaging in meaningful patient-provider discussions related to risks and benefits of therapy, treatment expectations, and goals",
+		"Coordinate care and communicate with the multidisciplinary team to help address patient educational needs, and appropriately monitor, recognize, and manage all treatment-related adverse events (AEs)"
+	],
+	"patient_information": {
+		"patient_image_url": "https://cdn.atpoc.com/cdn/ihp/2539.61/assets/2539.61-patient-icon.png",
+		"patient_video_url": "https://cdn.atpoc.com/cdn/ihp/2539.61/assets/patient.mp4",
+		"patient_video_thumbnail": "https://cdn.atpoc.com/cdn/ihp/2539.61/assets/patient-placeholder.png",
+		"introduction": "My name is Susanne. I’m 71. I have stage III breast cancer. I’ve had surgery and chemo. I heard there are some pills now for my condition.",
+		"profile": [
+			{
+				"label": "Name",
+				"value": "Susanne"
+			},
+			{
+				"label": "Age",
+				"value": "71"
+			},
+			{
+				"label": "Biological Sex",
+				"value": "female"
+			}
+		],
+		"vitals": [
+			{ 
+				"label": "Temperature", 
+				"value": "98.6°F"
+			},
+			{ 
+				"label": "Respiration", 
+				"value": "14 breaths per minute",
+				"other": [
+					{
+						"label": "rhythm",
+						"value": "regular"
+					},
+					{
+						"label": "effort",
+						"value": "unlabored"
+					},
+					{
+						"label": "oxygen saturation (SpO<sub>2</sub>)",
+						"value": "98%"
+					}
+				]
+			},
+			{ 
+				"label": "Pulse", 
+				"value": "92 bpm",
+				"other": [
+					{
+						"label": "rhythm",
+						"value": "regular"
+					},
+					{
+						"label": "strength",
+						"value": "normal"
+					}
+				]
+			},
+			{ 
+				"label": "Blood Pressure",
+				"other": [
+					{
+						"label": "left",
+						"value": "134/82 mm Hg"
+					},
+					{
+						"label": "right",
+						"value": "135/80 mm Hg"
+					},
+					{
+						"label": "assessment",
+						"value": "elevated"
+					},
+					{
+						"label": "pulse pressure",
+						"value": "normal"
+					}
+				]
+			}
+		],
+		"key_findings": [
+			"Residual disease on pathology",
+			"4 lymph nodes involved on pathology",
+			"Ki-67 score of 50% on initial tumor core biopsy",
+			"Physical examination reveals a healing, intact right mastectomy scar and no additional enlarged lymph nodes"
+		],
+		"medical_history": {
+			"description": "<p>Susanne is a 71-year-old woman who initially presented with a 5-cm infiltrating ductal carcinoma in her right breast with the following phenotype:</p><ul class=\"custom-list\"><li>Estrogen receptor (ER): 100%</li><li>Progesterone receptor (PR): 20%</li><li>Human epidermal growth factor receptor 2 (HER2): 1+</li><li>Ki-67 score: 50%</li></ul><p>She had detected a lump in her right breast for 3 months. A mammogram and ultrasound revealed a 5-cm hypoechoic mass in her right breast, along with several enlarged right axillary lymph nodes. An ultrasound-guided core needle biopsy revealed the above diagnosis.</p><p>Computed tomography (CT) scan of the chest, abdomen, and pelvis revealed 2 to 3 enlarged right axillary nodes, with the largest being 2 cm in size.</p><p>Susanne underwent neoadjuvant chemotherapy with 4 cycles of doxorubicin and cyclophosphamide, followed by 12 weeks of paclitaxel. She then received a modified radical mastectomy of the right breast, which revealed 2 cm of residual disease in a tumor bed of 5 cm and 4 right axillary lymph nodes, thus resulting in her diagnosis of metastatic cancer.</p>",
+			"data": [
+				{
+					"label": "Past Medical History",
+					"value": [
+						{
+							"label": "Medical",
+							"value": "<p>Surgical resection with neoadjuvant therapy</p><p>(4 cycles of doxorubicin and cyclophosphamide, followed by 12 weeks of paclitaxel)</p>"
+						},
+						{
+							"label": "Medications (prescribed, over-the-counter)",
+							"value": "<p>Medications (prescribed, over-the-counter)</p><p>Zofran&#174; (ondansetron hydrochloride; GlaxoSmithKline) prn</p>"
+						}
+					]
+				},
+				{
+					"label": "Family History",
+					"value": "Susanne’s mother was diagnosed with breast cancer at 65 years of age, and her aunt had colon cancer at 70 years of age. Both of them are still alive."
+				},
+				{
+					"label": "Social History",
+					"value": "Susanne is currently retired. She is a social drinker (1 drink per week) and never smoked. She is married and lives with her husband. Susanne has 2 children (ages 35 and 40 years)."
+				}
+			]
+		},
+		"physical_exams": {
+			"description": null,
+			"data": null
+		}
+	},
+	"stages": [
+		{
+			"id": 1,
+			"order": 1,
+			"name": "Choice of Tests",
+			"type": "question",
+			"questions": [
+				{
+					"id": 1,
+					"question": "Which of the following initial tests would you have recommended for this patient? (please select all that apply)",
+					"type": "multiselect",
+					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
+					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
+					"choices": [
+						{
+							"choice_id": 1,
+							"choice_text": "Imaging (mammogram, ultrasound, breast MRI, and/or CT scan",
+							"choice_order": 1,
+							"choice_value": 1,
+							"choice_is_correct": 1,
+							"choice_feedback": "<p>Initial workup for a patient with invasive breast cancer includes imaging.<sup>1</sup></p>",
+							"choice_labs": {
+								"description": null,
+								"result": {
+									"text": "<p>CT scan of the chest, abdomen, and pelvis was notable for 2 to 3 enlarged right axillary nodes, with the largest measuring 2 cm in diameter</p>",
+									"image_url": "https://cdn.atpoc.com/cdn/ihp/2539.61/assets/2539.61_1_1_1.png",
+									"reference": "<p>Positron emission tomography (PET) image shows faint 18F-2-deoxy-D-glucose (FDG) uptake (arrow) in the left breast. The lesion is difficult to detect because of partial volume averaging.<sup>7</sup></p><p>With permission from Yang SK, Cho N, Moon WK. The role of PET/CT for evaluating breast cancer. <em>Korean J Radiol</em>. 2007;8(5):429-437.<sup>7</sup></p>"
+								}
+							}
+						},
+						{
+							"choice_id": 2,
+							"choice_text": "Lymph node biopsy",
+							"choice_order": 2,
+							"choice_value": 2,
+							"choice_is_correct": 1,
+							"choice_feedback": "<p>Lymph node biopsy is performed to evaluate enlarged lymph nodes.<sup>2</sup></p>",
+							"choice_labs": {
+								"description": null,
+								"result": {
+									"text": "<p>Biopsy of several enlarged right axillary lymph nodes revealed metastatic carcinoma</p><p>CT scan of the chest, abdomen, and pelvis</p>"
+								}
+							}
+						},
+						{
+							"choice_id": 3,
+							"choice_text": " Ki-67 score",
+							"choice_order": 3,
+							"choice_value": 3,
+							"choice_is_correct": 1,
+							"choice_feedback": "<p>Ki-67 score should be evaluated if abemaciclib is being considered as adjuvant therapy.<sup>1</sup> Susanne is a candidate for abemaciclib adjuvant therapy because she has HR+, HER2&#8211; breast cancer.<sup>1</sup></p>",
+							"choice_labs": {
+								"description": null,
+								"result": {
+									"text": "<p>Ki-67 is 50% (high)</p>"
+								}
+							}
+						},
+						{
+							"choice_id": 4,
+							"choice_text": "BRCA genetic testing",
+							"choice_order": 4,
+							"choice_value": 4,
+							"choice_is_correct": 0,
+							"choice_feedback": "<p><em>BRCA</em> genetic testing is not necessary, because olaparib adjuvant therapy is not recommended for Susanne. She does not have HR-, HER2&#8211; breast cancer.<sup>1</sup></p>",
+							"choice_labs": null
+						}
+					],
+					"feedback_title": "Patient Assessment",
+					"feedback": "<h1>Patient Assessment</h1><p>Initial workup for a patient with invasive breast cancer includes imaging with a bilateral mammogram, ultrasound if needed, and the option of breast MRI.<sup>1</sup> For patients with signs and symptoms of metastatic disease, additional imaging should be considered, such as diagnostic CT scans of the chest, abdomen, and pelvis.<sup>1</sup></p><p>Biopsy specimens should be tested for the biomarkers ER and PR, to determine eligibility for ET, and for the biomarker HER2, to determine eligibility for HER2-targeted therapy.<sup>1</sup> In addition, Ki-67 should be evaluated if abemaciclib is being considered as adjuvant therapy.<sup>1</sup> A Ki-67 score of &#8805;20% indicates a high risk for breast cancer.<sup>1</sup> Ki-67 is a biomarker of proliferation that is indicative of an individual having an increased risk for disease recurrence.<sup>3</sup></p>"
+				}
+			]
+		},
+		{
+			"id": 2,
+			"order": 2,
+			"name": "Choice of Treatment",
+			"type": "question",
+			"questions": [
+				{
+					"id": 1,
+					"question": "Which of the following treatments would you recommend for Susanne in addition to chest wall radiotherapy (XRT)?",
+					"type": "multichoice",
+					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
+					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
+					"choices": [
+						{
+							"choice_id": 1,
+							"choice_text": "Capecitabine, then anastrozole for 10 years",
+							"choice_order": 1,
+							"choice_value": 1,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},
+						{
+							"choice_id": 2,
+							"choice_text": "Anastrozole for 10 years",
+							"choice_order": 2,
+							"choice_value": 2,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},
+						{
+							"choice_id": 3,
+							"choice_text": "Abemaciclib for 2 years",
+							"choice_order": 3,
+							"choice_value": 3,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},
+						{
+							"choice_id": 4,
+							"choice_text": "Abemaciclib for 2 years with anastrozole for 10 years",
+							"choice_order": 4,
+							"choice_value": 4,
+							"choice_is_correct": 1,
+							"choice_feedback": "<p>The addition of adjuvant abemaciclib for 2 years may be considered, along with adjuvant ET</strong> for patients with HR+, HER2&#8211;, high-risk early breast cancer.<sup>1,5</sup> Although adjuvant capecitabine is an option for patents with HR&#8211;, HER2&#8211; breast cancer, it is not recommended for patients with HR+, HER2&#8211; breast cancer.<sup>1</sup></p>",
+							"choice_labs": null
+						}
+					],
+					"feedback_title": "Choice of Treatment",
+					"feedback": "<h1>Choice of Treatment</h1><div class=\"notes\">After a discussion with her provider and her family, Susanne chose adjuvant therapy with abemaciclib for 2 years with anastrozole for 10 years, because of the clinical trial data showing a benefit compared with ET alone.<sup>6,7</sup> She understood that her Ki-67 score of 50% is associated with an increased risk for disease recurrence.<sup>1,3</sup> Susanne was willing to accept the increased risk for AEs associated with the addition of abemaciclib to ET.<sup>8</sup></div><p>For postmenopausal women with HR+, HER2&#8211; early breast cancer, adjuvant ET with an AI (eg, anastrozole, letrozole, or exemestane) or tamoxifen is recommended for &#8805;5 years and may be considered for up to 10 years.<sup>1</sup> Extended adjuvant therapy with AIs for 7.5 to 10 years may be beneficial for patients with lymph node involvement.<sup> 1</sup> Patients with features of high-risk disease, however, have an increased risk for recurrence during their early years on adjuvant ET.<sup>7</sup></p><p>For patients with HR+, HER2&#8211;, high-risk early breast cancer, the addition of adjuvant abemaciclib for</p><p>2 years may be considered along with adjuvant ET for &#8805;5 years.<sup>1,5 </sup>Abemaciclib is a CDK4/6 inhibitor that was studied in combination with standard adjuvant ET in the open-label, randomized, phase 3 <a href=\"https://pubmed.ncbi.nlm.nih.gov/32954927/\">monarchE</a> trial, which enrolled a total of 5637 patients with HR+, HER&#8211;, node-positive, high-risk early breast cancer.<sup>7</sup> <em>High-risk</em> was defined having &#8805;4 positive pathologic axillary lymph nodes or 1 to 3 positive lymph nodes and &#8805;1 of the following: tumor size of &#8805;5 cm, grade 3 histology, or a Ki-67 score of &#8805;20%, according to central assessment.<sup>7</sup> Patients received abemaciclib 150 mg twice daily for</p><p>2 years, along with ET for 5 to 10 years.<sup>7 </sup></p><p>At the preplanned second efficacy interim analysis, at a median follow-up of approximately 15.5 months, a significant benefit was observed in the primary endpoint of IDFS with abemaciclib plus ET compared with ET alone (hazard ratio [HR], 0.75; 95% confidence interval [CI], 0.60 to 0.93; <em>P</em> =.01).<sup>7</sup> The 2-year IDFS was 92.2% with abemaciclib plus ET vs 88.7% with ET alone.<sup>7</sup></p><p>The addition of abemaciclib to ET continued to show a significant beneficial effect at the primary outcome analysis at a median follow-up of 19 months (HR, 0.71; 95% CI, 0.58 to 0.87, nominal</p><p><em>P</em> &lt;.001), as well as at 8 months of additional median follow-up (total median follow-up of 27 months; HR, 0.70; 95% CI, 0.59 to 0.82; nominal <em>P</em> &lt;.0001).<sup>6</sup> The IDFS benefit with abemaciclib was maintained in the Ki-67-high ITT population at the primary outcome analysis (HR, 0.69; 95% CI, 0.52 to 0.92; two-sided <em>P</em> =.0111) and at 8 months of additional follow-up (HR, 0.66; 95% CI, 0.52 to 0.84; nominal</p><p><em>P</em> =.0006).<sup>6</sup></p><p>Palbociclib, another CDK4/6 inhibitor, was investigated in patients with HR+, HER2&#8211;, high-risk early breast cancer in the phase 3 PALLAS and PENELOPE-B trials.<sup>9-11</sup> In the <a href=\"https://pubmed.ncbi.nlm.nih.gov/34995105/\">PALLAS</a> trial, which was conducted in a total of 5760 patients, participants received palbociclib (125 mg once daily for 3 weeks of a 4-week cycle) for 2 years plus ET for &#8805;5 years (n=2883) or ET alone for &#8805;5 years (n=2877).<sup>9</sup> At the preplanned second interim analysis at a median follow-up of 23.7 months, no significant difference was reported in the primary endpoint of IDFS with palbociclib plus ET compared with ET alone (HR, 0.93, 95% CI, 0.76 to 1.15, log-rank <em>P</em> =.51).<sup>9</sup> Based on the recommendation of the independent data monitoring committee, palbociclib was discontinued.<sup>9</sup> The final protocol-defined analysis at a median follow-up of 31 months which was evaluated in a total of 5761 patients in the ITT population, also demonstrated no significant benefit in IDFS with the addition of palbociclib to ET (HR, 0.96; 95% CI, 0.81 to 1.14; <em>P</em> =.65).<sup>10</sup></p><p>The <a href=\"https://pubmed.ncbi.nlm.nih.gov/33793299/\">PENELOPE-B</a> trial enrolled a total of 1250 patients with residual invasive disease after neoadjuvant chemotherapy. In PENELOPE-B, <em>high-risk</em> was defined as a clinical pathological staging-estrogen receptor grading (CPS-EG) score of &#8805;3 or a CPS-EG score of 2 with lymph node metastases (ypN+).<sup>11</sup> Patients received either palbociclib 125 mg once daily, for a total of thirteen 4-week cycles of 3 weeks followed by 1 week off, or matching placebo plus standard adjuvant ET for &#8805;5 years.<sup>11</sup> At a median follow-up of 42.8 months, no significant difference was observed with palbociclib compared with placebo in the primary endpoint of IDFS (stratified HR, 0.3; 95% repeated CI, 0.74 to 1.17, <em>P</em> [Cui, Hung, Wang {CHW}] =.525).<sup>11</sup></p>"
+				}
+			]
+		},
+		{
+			"id": 3,
+			"order": 3,
+			"name": "Adverse Events",
+			"type": "question",
+			"questions": [
+				{
+					"id": 1,
+					"question": "Which of the following is the most common AE associated with abemaciclib?",
+					"type": "multichoice",
+					"correct_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-spot-on.mp4",
+					"correct_video_text": "<p>Spot on. I left some additional notes for you to review.</p>",
+					"incorrect_video_url": "https://cdn.atpoc.com/cdn/ihp/global/guru-not-quite.mp4",
+					"incorrect_video_text": "<p>Not quite right. Take a look at the feedback for more information.</p>",
+					"choices": [
+						{
+							"choice_id": 1,
+							"choice_text": "Diarrhea",
+							"choice_order": 1,
+							"choice_value": 1,
+							"choice_is_correct": 1,
+							"choice_feedback": "<p>In the phase 3 monarchE trial, diarrhea was the most commonly reported AE with abemaciclib use.<sup>7</sup></p>",
+							"choice_labs": null
+						},
+						{
+							"choice_id": 2,
+							"choice_text": "Neutropenia",
+							"choice_order": 2,
+							"choice_value": 2,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},
+						{
+							"choice_id": 3,
+							"choice_text": "Inflammatory lung disease",
+							"choice_order": 3,
+							"choice_value": 3,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						},
+						{
+							"choice_id": 4,
+							"choice_text": "Deep venous thrombosis",
+							"choice_order": 4,
+							"choice_value": 4,
+							"choice_is_correct": 0,
+							"choice_feedback": null,
+							"choice_labs": null
+						}
+					],
+					"feedback_title": "Adverse Events",
+					"feedback": "<h1>Adverse Events</h1><div class=\"notes\"><p>Susanne experienced mild grade 1 diarrhea associated with her abemaciclib therapy, which resolved with diet modification and no dose reduction. She did not experience neutropenia or other AEs associated with abemaciclib use. Susanne was monitored for treatment-related AEs, and was counseled on the importance of maintaining adherence and persistence to abemaciclib and anastrozole, both of which are orally administered therapies, in order to reduce the risk for recurrence from breast cancer.</p></div><p>A safety analysis from monarchE was reported at a median treatment duration of 24 months (N=5591 in the safety population).<sup>8</sup> Diarrhea, which was the most common AE associated with abemaciclib use, was reported in 83.5% of abemaciclib-treated patients (7.8% with grade &#8805;3).<sup>8</sup> Neutropenia occurred in 45.8% of patients who received abemaciclib (19.6% with grade &#8805;3).<sup>8</sup> In comparison, diarrhea and neutropenia each occurred in &lt;10% of patients who received ET alone.<sup>8</sup> The rates of interstitial lung disease were 3.2% (0.4% with grade &#8805;3) with abemaciclib vs 1.3% (0.0% [1 patient] with grade &#8805;3) with ET alone.<sup>8 </sup>The rates of venous thromboembolic events were 2.5% with abemaciclib (1.4% with grade &#8805;3 ) and 0.6% (0.3% with grade &#8805;3) with ET alone.<sup>8</sup></p><p>The onset of diarrhea was early (median, 8 days). The majority of grade 2 and 3 events were within the first 3 months (month 1: 20.5%; month 2: 12.1%; month 3: 7.3%) and had a short duration (median, &#8804;7 days) without recurrence.<sup>8</sup> Diarrhea was managed using antidiarrheal medications in 79% of patients and dose reductions in &lt;25% of patients.<sup>8</sup> Only 5.3% of patients discontinued abemaciclib because of diarrhea.<sup>8</sup></p>"
+				}
+			]
+		},
+		{
+			"id": 4,
+			"order": 4,
+			"name": "Feedback",
+			"type": "info",
+			"content": "<div class=\"notes\"><p>Susanne is doing well 1 year after the initiation of anastrozole and abemaciclib therapy. She has follow-up appointments every 6 months, which she will continue for 5 years. Her mammogram of the opposite breast, which is performed yearly, has revealed no abnormalities.</p></div>"
+		},
+		{
+			"id": 5,
+			"order": 5,
+			"name": "Conclusion",
+			"type": "info",
+			"content": "<ul class=\"custom-list\"><li>CDK4/6 inhibition with abemaciclib has a disease-free survival benefit when added to AIs in patients with high-risk, ER+, HER2&#8211; early-stage breast cancer</li><li>Ki67 scores should be measured in all patients with HR+, HER2&#8211;, high-risk early breast cancer, since the definition of <em>high-risk</em> includes a Ki-67 score of &#8805;20%</li><li>Choice of CDK4/6 inhibitor is important, as there was no benefit reported with palbociclib in this setting</li><li>Diarrhea is the most common AE associated with abemaciclib use, but it is manageable</li></ul>"
+		}
+	]
+}

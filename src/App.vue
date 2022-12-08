@@ -250,25 +250,32 @@ export default {
 		if (!this.$route.query.jn) this.$store.dispatch('setRedirectURL', `/missing`)
 		if (this.$route.query.token) await this.$store.dispatch('setUserToken', this.$route.query.token)
 
-		if (this.$route.query.choices) console.log(this.$route.query.choices)
-
 		await this.setAppMode()
 		await this.$store.dispatch('setEnvironment', this.$route.query.jn)
+
 		if (this.$route.query.stage) {
 			await this.$store.dispatch('completeGuruIntro')
 			await this.$store.dispatch('completePatientIntro')
-			await this.$store.dispatch('goToStage', this.$route.query.stage - 1)
-			
-			// if (this.$route.query.choices) await this.submitQuestion(this.$route.query.choices.split(',')) 
+			const stageId = this.$route.query.stage.split('_')
+			const skipView = this.progress.stages
+				.filter((stage) => 
+					stage.id == stageId[0]
+					&& stage.group == (stageId[1] || 0)
+					&& stage.type !== 'feedback'
+				)[0]
+				?.view
+
+			if (skipView) await this.$store.dispatch('goToView', skipView)
+			if (this.$route.query.choices) await this.submitQuestion(this.$route.query.choices.split(',')) 
 		}
 
-		// await this.removeUrlParam({
-		// 	params: [
-		// 		'token',
-		// 		'stage',
-		// 		'choices'
-		// 	]
-		// })
+		await this.removeUrlParam({
+			params: [
+				'token',
+				'stage',
+				'choices'
+			]
+		})
 
 		window.addEventListener('resize', () => {
 			this.setAppMode()
@@ -388,11 +395,13 @@ export default {
 			
 			choices
 				.forEach((choice) => {
-					const key = this.currStage + '_' + this.currGroup + '_' + choice
+					const key = this.currStage + '_' + this.currGroup + '_' + (choice - 1)
 					payload[key] = ''
 				})
 
+			await this.$store.dispatch('isSubmitLoading')
 			await this.$store.dispatch('submitQuestion', payload)
+			await this.nextStage()
 		},
 		removeUrlParam(props) {
 			const { params } = props

@@ -139,8 +139,6 @@ export default {
 					this.script = question?.incorrect_video_text
 				}
 
-				console.log(videoURL)
-
 				this.$store.dispatch('setGuruResponseURL', videoURL)
 			}
 			else {

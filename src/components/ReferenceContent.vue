@@ -12,7 +12,7 @@
 						:key="reference_ndx"
 					>
 						<p>
-							{{ reference.title }} 
+							<span v-html="reference.title"></span>
 							<a 
 								v-if="reference.href"
 								:href="reference.href"

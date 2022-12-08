@@ -9,7 +9,7 @@
 							<div
 								v-for="(choice, choice_ndx) in choices" 
 								:key="choice_ndx"
-								class="d-flex"
+								class="d-flex black-label"
 							>
 								<v-checkbox 
 									:id="name + '_' + choice_ndx"
@@ -33,7 +33,7 @@
 							<div
 								v-for="(choice, choice_ndx) in choices" 
 								:key="choice_ndx"
-								class="d-flex"
+								class="d-flex black-label"
 							>
 								<v-checkbox 
 									:id="name + '_' + choice_ndx"
@@ -57,36 +57,56 @@
 					<template v-if="isCompleted">
 						<v-radio-group v-model="selectedRadio">
 							<div class="d-flex flex-column gap-3">
-								<v-radio 
+								<div
 									v-for="(choice, choice_ndx) in choices" 
 									:key="choice_ndx"
-									class="ma-0 pa-0 black-label" 
-									:name="name + '_' + choice_ndx"
-									:label="choice.choice_text" 
-									:value="choice.choice_value"
-									:true-value="choice.choice_value"
-									:ripple="false"
-									disabled
-									color="#4e9d2d"
-									:input-value="isAnswered(choice.choice_order)"
-								></v-radio>
+									class="d-flex black-label"
+								>
+									<v-radio 
+										:id="name + '_' + choice_ndx"
+										class="ma-0 pa-0 black-label" 
+										:name="name + '_' + choice_ndx"
+										:value="choice.choice_value"
+										:true-value="choice.choice_value"
+										:ripple="false"
+										disabled
+										color="#4e9d2d"
+										:input-value="isAnswered(choice.choice_order)"
+									></v-radio>
+									<label 
+										:for="name + '_' + choice_ndx" 
+										class="v-label theme--light mt-1" 
+										style="left: 0px; right: auto; position: relative;" 
+										v-html="choice.choice_text"
+									></label>
+								</div>
 							</div>
 						</v-radio-group>
 					</template>
 					<template v-else>
 						<v-radio-group>
 							<div class="d-flex flex-column gap-3">
-								<v-radio 
+								<div
 									v-for="(choice, choice_ndx) in choices" 
 									:key="choice_ndx"
-									class="ma-0 pa-0 black-label" 
-									:name="name + '_' + choice_ndx"
-									:label="choice.choice_text" 
-									:value="choice.choice_value"
-									:true-value="choice.choice_value"
-									:ripple="false"
-									color="#4e9d2d"
-								></v-radio>
+									class="d-flex black-label"
+								>
+									<v-radio 
+										:id="name + '_' + choice_ndx"
+										class="ma-0 pa-0 black-label" 
+										:name="name + '_' + choice_ndx"
+										:value="choice.choice_value"
+										:true-value="choice.choice_value"
+										:ripple="false"
+										color="#4e9d2d"
+									></v-radio>
+									<label 
+										:for="name + '_' + choice_ndx" 
+										class="v-label theme--light mt-1" 
+										style="left: 0px; right: auto; position: relative;" 
+										v-html="choice.choice_text"
+									></label>
+								</div>
 							</div>
 						</v-radio-group>
 					</template>

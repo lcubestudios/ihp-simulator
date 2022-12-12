@@ -71,8 +71,9 @@ export default {
 		pastAssessments() {
 			return this.choices
 				.filter((choice) => 
-					choice.choice_labs 
-					&& !choice.choice_is_correct
+					!choice.choice_is_correct
+					&& choice.choice_labs 
+					&& choice.choice_labs.is_past_assessment
 				)
 		}
 	},

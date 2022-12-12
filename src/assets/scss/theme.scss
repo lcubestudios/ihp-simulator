@@ -138,11 +138,7 @@ ul.custom-list {
   list-style: none;
 }
 
-ul.custom-list > li {
-	display: flex;
-	flex-flow: row nowrap;
-	gap: 5px;
-}
+ul.custom-list > li { position: relative; }
 
 ul.custom-list > li p { margin-bottom: 0 !important; }
 
@@ -150,6 +146,7 @@ ul.custom-list >li::before {
   content: "\2022";
   color: $primary;
   font-weight: bold;
+	position: absolute;
 	display: inline-block;
 	top: 0;
   width: 1em;

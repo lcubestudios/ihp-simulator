@@ -117,14 +117,22 @@ export default {
 	},
 	methods: {
 		setVideoURL() {
-			const checkProgress = this.progress?.stages
-				.filter((stage) => 
-					stage.stage === this.stage 
-					&& stage.group === this.group
-					&& !stage.isCompleted
-				)[0]
+			const checkProgress = this.$route.params.stage
+				? this.progress?.stages
+					.filter((stage) => 
+						stage.view === this.$route.params.stage + 1
+					)[0]
+				: this.progress?.stages
+					.filter((stage) => 
+						stage.stage === this.stage 
+						&& stage.group === this.group
+						&& !stage.isCompleted
+					)[0]
 
-			if (checkProgress.type === 'feedback' && !checkProgress.isCompleted) {
+			console.log(this.$route.params.stage)
+			console.log(checkProgress)
+
+			if (checkProgress && checkProgress.type === 'feedback' && !checkProgress.isCompleted) {
 				const question = this.$store.getters?.stages[this.stage].questions[this.group]
 				const correctAnswers = question.answers ? question?.answers.filter((answer) => answer.choice_is_correct)?.length : null
 				const correctChoices = question.choices ? question?.choices.filter((choice) => choice.choice_is_correct)?.length : null

@@ -399,6 +399,8 @@ export default {
 					payload[key] = ''
 				})
 
+			console.log(this.$store.getters.stages)
+
 			await this.$store.dispatch('isSubmitLoading')
 			await this.$store.dispatch('submitQuestion', payload)
 			await this.nextStage()

@@ -651,7 +651,8 @@ const actions = {
 	async submitQuestion({ state, commit, dispatch }, payload) {
 		const output = []
 
-		dispatch('setGuruResponseURL', null)
+		console.log('submit question')
+		await dispatch('setGuruResponseURL', null)
 		
 		Object.keys(payload)
 			.map((item) => {

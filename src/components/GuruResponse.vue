@@ -225,6 +225,9 @@ export default {
 </style>
 
 <style lang="scss">
+#guruResponse {
+	z-index: 1;
+}
 .guru-script {
 	p:last-child {
 		margin: 0 !important;

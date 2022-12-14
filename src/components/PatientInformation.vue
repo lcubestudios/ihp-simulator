@@ -266,7 +266,7 @@
 										v-for="(finding, finding_ndx) in findings"
 										:key="finding_ndx"
 									>
-										<p v-if="finding">{{ finding }}</p>
+										<p v-if="finding" v-html="finding"></p>
 									</li>
 								</ul>
 							</v-row>

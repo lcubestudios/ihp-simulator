@@ -9,7 +9,7 @@
 							<div
 								v-for="(choice, choice_ndx) in choices" 
 								:key="choice_ndx"
-								class="d-flex black-label"
+								class="d-flex align-items-start black-label"
 							>
 								<v-checkbox 
 									:id="name + '_' + choice_ndx"
@@ -23,7 +23,7 @@
 								></v-checkbox>
 								<label 
 									:for="name + '_' + choice_ndx" 
-									class="v-label theme--light mt-1" 
+									class="v-label theme--light" 
 									style="left: 0px; right: auto; position: relative;" 
 									v-html="choice.choice_text"
 								></label>
@@ -33,7 +33,7 @@
 							<div
 								v-for="(choice, choice_ndx) in choices" 
 								:key="choice_ndx"
-								class="d-flex black-label"
+								class="d-flex align-items-start black-label"
 							>
 								<v-checkbox 
 									:id="name + '_' + choice_ndx"
@@ -45,7 +45,7 @@
 								></v-checkbox>
 								<label 
 									:for="name + '_' + choice_ndx" 
-									class="v-label theme--light mt-1" 
+									class="v-label theme--light" 
 									style="left: 0px; right: auto; position: relative;" 
 									v-html="choice.choice_text"
 								></label>
@@ -60,7 +60,7 @@
 								<div
 									v-for="(choice, choice_ndx) in choices" 
 									:key="choice_ndx"
-									class="d-flex black-label"
+									class="d-flex align-items-start black-label"
 								>
 									<v-radio 
 										:id="name + '_' + choice_ndx"
@@ -75,7 +75,7 @@
 									></v-radio>
 									<label 
 										:for="name + '_' + choice_ndx" 
-										class="v-label theme--light mt-1" 
+										class="v-label theme--light" 
 										style="left: 0px; right: auto; position: relative;" 
 										v-html="choice.choice_text"
 									></label>
@@ -89,7 +89,7 @@
 								<div
 									v-for="(choice, choice_ndx) in choices" 
 									:key="choice_ndx"
-									class="d-flex black-label"
+									class="d-flex align-items-start black-label"
 								>
 									<v-radio 
 										:id="name + '_' + choice_ndx"
@@ -102,7 +102,7 @@
 									></v-radio>
 									<label 
 										:for="name + '_' + choice_ndx" 
-										class="v-label theme--light mt-1" 
+										class="v-label theme--light" 
 										style="left: 0px; right: auto; position: relative;" 
 										v-html="choice.choice_text"
 									></label>
@@ -190,3 +190,11 @@ export default {
 	}
 };
 </script>
+
+<style lang="scss" scoped>
+.form {
+	label {
+		height: auto !important;
+	}
+}
+</style>

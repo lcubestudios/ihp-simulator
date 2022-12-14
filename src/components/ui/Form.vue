@@ -194,6 +194,7 @@ export default {
 <style lang="scss" scoped>
 .form {
 	label {
+		margin-top: 0.25em;
 		height: auto !important;
 	}
 }

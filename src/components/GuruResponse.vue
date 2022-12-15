@@ -135,10 +135,11 @@ export default {
 			if (checkProgress && checkProgress.type === 'feedback' && !checkProgress.isCompleted) {
 				const question = this.$store.getters?.stages[this.stage].questions[this.group]
 				const correctAnswers = question.answers ? question?.answers.filter((answer) => answer.choice_is_correct)?.length : null
+				const hasIncorrectAnswer = question.answers ? question?.answers.filter((answer) => !answer.choice_is_correct)?.length : null
 				const correctChoices = question.choices ? question?.choices.filter((choice) => choice.choice_is_correct)?.length : null
 				let videoURL
 
-				if (correctAnswers === correctChoices) {
+				if (!hasIncorrectAnswer && correctAnswers === correctChoices) {
 					videoURL = question?.correct_video_url.replace(/\{\{CORRECT_VIDEO\}\}/gi, 'global/guru-spot-on.mp4')
 					this.script = question?.correct_video_text
 				}

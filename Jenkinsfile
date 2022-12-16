@@ -1,6 +1,6 @@
 pipeline{
     agent { label 'lcube-web' }
-    tools { nodejs 'node-14.18.3' }
+    tools { nodejs 'node' }
     environment {
         //Mandatory
         REPO_NAME = 'ihp-simulator'

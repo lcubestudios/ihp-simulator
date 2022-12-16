@@ -1,5 +1,5 @@
 pipeline{
-    agent { label 'frontend-node' }
+    agent { label 'lcube-web' }
     tools { nodejs 'node-14.18.3' }
     environment {
         //Mandatory
